@@ -11,7 +11,7 @@ public class CharacterItems : MonoBehaviour
 
     void Start()
     {
-        fireStone = 0;
+        fireStone = 100;
         food = 6;
         trap = 6;
         key = new List<int>();
@@ -32,7 +32,12 @@ public class CharacterItems : MonoBehaviour
         return trap;
     }
 
-    public void changeFirestone(int num)
+    public int getFireStone()
+    {
+        return fireStone;
+    }
+
+    public void changeFireStone(int num)
     {
         fireStone += num;
     }

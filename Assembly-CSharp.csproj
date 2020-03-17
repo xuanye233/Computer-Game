@@ -72,8 +72,14 @@
     <Compile Include="Assets\Scripts\Character\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonUserControl.cs" />
     <Compile Include="Assets\Scripts\Environment\Addcollider.cs" />
+    <Compile Include="Assets\Scripts\tool\fireControlor.cs" />
+    <Compile Include="Assets\Scripts\tool\FireStone.cs" />
+    <Compile Include="Assets\Scripts\tool\Food.cs" />
+    <Compile Include="Assets\Scripts\tool\Key.cs" />
+    <Compile Include="Assets\Scripts\tool\lightControlor.cs" />
+    <Compile Include="Assets\Scripts\tool\TakeAndDrop.cs" />
+    <Compile Include="Assets\Scripts\tool\Trap.cs" />
     <Compile Include="Assets\Scripts\UI\BloodControl.cs" />
-    <Compile Include="Assets\Scripts\UI\Player.cs" />
     <Compile Include="Assets\Scripts\UI\ToolInteraction.cs" />
     <Compile Include="Assets\Scripts\UI\ToolUIController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">

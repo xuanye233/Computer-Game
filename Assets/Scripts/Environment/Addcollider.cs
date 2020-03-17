@@ -36,7 +36,7 @@ public class Addcollider : MonoBehaviour
                 {
                     child.gameObject.AddComponent<MeshCollider>();
                 }
-                Debug.Log(child.gameObject.name);
+                //Debug.Log(child.gameObject.name);
             }
         }
     }

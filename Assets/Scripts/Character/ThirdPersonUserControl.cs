@@ -13,12 +13,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
         private GameObject mapCube, mapCamera;
+        float speed;
         
         private void Start()
         {
             mapCube = GameObject.Find("Player/PlayerCube");
             mapCamera = GameObject.Find("MapCamera");
 
+            speed = 1.0f;
             // get the transform of the main camera
             if (Camera.main != null)
             {
@@ -69,11 +71,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
 #if !MOBILE_INPUT
 			// walk speed multiplier
-	        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
+	        if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = 1.2f;
+            }
+            else
+            {
+                speed = 1.0f;
+            }
 #endif
 
             // pass all parameters to the character control script
-            m_Character.Move(m_Move, crouch, m_Jump);
+            m_Character.Move(m_Move, crouch, m_Jump, speed);
             m_Jump = false;
         }
     }
