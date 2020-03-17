@@ -6,20 +6,21 @@ using UnityEngine.UI;
 public class BloodControl : MonoBehaviour
 {
     public Slider bloodSloder;
-    Player player;
+    //Player player;
+    CharacterStatus characterStatus;
 
     void Start()
     {
+        characterStatus = GameObject.Find("Player/Player").GetComponent<CharacterStatus>();
         bloodSloder = FindObjectOfType<Slider>();
-        player = GameObject.Find("Player").GetComponent<Player>();
-        bloodSloder.value = player.blood;
-
+        //player = GameObject.Find("Player").GetComponent<Player>();
+        bloodSloder.value = characterStatus.GetHealth();
     }
 
     
     void Update()
     {
-        bloodSloder.value = player.blood;
+        bloodSloder.value = characterStatus.GetHealth();
         changeSliderColor();
     }
     

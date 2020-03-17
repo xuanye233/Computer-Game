@@ -11,7 +11,7 @@ public class CharacterStatus : MonoBehaviour
     void Start()
     {
         items = GetComponent<CharacterItems>();
-        health = 100f;
+        health = 50f;
     }
 
     void Update()
@@ -99,20 +99,15 @@ public class CharacterStatus : MonoBehaviour
 #endif
     }
 
-    void IncreaseHealth(float increaseNum)
+    public void ChangeHealth(float increaseNum)
     {
         health = health + increaseNum > 100 ? 100 : health + increaseNum;
-    }
-
-    void DecreaseHealth(float decreaseNum)
-    {
-        health -= decreaseNum;
-        if (health <= 0)
+        if(health < 0)
         {
-            //人物死亡，调用某些函数
-            /*----------------------------------------*/
+            health = 0;
         }
     }
+
 
     public float GetHealth()
     {

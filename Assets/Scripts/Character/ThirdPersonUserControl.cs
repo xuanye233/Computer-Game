@@ -4,6 +4,7 @@ using UnityEngine;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
     [RequireComponent(typeof (ThirdPersonCharacter))]
+    
     public class ThirdPersonUserControl : MonoBehaviour
     {
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
@@ -11,10 +12,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-
+        private GameObject mapCube, mapCamera;
         
         private void Start()
         {
+            mapCube = GameObject.Find("Player/PlayerCube");
+            mapCamera = GameObject.Find("MapCamera");
+
             // get the transform of the main camera
             if (Camera.main != null)
             {
@@ -38,6 +42,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 m_Jump = Input.GetButtonDown("Jump");
             }
+            mapCube.transform.position = new Vector3(m_Character.transform.position.x, 24, m_Character.transform.position.z);
+            mapCamera.transform.position = new Vector3(m_Character.transform.position.x, 34, m_Character.transform.position.z);
         }
 
 

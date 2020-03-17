@@ -6,7 +6,10 @@ using System;
 
 public class ToolInteraction : MonoBehaviour
 {
-    Player player;
+    //Player player;
+    CharacterItems characterItems;
+    CharacterStatus characterStatus;
+
     Text noFoodText;
     Text noTrapText;
     float duration = 5.0f;
@@ -15,7 +18,9 @@ public class ToolInteraction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Player>();
+        //player = GameObject.Find("Player").GetComponent<Player>();
+        characterItems = GameObject.Find("Player/Player").GetComponent<CharacterItems>();
+        characterStatus = GameObject.Find("Player/Player").GetComponent<CharacterStatus>();
         noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
         noFoodText.gameObject.SetActive(false);
         noTrapText = GameObject.Find("Canvas/TipsList/NoTrapText").GetComponent<Text>();
@@ -27,7 +32,7 @@ public class ToolInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isTrapClick && Input.GetMouseButtonDown(0) && player.tool.trap > 0)
+        if(isTrapClick && Input.GetMouseButtonDown(0) && characterItems.getTrap() > 0)
         {
             trapEvent();
         }
@@ -40,7 +45,7 @@ public class ToolInteraction : MonoBehaviour
     public void foodClick()//food interaction
     {
         //Debug.Log("Sssss");
-        if (player.tool.food == 0)//have no food available
+        if (characterItems.getFood() == 0)//have no food available
         {
             noFoodText.gameObject.SetActive(true);//display the tips
             Debug.Log("nofood");
@@ -74,17 +79,9 @@ public class ToolInteraction : MonoBehaviour
         }
         else//have enough food
         {
-            player.tool.food--;
-            if (player.blood <= 90)//not reach the maxmum
-            {
-                player.blood += 10;
-            }
-            else//reach the maxmum
-            {
-                player.blood = 100;
-            }
-
-            //player
+            characterItems.changeFood(-1);
+            
+            characterStatus.ChangeHealth(10);
         }
 
     }
@@ -92,7 +89,7 @@ public class ToolInteraction : MonoBehaviour
     public void trapClick()
     {
         
-        if(player.tool.trap == 0)
+        if(characterItems.getTrap() == 0)
         {
             //没有陷阱 需要弹窗
             showNoTrap();
@@ -118,7 +115,7 @@ public class ToolInteraction : MonoBehaviour
             //Debug.DrawRay(hit.point, hit.normal, Color.green);
 
             //update the num of the traps
-            player.tool.trap--;
+            characterItems.changeTrap(-1);
         }
         
     }

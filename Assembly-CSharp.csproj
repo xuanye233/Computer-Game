@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\BloodControl.cs" />
     <Compile Include="Assets\Scripts\Camera\AbstractTargetFollower.cs" />
     <Compile Include="Assets\Scripts\Camera\FreeLookCam.cs" />
     <Compile Include="Assets\Scripts\Camera\PivotBasedCameraRig.cs" />
@@ -72,9 +71,11 @@
     <Compile Include="Assets\Scripts\Character\CharacterStatus.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonUserControl.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\ToolInteraction.cs" />
-    <Compile Include="Assets\Scripts\ToolUIController.cs" />
+    <Compile Include="Assets\Scripts\Environment\Addcollider.cs" />
+    <Compile Include="Assets\Scripts\UI\BloodControl.cs" />
+    <Compile Include="Assets\Scripts\UI\Player.cs" />
+    <Compile Include="Assets\Scripts\UI\ToolInteraction.cs" />
+    <Compile Include="Assets\Scripts\UI\ToolUIController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/UnityProject/Test/Game_yyx_01/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
