@@ -13,6 +13,8 @@ public class ToolInteraction : MonoBehaviour
     Text noFoodText;
     Text noTrapText;
     Text noFireStoneText;
+    Transform trapTransform;
+    Transform fireStoneTransform;
     float duration = 5.0f;
     public Boolean isTrapClick;
     public Boolean isFireStoneClick;
@@ -29,8 +31,9 @@ public class ToolInteraction : MonoBehaviour
         noTrapText.gameObject.SetActive(false);
         noFireStoneText = GameObject.Find("Canvas/TipsList/NoFireStoneText").GetComponent<Text>();
         noFireStoneText.gameObject.SetActive(false);
-        
-        
+        trapTransform = GameObject.Find("Canvas/ToolList/Trap/TrapImage").GetComponent<Transform>();
+        fireStoneTransform = GameObject.Find("Canvas/ToolList/FireStone/FireStoneImage").GetComponent<Transform>();
+
         isTrapClick = false;
         isFireStoneClick = false;
     }
@@ -113,6 +116,7 @@ public class ToolInteraction : MonoBehaviour
         else
         {
             isTrapClick = true;
+            trapTransform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
         }
     }
 
@@ -131,6 +135,7 @@ public class ToolInteraction : MonoBehaviour
             //Debug.DrawRay(hit.point, hit.normal, Color.green);
 
             //update the num of the traps
+            trapTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             characterItems.changeTrap(-1);
         }
         
@@ -154,6 +159,7 @@ public class ToolInteraction : MonoBehaviour
             
             Debug.Log(hit.transform.GetChild(0).name);
             isFireStoneClick = false;
+            fireStoneTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             characterItems.changeFireStone(-1);
         }
 
@@ -170,6 +176,7 @@ public class ToolInteraction : MonoBehaviour
         else
         {
             isFireStoneClick = true;
+            fireStoneTransform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
         }
     }
 
