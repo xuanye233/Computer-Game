@@ -13,12 +13,19 @@ public class TakeAndDrop : MonoBehaviour
     CharacterItems characterItems;
     ToolInteraction toolInteraction;
 
+
+
     void Start()
-    { 
+    {
+        do
+        {
+            StartCoroutine(Wait(5.0f));
+        } while (!GameObject.Find("Player(Clone)"));
         GameObject gameObject = GameObject.Find("Camera");
         cam = gameObject.GetComponent<Camera>();
-        characterItems = GameObject.Find("Player/Player").GetComponent<CharacterItems>();
+        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
+        
     }
     void Update()
     {
@@ -76,5 +83,9 @@ public class TakeAndDrop : MonoBehaviour
     //    newCube = GameObject.Instantiate(preFabCube, dropPosition, Quaternion.identity);
     //    equipNum--;
     //}
-
+    IEnumerator Wait(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        //等待之后执行的动作
+    }
 }

@@ -13,8 +13,13 @@ public class ToolUIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //do
+        //{
+        //    StartCoroutine(Wait(5.0f));
+        //} while (!GameObject.Find("Player(Clone)"));
         //player = GameObject.Find("Player").GetComponent<Player>();
-        characterItems = GameObject.Find("Player/Player").GetComponent<CharacterItems>();
+
+        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         foodNumText = GameObject.Find("Canvas/ToolList/Food/FoodNum").GetComponent<Text>();
         trapNumText = GameObject.Find("Canvas/ToolList/Trap/TrapNum").GetComponent<Text>();
         fireStoneNumText = GameObject.Find("Canvas/ToolList/FireStone/FireStoneNum").GetComponent<Text>();
@@ -34,4 +39,9 @@ public class ToolUIController : MonoBehaviour
         fireStoneNumText.text = "X " + characterItems.getFireStone().ToString();
     }
 
+    IEnumerator Wait(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        //等待之后执行的动作
+    }
 }

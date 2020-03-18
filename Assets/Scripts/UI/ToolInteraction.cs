@@ -19,12 +19,18 @@ public class ToolInteraction : MonoBehaviour
     public Boolean isTrapClick;
     public Boolean isFireStoneClick;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
+        do
+        {
+            StartCoroutine(Wait(5.0f));
+        } while (!GameObject.Find("Player(Clone)"));
         //player = GameObject.Find("Player").GetComponent<Player>();
-        characterItems = GameObject.Find("Player/Player").GetComponent<CharacterItems>();
-        characterStatus = GameObject.Find("Player/Player").GetComponent<CharacterStatus>();
+        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
+        characterStatus = GameObject.Find("Player(Clone)").GetComponent<CharacterStatus>();
         noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
         noFoodText.gameObject.SetActive(false);
         noTrapText = GameObject.Find("Canvas/TipsList/NoTrapText").GetComponent<Text>();
@@ -36,6 +42,8 @@ public class ToolInteraction : MonoBehaviour
 
         isTrapClick = false;
         isFireStoneClick = false;
+        
+        
     }
 
     // Update is called once per frame
@@ -151,13 +159,13 @@ public class ToolInteraction : MonoBehaviour
             {
                 if (hit.transform.GetChild(0).GetComponent<Light>())
                 {
-                    Debug.Log("yes");
+                    //Debug.Log("yes");
                     hit.transform.GetChild(0).GetComponent<Light>().range = 7;
                     hit.transform.GetChild(1).gameObject.SetActive(true);
                 }
             }
             
-            Debug.Log(hit.transform.GetChild(0).name);
+            //Debug.Log(hit.transform.GetChild(0).name);
             isFireStoneClick = false;
             fireStoneTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             characterItems.changeFireStone(-1);
@@ -220,5 +228,10 @@ public class ToolInteraction : MonoBehaviour
         noFireStoneText.CrossFadeAlpha(1, 1f, false);
         yield return new WaitForSeconds(1);
         noFireStoneText.CrossFadeAlpha(0, 1f, false);
+    }
+    IEnumerator Wait(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        //等待之后执行的动作
     }
 }

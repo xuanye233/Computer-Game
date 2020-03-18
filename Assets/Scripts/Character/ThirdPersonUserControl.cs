@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using Photon.Pun;
+//using System;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
     [RequireComponent(typeof (ThirdPersonCharacter))]
-    
-    public class ThirdPersonUserControl : MonoBehaviour
+    public class ThirdPersonUserControl : MonoBehaviourPun
     {
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
         private Transform m_Cam;                  // A reference to the main camera in the scenes transform
@@ -15,10 +16,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private GameObject mapCube, mapCamera;
         float speed;
         
+
+
         private void Start()
         {
-            mapCube = GameObject.Find("Player/PlayerCube");
-            mapCamera = GameObject.Find("MapCamera");
+            //do
+            //{
+            //    StartCoroutine(Wait(5.0f));
+            //} while (!GameObject.Find("Player(Clone)"));
+            mapCube = GameObject.Find("Player(Clone)/PlayerCube");
+            mapCamera = GameObject.Find("Player(Clone)/MapCamera");
 
             speed = 1.0f;
             // get the transform of the main camera
@@ -40,6 +47,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
+            if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            {
+                return;
+            }
             if (!m_Jump)
             {
                 m_Jump = Input.GetButtonDown("Jump");
@@ -85,5 +96,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Character.Move(m_Move, crouch, m_Jump, speed);
             m_Jump = false;
         }
+
+        //IEnumerator Wait(float waitTime)
+        //{
+        //    yield return new WaitForSeconds(waitTime);
+        //    //等待之后执行的动作
+        //}
     }
+    
 }

@@ -9,9 +9,16 @@ public class BloodControl : MonoBehaviour
     //Player player;
     CharacterStatus characterStatus;
 
+
+    
     void Start()
     {
-        characterStatus = GameObject.Find("Player/Player").GetComponent<CharacterStatus>();
+        Debug.Log(!GameObject.Find("Player(Clone)")==null);
+        do
+        {
+            StartCoroutine(Wait(5.0f));
+        } while (!GameObject.Find("Player(Clone)"));
+        characterStatus = GameObject.Find("Player(Clone)").GetComponent<CharacterStatus>();
         bloodSloder = FindObjectOfType<Slider>();
         //player = GameObject.Find("Player").GetComponent<Player>();
         bloodSloder.value = characterStatus.GetHealth();
@@ -38,5 +45,11 @@ public class BloodControl : MonoBehaviour
         {
             bloodSloder.fillRect.transform.GetComponent<Image>().color = Color.red;
         }
+    }
+
+    IEnumerator Wait(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        //等待之后执行的动作
     }
 }
