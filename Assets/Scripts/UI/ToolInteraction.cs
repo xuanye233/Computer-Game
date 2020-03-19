@@ -24,10 +24,10 @@ public class ToolInteraction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        do
-        {
-            StartCoroutine(Wait(5.0f));
-        } while (!GameObject.Find("Player(Clone)"));
+        //do
+        //{
+        //    StartCoroutine(Wait(5.0f));
+        //} while (!GameObject.Find("Player(Clone)"));
         //player = GameObject.Find("Player").GetComponent<Player>();
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         characterStatus = GameObject.Find("Player(Clone)").GetComponent<CharacterStatus>();

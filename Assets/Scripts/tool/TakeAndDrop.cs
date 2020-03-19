@@ -17,10 +17,10 @@ public class TakeAndDrop : MonoBehaviour
 
     void Start()
     {
-        do
-        {
-            StartCoroutine(Wait(5.0f));
-        } while (!GameObject.Find("Player(Clone)"));
+        //do
+        //{
+        //    StartCoroutine(Wait(5.0f));
+        //} while (!GameObject.Find("Player(Clone)"));
         GameObject gameObject = GameObject.Find("Camera");
         cam = gameObject.GetComponent<Camera>();
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();

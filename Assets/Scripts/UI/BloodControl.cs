@@ -14,10 +14,10 @@ public class BloodControl : MonoBehaviour
     void Start()
     {
         Debug.Log(!GameObject.Find("Player(Clone)")==null);
-        do
-        {
-            StartCoroutine(Wait(5.0f));
-        } while (!GameObject.Find("Player(Clone)"));
+        //do
+        //{
+        //    StartCoroutine(Wait(5.0f));
+        //} while (!GameObject.Find("Player(Clone)"));
         characterStatus = GameObject.Find("Player(Clone)").GetComponent<CharacterStatus>();
         bloodSloder = FindObjectOfType<Slider>();
         //player = GameObject.Find("Player").GetComponent<Player>();
