@@ -24,8 +24,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //{
             //    StartCoroutine(Wait(5.0f));
             //} while (!GameObject.Find("Player(Clone)"));
-            mapCube = GameObject.Find("Player(Clone)/PlayerCube");
-            mapCamera = GameObject.Find("Player(Clone)/MapCamera");
+            mapCube = GameObject.Find("MapCamera/PlayerCube");
+            mapCamera = GameObject.Find("MapCamera");
 
             speed = 1.0f;
             // get the transform of the main camera
@@ -49,6 +49,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             if(!photonView.IsMine && PhotonNetwork.IsConnected)
             {
+                //Debug.Log("not mine");
                 return;
             }
             if (!m_Jump)
@@ -56,13 +57,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_Jump = Input.GetButtonDown("Jump");
             }
             mapCube.transform.position = new Vector3(m_Character.transform.position.x, 24, m_Character.transform.position.z);
-            mapCamera.transform.position = new Vector3(m_Character.transform.position.x, 34, m_Character.transform.position.z);
+            mapCamera.transform.position = new Vector3(m_Character.transform.position.x, 28, m_Character.transform.position.z);
         }
 
 
         // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
+            if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            {
+                //Debug.Log("not mine");
+                return;
+            }
             // read inputs
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");

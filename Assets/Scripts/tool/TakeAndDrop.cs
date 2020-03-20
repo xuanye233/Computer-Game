@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class TakeAndDrop : MonoBehaviour
+public class TakeAndDrop : MonoBehaviourPun
 {
     public GameObject preFabCube;
     private GameObject newCube;
@@ -22,13 +23,17 @@ public class TakeAndDrop : MonoBehaviour
         //    StartCoroutine(Wait(5.0f));
         //} while (!GameObject.Find("Player(Clone)"));
         GameObject gameObject = GameObject.Find("Camera");
-        cam = gameObject.GetComponent<Camera>();
+        //cam = gameObject.GetComponent<Camera>();
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
         
     }
     void Update()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        {
+            return;
+        }
         PickUpTool();
     }  
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
-
-
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,10 +13,17 @@ namespace Com.MyCompany.MyGame
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
+        #region Public Fields
+        public static GameManager Instance;
+        [Tooltip("The prefab to use for representing the player")]
+        public GameObject playerPrefab;
+        //public GameObject cameraPrefab;
+        public List<Transform> outsideArray;
+        //public GameObject mapPrefab;
 
+        #endregion
 
         #region Photon Callbacks
-
 
         /// <summary>
         /// Called when the local player left the room. We need to load the launcher scene.
@@ -28,6 +34,35 @@ namespace Com.MyCompany.MyGame
         }
 
 
+        #endregion
+
+        #region MonoBehaviour Callbacks
+        public void Awake()
+        {
+            Instance = GetComponent<GameManager>();
+
+            if (playerPrefab == null)
+            {
+                Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
+            }
+            else
+            {
+                if (CharacterStatus.LocalPlayerInstance == null)
+                {
+                    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+                    // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 10f, -42f), Quaternion.identity, 0);
+                    //PhotonNetwork.Instantiate(this.cameraPrefab.name, new Vector3(0f, 9f, -35f), Quaternion.identity, 0);
+                    //PhotonNetwork.Instantiate(this.mapPrefab.name, new Vector3(0f, 10f, -45f), Quaternion.identity, 0);
+                    Debug.Log("chuangjian");
+                    //addCollider();
+                }
+                else
+                {
+                    Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+                }
+            }
+        }
         #endregion
 
 
@@ -74,7 +109,7 @@ namespace Com.MyCompany.MyGame
 
             //    LoadArena();
             //}
-            LoadArena();
+            //LoadArena();
         }
 
 

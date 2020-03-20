@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Character\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonUserControl.cs" />
     <Compile Include="Assets\Scripts\Environment\Addcollider.cs" />
+    <Compile Include="Assets\Scripts\Network\CameraWork.cs" />
     <Compile Include="Assets\Scripts\Network\GameManager.cs" />
     <Compile Include="Assets\Scripts\Network\Launcher.cs" />
     <Compile Include="Assets\Scripts\Network\LauncherTest.cs" />

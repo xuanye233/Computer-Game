@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class ToolUIController : MonoBehaviour
+public class ToolUIController : MonoBehaviourPun
 {
     //Player player;
     CharacterItems characterItems;
@@ -28,6 +29,10 @@ public class ToolUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        //{
+        //    return;
+        //}
         upDateTool();
     }
 

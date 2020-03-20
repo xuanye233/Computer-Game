@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-
-public class ToolInteraction : MonoBehaviour
+using Photon.Pun;
+public class ToolInteraction : MonoBehaviourPun
 {
     //Player player;
     CharacterItems characterItems;
@@ -49,6 +49,10 @@ public class ToolInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        //{
+        //    return;
+        //}
         noTrapText.gameObject.SetActive(false);
         if (isTrapClick && Input.GetMouseButtonDown(0) && characterItems.getTrap() > 0)
         {

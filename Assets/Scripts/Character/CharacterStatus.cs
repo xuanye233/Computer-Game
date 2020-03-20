@@ -1,22 +1,65 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CharacterStatus : MonoBehaviour
+using Photon.Pun;
+
+using System.Collections;
+using Photon.Pun.Demo.PunBasics;
+
+public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
 {
     //[SerializeField] GameObject healthUI; //show the current health
     float health; //Character HP
     CharacterItems items;
 
+    #region Public Fields
+    [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
+    public static GameObject LocalPlayerInstance;
+    #endregion
+
+   void Awake()
+    {
+        if (photonView.IsMine)
+        {
+            PlayerManager.LocalPlayerInstance = this.gameObject;
+        }
+        // #Critical
+        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     void Start()
     {
+        //CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+
+
+        //if (_cameraWork != null)
+        //{
+        //    if (photonView.IsMine)
+        //    {
+        //        _cameraWork.OnStartFollowing();
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+        //}
         items = GetComponent<CharacterItems>();
         health = 50f;
     }
 
     void Update()
     {
-        
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        {
+            return;
+        }
+        if (health <= 0)
+        {
+            //GameObject.Find("GameManager").SendMessage("LeaveRoom()");
+            GameObject.Find("GameManager").GetComponent<GameManager>().LeaveRoom();
+            //GameManager.
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -113,4 +156,26 @@ public class CharacterStatus : MonoBehaviour
     {
         return health;
     }
+
+    #region IPunObservable implementation
+
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        //using network to send and receive message
+
+        //if (stream.IsWriting)
+        //{
+        //    // We own this player: send the others our data
+        //    stream.SendNext(IsFiring);
+        //}
+        //else
+        //{
+        //    // Network player, receive data
+        //    this.IsFiring = (bool)stream.ReceiveNext();
+        //}
+    }
+
+
+    #endregion
 }

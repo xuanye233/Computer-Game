@@ -8,8 +8,9 @@ public class Addcollider : MonoBehaviour
     private GameObject outside;                 //需要遍历子物体的母体
     public List<Transform> outsideArray;       //遍历的结果数组
                                            // Use this for initialization
-    void Start()
+    void Awake()
     {
+        Debug.Log("zhixing");
         outside = GameObject.Find("Outside");   //查找物体
         if (outside != null)
         {
@@ -35,6 +36,7 @@ public class Addcollider : MonoBehaviour
                 if(child.gameObject.GetComponent<MeshCollider>() == null)
                 {
                     child.gameObject.AddComponent<MeshCollider>();
+                    //Debug.Log("add ok");
                 }
                 //Debug.Log(child.gameObject.name);
             }

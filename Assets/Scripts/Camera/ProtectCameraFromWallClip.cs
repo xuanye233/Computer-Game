@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Photon.Pun;
 
 namespace UnityStandardAssets.Cameras
 {
-    public class ProtectCameraFromWallClip : MonoBehaviour
+    public class ProtectCameraFromWallClip : MonoBehaviourPun
     {
         public float clipMoveTime = 0.05f;              // time taken to move when avoiding cliping (low value = fast, which it should be)
         public float returnTime = 0.4f;                 // time taken to move back towards desired position, when not clipping (typically should be a higher value than clipMoveTime)
