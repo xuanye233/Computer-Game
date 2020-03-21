@@ -1866,6 +1866,7 @@ GameObject:
   - component: {fileID: 8829297008336286164}
   - component: {fileID: 8829297008336286165}
   - component: {fileID: 8829297008336286166}
+  - component: {fileID: 114185089272429908}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2057,6 +2058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
   Synchronization: 3
@@ -2068,6 +2070,21 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &114185089272429908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829297008336286160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a6c5181beed7b46ae857f6cedfee13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preFabCube: {fileID: 0}
+  cam: {fileID: 0}
+  equipNum: 0
 --- !u!1 &8829297008355541235
 GameObject:
   m_ObjectHideFlags: 0

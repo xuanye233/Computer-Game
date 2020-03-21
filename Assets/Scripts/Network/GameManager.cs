@@ -17,7 +17,7 @@ namespace Com.MyCompany.MyGame
         public static GameManager Instance;
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
-        //public GameObject cameraPrefab;
+        public GameObject foodPrefab;
         public List<Transform> outsideArray;
         //public GameObject mapPrefab;
 
@@ -47,12 +47,18 @@ namespace Com.MyCompany.MyGame
             }
             else
             {
+                if(PhotonNetwork.IsMasterClient)
+                {
+                    PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 6f, -40f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 8f, -40f), Quaternion.identity, 0);
+                    Debug.Log("ahahahaha");
+                }
                 if (CharacterStatus.LocalPlayerInstance == null)
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 10f, -42f), Quaternion.identity, 0);
-                    //PhotonNetwork.Instantiate(this.cameraPrefab.name, new Vector3(0f, 9f, -35f), Quaternion.identity, 0);
+                    //PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 20f, -40f), Quaternion.identity, 0);
                     //PhotonNetwork.Instantiate(this.mapPrefab.name, new Vector3(0f, 10f, -45f), Quaternion.identity, 0);
                     Debug.Log("chuangjian");
                     //addCollider();
@@ -72,6 +78,7 @@ namespace Com.MyCompany.MyGame
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
+
         }
 
 

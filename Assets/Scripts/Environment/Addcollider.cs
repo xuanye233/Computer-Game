@@ -32,11 +32,11 @@ public class Addcollider : MonoBehaviour
             foreach (Transform child in outside.transform)
             {
                 outsideArray.Add(child);
-                Destroy(child.gameObject.GetComponent<BoxCollider>());
-                if(child.gameObject.GetComponent<MeshCollider>() == null)
+                //Destroy(child.gameObject.GetComponent<BoxCollider>());
+                if(child.gameObject.GetComponent<BoxCollider>() == null)
                 {
-                    child.gameObject.AddComponent<MeshCollider>();
-                    //Debug.Log("add ok");
+                    child.gameObject.AddComponent<BoxCollider>();
+                    Debug.Log("add ok");
                 }
                 //Debug.Log(child.gameObject.name);
             }

@@ -7,6 +7,7 @@ namespace Com.MyCompany.MyGame
 {
     public class LauncherTest : MonoBehaviourPunCallbacks
     {
+        public GameObject foodPrefab;
         #region Private Serializable Fields
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
@@ -37,7 +38,7 @@ namespace Com.MyCompany.MyGame
         {
             // #Critical
             // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
-            PhotonNetwork.AutomaticallySyncScene = false;
+            PhotonNetwork.AutomaticallySyncScene = true;
             isConnecting = false;
         }
 
@@ -114,7 +115,7 @@ namespace Com.MyCompany.MyGame
 
         public override void OnJoinedRoom()
         {
-            if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
                 //Debug.Log("We load the 'Room for 1' ");
 
@@ -122,6 +123,7 @@ namespace Com.MyCompany.MyGame
                 // #Critical
                 // Load the Room Level.
                 PhotonNetwork.LoadLevel(1);
+                //PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 20f, -40f), Quaternion.identity, 0);
             }
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
         }
