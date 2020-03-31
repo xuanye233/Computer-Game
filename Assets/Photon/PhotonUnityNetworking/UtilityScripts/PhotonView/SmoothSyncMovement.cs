@@ -25,7 +25,7 @@ namespace Photon.Pun.UtilityScripts
         public void Awake()
         {
             bool observed = false;
-            foreach (Component observedComponent in this.photonView.ObservedComponents)
+            foreach (Component observedComponent in this.PhotonView.ObservedComponents)
             {
                 if (observedComponent == this)
                 {
@@ -60,7 +60,7 @@ namespace Photon.Pun.UtilityScripts
 
         public void Update()
         {
-            if (!photonView.IsMine)
+            if (!PhotonView.IsMine)
             {
                 //Update remote player (smooth this, this looks good, at the cost of some accuracy)
                 transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * this.SmoothingDelay);

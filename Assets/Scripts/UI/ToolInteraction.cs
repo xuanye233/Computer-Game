@@ -210,7 +210,7 @@ public class ToolInteraction : MonoBehaviourPun
         StartCoroutine(noTrapWait());//disappear smothly
     }
 
-    IEnumerator noFoodWait() //fade function
+    public IEnumerator noFoodWait() //fade function
     {
         //yield return new WaitForSeconds(5);
         noFoodText.CrossFadeAlpha(1, 1f, false);

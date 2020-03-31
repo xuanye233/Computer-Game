@@ -137,7 +137,7 @@ namespace Photon.Pun.Demo.PunBasics
 			}
 
 			if (playerNameText != null) {
-                playerNameText.text = this.target.photonView.Owner.NickName;
+                playerNameText.text = this.target.PhotonView.Owner.NickName;
 			}
 		}
 

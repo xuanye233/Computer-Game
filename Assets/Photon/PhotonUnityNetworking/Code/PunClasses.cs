@@ -188,7 +188,7 @@ namespace Photon.Pun
         /// If you intend to remove the PhotonView component from the GameObject but keep this Photon.MonoBehaviour,
         /// avoid this reference or modify this code to use PhotonView.Get(obj) instead.
         /// </remarks>
-        public PhotonView photonView
+        public PhotonView PhotonView
         {
             get
             {

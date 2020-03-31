@@ -123,7 +123,7 @@ namespace Photon.Pun.Demo.SlotRacer
             this.CarInstance = (GameObject) Instantiate(this.CarPrefabs[gridStartIndex], this.transform.position, this.transform.rotation);
 
             // We'll wait for the first serializatin to pass, else we'll have a glitch where the car is positioned at the wrong position.
-            if (!this.photonView.IsMine)
+            if (!this.PhotonView.IsMine)
             {
                 this.CarInstance.SetActive(false);
             }
@@ -159,10 +159,10 @@ namespace Photon.Pun.Demo.SlotRacer
         {
             // Wait until a Player Number is assigned
             // PlayerNumbering component must be in the scene.
-            yield return new WaitUntil(() => this.photonView.Owner.GetPlayerNumber() >= 0);
+            yield return new WaitUntil(() => this.PhotonView.Owner.GetPlayerNumber() >= 0);
 
             // now we can set it up.
-            this.SetupCarOnTrack(this.photonView.Owner.GetPlayerNumber());
+            this.SetupCarOnTrack(this.PhotonView.Owner.GetPlayerNumber());
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Photon.Pun.Demo.SlotRacer
                 return;
             }
 
-            if (this.photonView.IsMine)
+            if (this.PhotonView.IsMine)
             {
                 this.m_input = Input.GetAxis("Vertical");
                 if (this.m_input == 0f)

@@ -54,8 +54,8 @@ public class TakeAndDrop : MonoBehaviourPun
                     if (itemTag == "food" || itemTag == "trap" || itemTag == "key" || itemTag == "fireStone")
                     {
                         //PhotonNetwork.Destroy(hit.transform.gameObject);
-                        photonView.RPC("destroyFood", RpcTarget.MasterClient, hit.transform.gameObject.GetComponent<PhotonView>().ViewID);                       
-                        if (photonView.IsMine && itemTag == "food")
+                        PhotonView.RPC("destroyFood", RpcTarget.MasterClient, hit.transform.gameObject.GetComponent<PhotonView>().ViewID);                       
+                        if (PhotonView.IsMine && itemTag == "food")
                         {
                             //Destroy(hit.transform.gameObject);
                             Debug.Log("add 1");

@@ -64,7 +64,7 @@ namespace Photon.Pun.Demo.PunBasics
 
             // #Important
             // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
-            if (photonView.IsMine)
+            if (PhotonView.IsMine)
             {
                 LocalPlayerInstance = gameObject;
             }
@@ -83,7 +83,7 @@ namespace Photon.Pun.Demo.PunBasics
 
             if (_cameraWork != null)
             {
-                if (photonView.IsMine)
+                if (PhotonView.IsMine)
                 {
                     _cameraWork.OnStartFollowing();
                 }
@@ -131,7 +131,7 @@ namespace Photon.Pun.Demo.PunBasics
         public void Update()
         {
             // we only process Inputs and check health if we are the local player
-            if (photonView.IsMine)
+            if (PhotonView.IsMine)
             {
                 this.ProcessInputs();
 
@@ -155,7 +155,7 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         public void OnTriggerEnter(Collider other)
         {
-            if (!photonView.IsMine)
+            if (!PhotonView.IsMine)
             {
                 return;
             }
@@ -179,7 +179,7 @@ namespace Photon.Pun.Demo.PunBasics
         public void OnTriggerStay(Collider other)
         {
             // we dont' do anything if we are not the local player.
-            if (!photonView.IsMine)
+            if (!PhotonView.IsMine)
             {
                 return;
             }

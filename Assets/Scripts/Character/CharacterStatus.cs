@@ -11,6 +11,8 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
     //[SerializeField] GameObject healthUI; //show the current health
     float health; //Character HP
     CharacterItems items;
+    GameObject mainCamera;
+    [SerializeField] GameObject blackScreen;
 
     #region Public Fields
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
@@ -19,7 +21,7 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
 
    void Awake()
     {
-        if (photonView.IsMine)
+        if (PhotonView.IsMine)
         {
             PlayerManager.LocalPlayerInstance = this.gameObject;           
         }
@@ -46,11 +48,19 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         //}
         items = GetComponent<CharacterItems>();
         health = 50f;
+        if (mainCamera == null)
+        {
+            mainCamera = GameObject.Find("Camera");
+        }
+        if (blackScreen == null)
+        {
+            blackScreen= GameObject.Find("BlackScreen");
+        }
     }
 
     void Update()
     {
-        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        if (!PhotonView.IsMine && PhotonNetwork.IsConnected)
         {
             return;
         }
@@ -64,6 +74,13 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("fallPlane"))
+        {
+            blackScreen.GetComponent<BlackFadeInOut>().fallScreenEffect();
+            Invoke("ChangePosWhileBlack", 1); //黑屏时改变人物和相机的位置
+        }
+
+#if false
         if (other.gameObject.CompareTag("Food"))
         {
             //碰到食物后增加一些体力
@@ -74,7 +91,7 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
             other.gameObject.SetActive(false);
         }
 
-#if false
+
         else if (other.gameObject.CompareTag("Sewage"))
         {
             //碰到污水减少体力
@@ -142,6 +159,12 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
 #endif
     }
 
+    void ChangePosWhileBlack()
+    {
+        transform.position = new Vector3(0f, 10f, -42f);
+        mainCamera.transform.position = new Vector3(0f, 10f, -4f);
+    }
+
     public void ChangeHealth(float increaseNum)
     {
         health = health + increaseNum > 100 ? 100 : health + increaseNum;
@@ -156,6 +179,15 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
     {
         return health;
     }
+
+    
+    //public void destroyFood(int viewID)
+    //{
+    //    PhotonNetwork.Destroy(PhotonView.Find(viewID));
+    //}
+
+    
+
 
     #region IPunObservable implementation
 

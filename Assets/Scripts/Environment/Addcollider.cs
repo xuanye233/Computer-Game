@@ -36,7 +36,7 @@ public class Addcollider : MonoBehaviour
                 if(child.gameObject.GetComponent<BoxCollider>() == null)
                 {
                     child.gameObject.AddComponent<BoxCollider>();
-                    Debug.Log("add ok");
+                    //Debug.Log("add ok");
                 }
                 //Debug.Log(child.gameObject.name);
             }

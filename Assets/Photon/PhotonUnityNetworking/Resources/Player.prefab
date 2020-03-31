@@ -1969,7 +1969,7 @@ MonoBehaviour:
   m_RunCycleLegOffset: 0.2
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.3
+  m_GroundCheckDistance: 0.45
   m_AnimationForwardSpeed: 0.7
 --- !u!114 &8829297008336286170
 MonoBehaviour:
@@ -1983,6 +1983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c92508c0deaf84eb33bc138f80b887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackScreen: {fileID: 0}
 --- !u!114 &8829297008336286171
 MonoBehaviour:
   m_ObjectHideFlags: 0
