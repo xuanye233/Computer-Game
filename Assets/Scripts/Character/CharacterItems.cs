@@ -10,6 +10,9 @@ public class CharacterItems : MonoBehaviour
     int OriginStone;
     int StumblingBolack;
     int FixPotion;
+    int BlindDrug;
+    int Teleportation;
+    int StumblingBlock;
     List<int> key;
 
     void Start()
@@ -20,6 +23,9 @@ public class CharacterItems : MonoBehaviour
         OriginStone = 5;
         StumblingBolack = 5;
         FixPotion = 5;
+        BlindDrug = 5;
+        Teleportation = 5;
+        StumblingBlock = 5;
         key = new List<int>();
     }
 
@@ -57,6 +63,21 @@ public class CharacterItems : MonoBehaviour
         return fireStone;
     }
 
+    public int getBlindDrug()
+    {
+        return BlindDrug;
+    }
+
+    public int getTeleportation()
+    {
+        return Teleportation;
+    }
+
+    public int getStumblingBlock()
+    {
+        return StumblingBlock;
+    }
+
     public void changeFireStone(int num)
     {
         fireStone += num;
@@ -87,6 +108,20 @@ public class CharacterItems : MonoBehaviour
         FixPotion += num;
     }
 
+    public void changeBlindDrug(int num)
+    {
+        BlindDrug += num;
+    }
+
+    public void changeTeleportation(int num)
+    {
+        Teleportation += num;
+    }
+
+    public void changeStumblingBlock(int num)
+    {
+        StumblingBlock += num;
+    }
     public void addKey(int index)
     {
         key.Add(index);

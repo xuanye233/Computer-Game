@@ -18,7 +18,7 @@ public class Food : MonoBehaviour
         noFoodText.gameObject.SetActive(false);
     }
 
-    void onClicked()
+    public void onClicked()
     {
         
         //Debug.Log("Sssss");

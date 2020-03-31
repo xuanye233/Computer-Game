@@ -77,10 +77,12 @@
     <Compile Include="Assets\Scripts\Network\Launcher.cs" />
     <Compile Include="Assets\Scripts\Network\LauncherTest.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerNameInputField.cs" />
+    <Compile Include="Assets\Scripts\tool\BlindDrug.cs" />
     <Compile Include="Assets\Scripts\tool\fireControlor.cs" />
     <Compile Include="Assets\Scripts\tool\FireStone.cs" />
     <Compile Include="Assets\Scripts\tool\FixPotion.cs" />
     <Compile Include="Assets\Scripts\tool\Food.cs" />
+    <Compile Include="Assets\Scripts\tool\JewelThief.cs" />
     <Compile Include="Assets\Scripts\tool\Key.cs" />
     <Compile Include="Assets\Scripts\tool\lightControlor.cs" />
     <Compile Include="Assets\Scripts\tool\OriginStone.cs" />
@@ -89,8 +91,8 @@
     <Compile Include="Assets\Scripts\tool\Teleportation.cs" />
     <Compile Include="Assets\Scripts\tool\ThunderstormStone.cs" />
     <Compile Include="Assets\Scripts\tool\Trap.cs" />
-    <Compile Include="Assets\Scripts\UI\BlackFadeInOut.cs" />
     <Compile Include="Assets\Scripts\UI\BloodControl.cs" />
+    <Compile Include="Assets\Scripts\UI\LoseSight.cs" />
     <Compile Include="Assets\Scripts\UI\ToolInteraction.cs" />
     <Compile Include="Assets\Scripts\UI\ToolUIController.cs" />
     <None Include="Assets\Photon\PhotonLibs\changes-library.txt" />
