@@ -1,4 +1,7 @@
 sceneSetups:
+- path: Assets/PolygonDungeon/Scenes/Laucher.unity
+  isLoaded: 0
+  isActive: 0
 - path: Assets/PolygonDungeon/Scenes/Room for 1.unity
   isLoaded: 1
   isActive: 1

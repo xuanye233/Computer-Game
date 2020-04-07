@@ -13,7 +13,11 @@ public class CharacterItems : MonoBehaviour
     int BlindDrug;
     int Teleportation;
     int StumblingBlock;
+    int ThunderstormStone;
     List<int> key;
+
+    int JewelThief;//jewelthief的数量
+    int jewel;//后续改成list，现在先用单个测试
 
     void Start()
     {
@@ -26,6 +30,10 @@ public class CharacterItems : MonoBehaviour
         BlindDrug = 5;
         Teleportation = 5;
         StumblingBlock = 5;
+        ThunderstormStone = 5;
+
+        JewelThief = 5;
+        jewel = 5;
         key = new List<int>();
     }
 
@@ -78,6 +86,20 @@ public class CharacterItems : MonoBehaviour
         return StumblingBlock;
     }
 
+    public int getThunderstormStone()
+    {
+        return ThunderstormStone;
+    }
+
+    public int getJewelThief()//新增
+    {
+        return JewelThief;
+    }
+
+    public int getJewel()//新增
+    {
+        return jewel;
+    }
     public void changeFireStone(int num)
     {
         fireStone += num;
@@ -122,6 +144,22 @@ public class CharacterItems : MonoBehaviour
     {
         StumblingBlock += num;
     }
+
+    public void changeThunderstormStone(int num)
+    {
+        ThunderstormStone += num;
+    }
+
+    public void changeJewelThief(int num)//新增
+    {
+        JewelThief += num;
+    }
+
+    public void changeJewel(int num)//新增
+    {
+        jewel += num;
+    }
+
     public void addKey(int index)
     {
         key.Add(index);

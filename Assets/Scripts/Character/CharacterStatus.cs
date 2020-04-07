@@ -180,13 +180,56 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         return health;
     }
 
-    
+
     //public void destroyFood(int viewID)
     //{
     //    PhotonNetwork.Destroy(PhotonView.Find(viewID));
     //}
 
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "ThunderStorm")
+        {
+            //Destroy(collision.collider.gameObject);
+            int viewID = collision.collider.gameObject.GetComponent<PhotonView>().ViewID;
+            Vector3 position = GameObject.Find("MapCamera/PlayerCube").transform.position;
+            Debug.Log(position);
+            PhotonView.RPC("ThunderStormEvent", RpcTarget.MasterClient,viewID, position);
+        }
+
+        if (collision.collider.tag == "StumblingBlock")
+        {
+            int viewID = collision.collider.gameObject.GetComponent<PhotonView>().ViewID;
+            PhotonView.RPC("StumblingBlockEvent", RpcTarget.MasterClient, viewID);
+            ChangeHealth(-20f);
+        }
+    }
+
+    [PunRPC]
+    public void ThunderStormEvent(int viewID, Vector3 position)
+    {
+        PhotonNetwork.Destroy(PhotonView.Find(viewID));
+        StartCoroutine(Wait(position));
+    }
+
+    [PunRPC]
+    public void StumblingBlockEvent(int viewID)
+    {
+        PhotonNetwork.Destroy(PhotonView.Find(viewID));
+    }
+
+    IEnumerator Wait(Vector3 position) //fade function
+    {
+        Time.timeScale = 1;
+        GameObject gameobj;
+        gameobj = PhotonNetwork.Instantiate("PlayerCube", position + new Vector3(0, -9, 0), Quaternion.identity, 0);
+        //gameobj.transform.position = position + new Vector3(0,-5,0);
+        yield return new WaitForSeconds(5);
+        //PhotonNetwork.Destroy(gameobj);
+        //PhotonNetwork.
+    }
+
+
 
 
     #region IPunObservable implementation

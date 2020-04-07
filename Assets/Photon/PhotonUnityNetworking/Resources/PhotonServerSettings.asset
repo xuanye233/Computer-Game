@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 0397e9a6-f4c4-475c-8cea-32f8fc38c7df
+    AppIdRealtime: 007b30c1-165c-4972-be4d-9a4ae4a6cf5f
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 1
     UseNameServer: 1
-    FixedRegion: eu
+    FixedRegion: CN
     Server: 
     Port: 0
     Protocol: 0
@@ -44,5 +44,10 @@ MonoBehaviour:
   - DeHealth
   - createStumblingBlock
   - deleteStumblingBlock
+  - createThunderstorm
+  - ThunderStormEvent
+  - StumblingBlockEvent
+  - useJewelThief
+  - lightUP
   DisableAutoOpenWizard: 1
   ShowSettings: 1

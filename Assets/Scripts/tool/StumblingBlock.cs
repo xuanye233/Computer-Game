@@ -109,9 +109,9 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
     }
 
 
-    [PunRPC]
-    public void deleteStumblingBlock(int ViewID)
-    {
+    //[PunRPC]
+    //public void deleteStumblingBlock(int ViewID)
+    //{
         
-    }
+    //}
 }

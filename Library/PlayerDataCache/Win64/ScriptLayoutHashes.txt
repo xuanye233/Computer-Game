@@ -113,7 +113,7 @@ aa165095bcf0f4d99594ea33df01c81b UnityEngine.UI.dll:UnityEngine.UI.Slider
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 267e1e00a8f1d106bd614339db235595 PhotonUnityNetworking.Demos.dll:Photon.Pun.Demo.Cockpit.PunCockpit
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ThunderstormStone
+f51b3648fe9f731fba9eee929a217fe8 Assembly-CSharp.dll:.ThunderstormStone
 43164e6d729996c951c90acae7178a26 Assembly-CSharp.dll:.lightControlor
 ba160f8fe96116c81151a9a24d7d9f4f PhotonUnityNetworking.Demos.dll:Photon.Pun.Demo.Cockpit.RoomListCell
 c87a2744a4fec8052f557862b102c4e4 PhotonUnityNetworking.Demos.dll:Photon.Pun.Demo.Cockpit.FriendListCell
@@ -281,7 +281,7 @@ c5fd97cc10b89deaf7c60af66a6b0d5a PhotonRealtime.dll:Photon.Realtime.SupportLogge
 3f600ad0f750f59238a91f7513b927c1 PhotonUnityNetworking.dll:Photon.Pun.PhotonTransformViewClassic
 71bb6a6b6c8f052f948db64c7dd3ca4f PhotonUnityNetworking.Demos.dll:Photon.Pun.Demo.Cockpit.CrcCheckToggle
 71bb6a6b6c8f052f948db64c7dd3ca4f PhotonUnityNetworking.Utilities.dll:Photon.Pun.UtilityScripts.OnPointerOverTooltip
-7a06a36a6a5eea1e5a054dc9cc853855 Assembly-CSharp.dll:.JewelThief
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.JewelThief
 c656dcc13ae391b68d594cc8f9c590b0 PhotonUnityNetworking.Demos.dll:Photon.Pun.Demo.Cockpit.IsConnectedAndReadyProperty
 72308e24e3601ff53c7635f5a3bd8529 Assembly-CSharp.dll:.BloodControl
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
