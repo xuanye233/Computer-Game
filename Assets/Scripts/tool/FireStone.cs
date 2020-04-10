@@ -77,3 +77,4 @@ public class FireStone : MonoBehaviourPunCallbacks
         //GameObject.FindGameObjectWithTag(tag).SetActive(true);
     }
 }
+
