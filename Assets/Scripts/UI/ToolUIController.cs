@@ -8,8 +8,11 @@ public class ToolUIController : MonoBehaviourPun
 {
     //Player player;
     CharacterItems characterItems;
+    [SerializeField]
     Text foodNumText;
+    [SerializeField]
     Text trapNumText;
+    [SerializeField]
     Text fireStoneNumText;
     // Start is called before the first frame update
     void Start()
@@ -21,9 +24,9 @@ public class ToolUIController : MonoBehaviourPun
         //player = GameObject.Find("Player").GetComponent<Player>();
 
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
-        foodNumText = GameObject.Find("Canvas/ToolList/Food/FoodNum").GetComponent<Text>();
-        trapNumText = GameObject.Find("Canvas/ToolList/Trap/TrapNum").GetComponent<Text>();
-        fireStoneNumText = GameObject.Find("Canvas/ToolList/FireStone/FireStoneNum").GetComponent<Text>();
+        //foodNumText = GameObject.Find("Canvas/ToolList/Food/FoodNum").GetComponent<Text>();
+        //trapNumText = GameObject.Find("Canvas/ToolList/Trap/TrapNum").GetComponent<Text>();
+        //fireStoneNumText = GameObject.Find("Canvas/ToolList/FireStone/FireStoneNum").GetComponent<Text>();
     }
 
     // Update is called once per frame

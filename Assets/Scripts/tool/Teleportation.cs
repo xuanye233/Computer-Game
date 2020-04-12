@@ -11,6 +11,10 @@ public class Teleportation : MonoBehaviourPunCallbacks
     GameObject player;
     CharacterItems characterItems;
     bool isClicked;
+    [SerializeField]
+    GameObject bagButton;
+    [SerializeField]
+    GameObject bagPanel;
     void Awake()
     {
         player = GameObject.Find("Player(Clone)");
@@ -34,7 +38,8 @@ public class Teleportation : MonoBehaviourPunCallbacks
             return;
         }
         isClicked = true;
-
+        bagButton.SetActive(true);
+        bagPanel.SetActive(false);
     }
 
     private void TeleportationEvent()

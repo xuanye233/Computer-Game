@@ -9,12 +9,12 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     private GameObject[] players;
     CharacterItems characterItems;
     [SerializeField] GameObject blackScreen;//这个blackScreen应该是对手UI界面里的黑屏？
-    private RawImage rawImage;
+    [SerializeField] RawImage rawImage;
     private void Awake()
     {
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         //blackScreen = GameObject.Find("Canvas/BlackScreen");
-        rawImage = GameObject.Find("Canvas/BlackScreen").GetComponent<RawImage>();
+        //rawImage = GameObject.Find("Canvas/BlackScreen").GetComponent<RawImage>();
         rawImage.CrossFadeAlpha(0, 1f, false);
         //rawImage.color = Color.clear;
     }

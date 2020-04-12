@@ -25,7 +25,7 @@ public class TakeAndDrop : MonoBehaviourPun
         GameObject gameObject = GameObject.Find("Camera");
         //cam = gameObject.GetComponent<Camera>();
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
-        toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
+        //toolInteraction = GameObject.Find("Canvas/BagPanel/ToolList").GetComponent<ToolInteraction>();
 
     }
     void Update()
@@ -41,7 +41,7 @@ public class TakeAndDrop : MonoBehaviourPun
         //timeHit += Time.deltaTime;
         //if (timeHit > 0.2f)
         //{
-            if (Input.GetMouseButtonUp(0) && !toolInteraction.isTrapClick && !toolInteraction.isFireStoneClick)
+            if (Input.GetMouseButtonUp(0))
             {
                 //no using tool
                 timeHit = 0f;

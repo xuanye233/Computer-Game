@@ -12,16 +12,23 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
     [SerializeField] private float deVal = 20.0f; //减少的生命值
     [SerializeField] private int life = 5; //石头的生命周期
     public bool isTrapClick;
+    [SerializeField]
     Transform trapTransform;
     GameObject tempPlayer;
     CharacterItems characterItems;
+    [SerializeField]
     Text noTrapText;
+
+    [SerializeField]
+    GameObject bagButton;
+    [SerializeField]
+    GameObject bagPanel;
 
     void Start()
     {
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
-        trapTransform = GameObject.Find("Canvas/ToolList/Trap/TrapImage").GetComponent<Transform>();
-        noTrapText = GameObject.Find("Canvas/TipsList/NoTrapText").GetComponent<Text>();
+        //trapTransform = GameObject.Find("Canvas/ToolList/Trap/TrapImage").GetComponent<Transform>();
+        //noTrapText = GameObject.Find("Canvas/TipsList/NoTrapText").GetComponent<Text>();
         isTrapClick = false;
         noTrapText.gameObject.SetActive(false);
     }
@@ -46,6 +53,8 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
         {
             isTrapClick = true;
             trapTransform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+            bagButton.SetActive(true);
+            bagPanel.SetActive(false);
         }
     }
 

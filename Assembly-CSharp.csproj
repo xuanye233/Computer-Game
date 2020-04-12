@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\tool\ThunderstormStone.cs" />
     <Compile Include="Assets\Scripts\tool\Trap.cs" />
     <Compile Include="Assets\Scripts\UI\BloodControl.cs" />
+    <Compile Include="Assets\Scripts\UI\CanvasControl.cs" />
     <Compile Include="Assets\Scripts\UI\LoseSight.cs" />
     <Compile Include="Assets\Scripts\UI\ToolInteraction.cs" />
     <Compile Include="Assets\Scripts\UI\ToolUIController.cs" />

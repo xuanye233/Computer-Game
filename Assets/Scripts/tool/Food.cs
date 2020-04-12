@@ -7,15 +7,18 @@ public class Food : MonoBehaviour
 {
     CharacterItems characterItems;
     CharacterStatus characterStatus;
-    ToolInteraction toolInteraction;
+    //ToolInteraction toolInteraction;
+    [SerializeField]
     Text noFoodText;
+
     private void Start()
     {
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         characterStatus = GameObject.Find("Player(Clone)").GetComponent<CharacterStatus>();
-        toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
-        noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
-        noFoodText.gameObject.SetActive(false);
+        //toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
+        //noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
+        //noFoodText.gameObject.SetActive(false);
+        //Debug.Log("setfalse");
     }
 
     public void onClicked()
@@ -28,7 +31,7 @@ public class Food : MonoBehaviour
             Debug.Log("nofood");
 
             //StartCoroutine(wait1());
-            StartCoroutine(toolInteraction.noFoodWait());//disappear smothly
+            StartCoroutine(noFoodWait());//disappear smothly
 
             //double currentTime = 0;
 
@@ -61,7 +64,13 @@ public class Food : MonoBehaviour
             characterStatus.ChangeHealth(5);
         }
     }
-    
+    public IEnumerator noFoodWait() //fade function
+    {
+        //yield return new WaitForSeconds(5);
+        noFoodText.CrossFadeAlpha(1, 1f, false);
+        yield return new WaitForSeconds(1);
+        noFoodText.CrossFadeAlpha(0, 1f, false);
+    }
 
 }
 

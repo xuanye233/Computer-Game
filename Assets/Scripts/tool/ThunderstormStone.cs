@@ -7,6 +7,10 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
 {
     CharacterItems characterItems;
     public bool isThunderstormStoneClick;
+    [SerializeField]
+    GameObject bagButton;
+    [SerializeField]
+    GameObject bagPanel;
 
     private void Start()
     {
@@ -39,6 +43,8 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
             //Debug.Log("2");
             isThunderstormStoneClick = true;
             //trapTransform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+            bagButton.SetActive(true);
+            bagPanel.SetActive(false);
         }
     }
 

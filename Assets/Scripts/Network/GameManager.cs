@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -20,6 +21,8 @@ namespace Com.MyCompany.MyGame
         public GameObject foodPrefab;
         public List<Transform> outsideArray;
         //public GameObject mapPrefab;
+        [SerializeField]
+        RawImage blackScreen;
 
         #endregion
 
@@ -69,8 +72,13 @@ namespace Com.MyCompany.MyGame
                 }
             }
         }
-        #endregion
 
+        public void Start()
+        {
+            //blackScreen.CrossFadeAlpha(0, 1f, false);
+            blackScreen.gameObject.SetActive(false);
+        }
+        #endregion
 
         #region Public Methods
 

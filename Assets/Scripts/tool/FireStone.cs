@@ -7,18 +7,25 @@ using Photon.Pun;
 public class FireStone : MonoBehaviourPunCallbacks
 {
     CharacterItems characterItems;
-    ToolInteraction toolInteraction;
+    //ToolInteraction toolInteraction;
+    [SerializeField]
     Transform fireStoneTransform;
     GameObject player;
     bool isClicked;
     GameObject torch;
+    [SerializeField]
+    Text noFireStoneText;
+    [SerializeField]
+    GameObject bagButton;
+    [SerializeField]
+    GameObject bagPanel;
 
     private void Start()
     {
         player = GameObject.Find("Player(Clone)");
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
-        toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
-        fireStoneTransform = GameObject.Find("Canvas/ToolList/FireStone/FireStoneImage").GetComponent<Transform>();
+        //toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
+        //fireStoneTransform = GameObject.Find("Canvas/ToolList/FireStone/FireStoneImage").GetComponent<Transform>();
         isClicked = false;
         torch = GameObject.Find("Outside/SM_Prop_TorchStick_06/FX_Fire_01");
         torch.GetComponent<ParticleSystem>().Stop();
@@ -36,11 +43,13 @@ public class FireStone : MonoBehaviourPunCallbacks
     {
         if (characterItems.getFireStone() == 0)
         {
-            toolInteraction.showNoFireStone();
+            showNoFireStone();
             return;
         }
         isClicked = true;
         fireStoneTransform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+        bagPanel.SetActive(false);
+        bagButton.SetActive(true);
     }
 
     public void FireStoneEvent()
@@ -75,6 +84,23 @@ public class FireStone : MonoBehaviourPunCallbacks
         //Debug.Log(tag);
         //Debug.Log(GameObject.FindGameObjectWithTag(tag).name);
         //GameObject.FindGameObjectWithTag(tag).SetActive(true);
+    }
+
+    public void showNoFireStone()
+    {
+        noFireStoneText.gameObject.SetActive(true);//display the tips
+        Debug.Log("noFireStone");
+
+        //StartCoroutine(wait1());
+        StartCoroutine(noFireStoneWait());//disappear smothly
+    }
+
+    IEnumerator noFireStoneWait() //fade function
+    {
+        //yield return new WaitForSeconds(5);
+        noFireStoneText.CrossFadeAlpha(1, 1f, false);
+        yield return new WaitForSeconds(1);
+        noFireStoneText.CrossFadeAlpha(0, 1f, false);
     }
 }
 

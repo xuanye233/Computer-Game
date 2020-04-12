@@ -9,6 +9,10 @@ public class JewelThief : MonoBehaviourPunCallbacks
     private GameObject player;//自身
     CharacterItems characterItems;
     bool isClicked;
+    [SerializeField]
+    GameObject bagButton;
+    [SerializeField]
+    GameObject bagPanel;
 
     private void Start()
     {
@@ -34,6 +38,8 @@ public class JewelThief : MonoBehaviourPunCallbacks
             return;
         }
         isClicked = true;
+        bagButton.SetActive(true);
+        bagPanel.SetActive(false);
     }
 
     private void jewelThiefEvent()

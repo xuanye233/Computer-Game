@@ -19,7 +19,7 @@ public class ToolInteraction : MonoBehaviourPun
     public Boolean isTrapClick;
     public Boolean isFireStoneClick;
 
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -31,14 +31,14 @@ public class ToolInteraction : MonoBehaviourPun
         //player = GameObject.Find("Player").GetComponent<Player>();
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         characterStatus = GameObject.Find("Player(Clone)").GetComponent<CharacterStatus>();
-        noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
+        noFoodText = GameObject.Find("Canvas/BagPanel/TipsList/NoFoodText").GetComponent<Text>();
         noFoodText.gameObject.SetActive(false);
-        noTrapText = GameObject.Find("Canvas/TipsList/NoTrapText").GetComponent<Text>();
+        noTrapText = GameObject.Find("Canvas/BagPanel/TipsList/NoTrapText").GetComponent<Text>();
         noTrapText.gameObject.SetActive(false);
-        noFireStoneText = GameObject.Find("Canvas/TipsList/NoFireStoneText").GetComponent<Text>();
+        noFireStoneText = GameObject.Find("Canvas/BagPanel/TipsList/NoFireStoneText").GetComponent<Text>();
         noFireStoneText.gameObject.SetActive(false);
-        trapTransform = GameObject.Find("Canvas/ToolList/Trap/TrapImage").GetComponent<Transform>();
-        fireStoneTransform = GameObject.Find("Canvas/ToolList/FireStone/FireStoneImage").GetComponent<Transform>();
+        trapTransform = GameObject.Find("Canvas/BagPanel/ToolList/Trap/TrapImage").GetComponent<Transform>();
+        fireStoneTransform = GameObject.Find("Canvas/BagPanel/ToolList/FireStone/FireStoneImage").GetComponent<Transform>();
 
         isTrapClick = false;
         isFireStoneClick = false;
