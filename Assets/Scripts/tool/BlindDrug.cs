@@ -8,7 +8,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
 {
     private GameObject[] players;
     CharacterItems characterItems;
-    [SerializeField] GameObject blackScreen;//这个blackScreen应该是对手UI界面里的黑屏？
+    //[SerializeField] GameObject blackScreen;//这个blackScreen应该是对手UI界面里的黑屏？
     [SerializeField] RawImage rawImage;
     private void Awake()
     {
@@ -16,6 +16,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         //blackScreen = GameObject.Find("Canvas/BlackScreen");
         //rawImage = GameObject.Find("Canvas/BlackScreen").GetComponent<RawImage>();
         rawImage.CrossFadeAlpha(0, 1f, false);
+        rawImage.gameObject.SetActive(false);
         //rawImage.color = Color.clear;
     }
     public void onClick()
@@ -39,21 +40,20 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     [PunRPC]
     public void useBlindDrug()
     {
-        blackScreen = GameObject.Find("Canvas/BlackScreen");
-        //blackScreen.GetComponent<LoseSight>().beBlind();
-        
+        //blackScreen = GameObject.Find("Canvas/BlackScreen");
+        //blackScreen.GetComponent<LoseSight>().beBlind();       
         StartCoroutine(Wait());
     }
 
     IEnumerator Wait() //fade function
     {
-        RawImage rawImage;
-        rawImage = GameObject.Find("Canvas/BlackScreen").GetComponent<RawImage>();
         Time.timeScale = 1;
-        //Debug.Log("yyyyes");
-        //yield return new WaitForSeconds(5);
+        rawImage.CrossFadeAlpha(0, 0.1f, false);
+        yield return new WaitForSeconds(0.1f);
+        rawImage.gameObject.SetActive(true);
         rawImage.CrossFadeAlpha(1, 1f, false);
         yield return new WaitForSeconds(5);
         rawImage.CrossFadeAlpha(0, 2f, false);
+        rawImage.gameObject.SetActive(false);
     }
 }

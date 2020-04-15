@@ -225,7 +225,7 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         gameobj = PhotonNetwork.Instantiate("PlayerCube", position + new Vector3(0, -9, 0), Quaternion.identity, 0);
         //gameobj.transform.position = position + new Vector3(0,-5,0);
         yield return new WaitForSeconds(5);
-        //PhotonNetwork.Destroy(gameobj);
+        PhotonNetwork.Destroy(gameobj);
         //PhotonNetwork.
     }
 

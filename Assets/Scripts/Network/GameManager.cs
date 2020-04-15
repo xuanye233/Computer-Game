@@ -76,7 +76,7 @@ namespace Com.MyCompany.MyGame
         public void Start()
         {
             //blackScreen.CrossFadeAlpha(0, 1f, false);
-            blackScreen.gameObject.SetActive(false);
+            //blackScreen.gameObject.SetActive(false);
         }
         #endregion
 

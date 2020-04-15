@@ -20,6 +20,7 @@ public class FixPotion : MonoBehaviourPunCallbacks
     }
     public void onClicked()
     {
+        Debug.Log("click");
         if(characterItems.getFixPotion() == 0)
         {
             return;
@@ -27,9 +28,10 @@ public class FixPotion : MonoBehaviourPunCallbacks
         }
         //现在的设定是只要是一定范围内的敌人都会被影响
         //
+        Debug.Log("click2");
         players = GameObject.FindGameObjectsWithTag("Player");
 
-        for (int i = 1; i < players.Length; i++)
+        for (int i = 0; i < players.Length; i++)
         {
             //float dis = Vector3.Distance(players[i].transform.position, transform.position);
 
