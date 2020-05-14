@@ -54,7 +54,7 @@ namespace Com.MyCompany.MyGame
                 {
                     PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 6f, -40f), Quaternion.identity, 0);
                     PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 8f, -40f), Quaternion.identity, 0);
-                    Debug.Log("ahahahaha");
+                    //Debug.Log("ahahahaha");
                 }
                 if (CharacterStatus.LocalPlayerInstance == null)
                 {

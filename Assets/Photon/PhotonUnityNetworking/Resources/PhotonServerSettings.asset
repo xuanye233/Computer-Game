@@ -49,5 +49,15 @@ MonoBehaviour:
   - StumblingBlockEvent
   - useJewelThief
   - lightUP
+  - destroyEffect
+  - showFoodEffect
+  - showOriginEffect
+  - showStumblingEffect
+  - showFixEffect
+  - showBlindEffect
+  - showJewelEffect
+  - showTeleEffect
+  - showThunderEffect
+  - showEffect
   DisableAutoOpenWizard: 1
   ShowSettings: 1

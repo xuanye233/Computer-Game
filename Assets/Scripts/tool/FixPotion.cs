@@ -12,11 +12,13 @@ public class FixPotion : MonoBehaviourPunCallbacks
     private GameObject[] players;
     ThirdPersonUserControl thirdPersonUserControl;
     CharacterItems characterItems;
+    GameObject curPlayer;
 
     public void Awake()
     {
-        thirdPersonUserControl = GameObject.Find("Player(Clone)").GetComponent<ThirdPersonUserControl>();
-        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
+        curPlayer = GameObject.Find("Player(Clone)");
+        thirdPersonUserControl = curPlayer.GetComponent<ThirdPersonUserControl>();
+        characterItems = curPlayer.GetComponent<CharacterItems>();
     }
     public void onClicked()
     {
@@ -29,8 +31,8 @@ public class FixPotion : MonoBehaviourPunCallbacks
         //现在的设定是只要是一定范围内的敌人都会被影响
         //
         Debug.Log("click2");
-        players = GameObject.FindGameObjectsWithTag("Player");
-
+        PhotonView.RPC("showFixEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
+        players = GameObject.FindGameObjectsWithTag("Player");        
         for (int i = 0; i < players.Length; i++)
         {
             //float dis = Vector3.Distance(players[i].transform.position, transform.position);
@@ -57,5 +59,12 @@ public class FixPotion : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(waitTime);
         PhotonView.Find(ViewID).GetComponent<ThirdPersonUserControl>().canMove = true;
         //等待之后执行的动作
+    }
+    
+    [PunRPC]
+    public void showFixEffect(Vector3 position, Vector3 center, float scale)
+    {
+        Vector3 centerPos = position + center * scale * 1.5f;
+        PhotonNetwork.Instantiate("Effects/FixEffect", centerPos, Quaternion.identity, 0);
     }
 }

@@ -13,11 +13,13 @@ public class JewelThief : MonoBehaviourPunCallbacks
     GameObject bagButton;
     [SerializeField]
     GameObject bagPanel;
+    GameObject curPlayer;
 
     private void Start()
     {
-        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
-        player = GameObject.Find("Player(Clone)");
+        curPlayer = GameObject.Find("Player(Clone)");
+        characterItems = curPlayer.GetComponent<CharacterItems>();
+        player = curPlayer;
         isClicked = false;//设置为点击玩家进行偷窃
     }
 
@@ -52,6 +54,7 @@ public class JewelThief : MonoBehaviourPunCallbacks
             {
                 if (hit.transform.gameObject.tag == "Player")
                 {
+                    PhotonView.RPC("showJewelEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
                     //Debug.Log("wodeid " + hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
                     //Debug.Log("his jewel " + PhotonView.Find(hit.transform.gameObject.GetComponent<PhotonView>().ViewID).GetComponent<CharacterItems>().getJewel());
                     PhotonView.RPC("useJewelThief", RpcTarget.Others, hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
@@ -87,5 +90,12 @@ public class JewelThief : MonoBehaviourPunCallbacks
                 //对方文字提示“您的宝石被偷了！”
             }
         }
+    }
+
+    [PunRPC]
+    public void showJewelEffect(Vector3 position, Vector3 center, float scale)
+    {
+        Vector3 centerPos = position + center * scale * 1.5f;
+        PhotonNetwork.Instantiate("Effects/JewelEffect", centerPos, Quaternion.identity, 0);
     }
 }

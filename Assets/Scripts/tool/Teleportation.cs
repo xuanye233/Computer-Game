@@ -8,7 +8,7 @@ public class Teleportation : MonoBehaviourPunCallbacks
     // 互换位置
     Vector3 myPosition;
     Vector3 othersPosition;
-    GameObject player;
+    GameObject curPlayer;
     CharacterItems characterItems;
     bool isClicked;
     [SerializeField]
@@ -17,8 +17,8 @@ public class Teleportation : MonoBehaviourPunCallbacks
     GameObject bagPanel;
     void Awake()
     {
-        player = GameObject.Find("Player(Clone)");
-        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
+        curPlayer = GameObject.Find("Player(Clone)");
+        characterItems = curPlayer.GetComponent<CharacterItems>();
         isClicked = false;
     }
 
@@ -56,12 +56,16 @@ public class Teleportation : MonoBehaviourPunCallbacks
                     //myPosition = transform.position;
                     //hit.transform.transform.position = myPosition;
                     //transform.position = othersPosition;
+                    PhotonView.RPC("showTeleEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
+                    //现在的设定是只要是一定范围内的敌人都会被影响
                     Debug.Log("wodeid " + hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
 
-                    myPosition = player.transform.position;
-                    player.transform.position = hit.transform.position;
+                    myPosition = curPlayer.transform.position;
+                    curPlayer.transform.position = hit.transform.position;
                     PhotonView.RPC("changePosition", RpcTarget.Others, hit.transform.gameObject.GetComponent<PhotonView>().ViewID, myPosition);
                     characterItems.changeTeleportation(-1);
+
+                    isClicked = false;
                 }
             }
         }
@@ -71,5 +75,12 @@ public class Teleportation : MonoBehaviourPunCallbacks
     public void changePosition(int viewID,Vector3 position)
     {
         PhotonView.Find(viewID).transform.position = position;
+    }
+   
+    [PunRPC]
+    public void showTeleEffect(Vector3 position, Vector3 center, float scale)
+    {
+        Vector3 centerPos = position + center * scale * 1.5f;
+        PhotonNetwork.Instantiate("Effects/TeleEffect", centerPos, Quaternion.identity, 0);
     }
 }

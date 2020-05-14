@@ -10,9 +10,11 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     CharacterItems characterItems;
     //[SerializeField] GameObject blackScreen;//这个blackScreen应该是对手UI界面里的黑屏？
     [SerializeField] RawImage rawImage;
+    GameObject curPlayer;
     private void Awake()
     {
-        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
+        curPlayer = GameObject.Find("Player(Clone)");
+        characterItems = curPlayer.GetComponent<CharacterItems>();
         //blackScreen = GameObject.Find("Canvas/BlackScreen");
         //rawImage = GameObject.Find("Canvas/BlackScreen").GetComponent<RawImage>();
         rawImage.CrossFadeAlpha(0, 1f, false);
@@ -25,6 +27,8 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         {
             return;
         }
+        PhotonView.RPC("showBlindEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
+
         players = GameObject.FindGameObjectsWithTag("Player");
 
         for (int i = 1; i < players.Length; i++)
@@ -55,5 +59,12 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(5);
         rawImage.CrossFadeAlpha(0, 2f, false);
         rawImage.gameObject.SetActive(false);
+    }
+
+    [PunRPC]
+    public void showBlindEffect(Vector3 position, Vector3 center, float scale)
+    {
+        Vector3 centerPos = position + center * scale * 1.5f;
+        PhotonNetwork.Instantiate("Effects/BlindEffect", centerPos, Quaternion.identity, 0);
     }
 }

@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class Food : MonoBehaviour
+public class Food : MonoBehaviourPunCallbacks
 {
     CharacterItems characterItems;
     CharacterStatus characterStatus;
     //ToolInteraction toolInteraction;
     [SerializeField]
     Text noFoodText;
+    GameObject curPlayer;
 
     private void Start()
     {
-        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
-        characterStatus = GameObject.Find("Player(Clone)").GetComponent<CharacterStatus>();
+        curPlayer = GameObject.Find("Player(Clone)");
+        characterItems = curPlayer.GetComponent<CharacterItems>();
+        characterStatus = curPlayer.GetComponent<CharacterStatus>();
         //toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
         //noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
         //noFoodText.gameObject.SetActive(false);
@@ -60,8 +63,9 @@ public class Food : MonoBehaviour
         else//have enough food
         {
             characterItems.changeFood(-1);
-
             characterStatus.ChangeHealth(5);
+            
+            PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
         }
     }
     public IEnumerator noFoodWait() //fade function
@@ -72,5 +76,11 @@ public class Food : MonoBehaviour
         noFoodText.CrossFadeAlpha(0, 1f, false);
     }
 
+    [PunRPC]
+    public void showFoodEffect(Vector3 position, Vector3 center, float scale)
+    {
+        Vector3 centerPos = position + center * scale * 1.5f;
+        PhotonNetwork.Instantiate("Effects/FoodEffect", centerPos, Quaternion.identity, 0);
+    }
 }
 

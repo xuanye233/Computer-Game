@@ -7,7 +7,6 @@ public class CanvasControl : MonoBehaviour
 {
     [SerializeField]
     GameObject bagPanel;
-
     [SerializeField]
     Text noFoodText;
     [SerializeField]
@@ -16,6 +15,7 @@ public class CanvasControl : MonoBehaviour
     Text noFireStoneText;
     [SerializeField]
     GameObject bagButton;
+
     private void Awake()
     {
         noFoodText.gameObject.SetActive(false);
