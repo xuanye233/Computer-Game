@@ -73,7 +73,9 @@
     <Compile Include="Assets\Scripts\Character\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonUserControl.cs" />
     <Compile Include="Assets\Scripts\Environment\Addcollider.cs" />
+    <Compile Include="Assets\Scripts\Launcher\BackgroundFit.cs" />
     <Compile Include="Assets\Scripts\Launcher\ButtonControl.cs" />
+    <Compile Include="Assets\Scripts\Launcher\ButtonCtrl.cs" />
     <Compile Include="Assets\Scripts\Launcher\setting\bgmControl.cs" />
     <Compile Include="Assets\Scripts\Network\CameraWork.cs" />
     <Compile Include="Assets\Scripts\Network\GameManager.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Assets\Scripts\UI\CanvasControl.cs" />
     <Compile Include="Assets\Scripts\UI\CharaSetButton.cs" />
     <Compile Include="Assets\Scripts\UI\ESC.cs" />
+    <Compile Include="Assets\Scripts\UI\GlobalData.cs" />
     <Compile Include="Assets\Scripts\UI\LoseSight.cs" />
     <Compile Include="Assets\Scripts\UI\MouseOverEffect.cs" />
     <Compile Include="Assets\Scripts\UI\TimerControl.cs" />

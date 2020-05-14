@@ -41,9 +41,9 @@ public class TimerControl : MonoBehaviour
         //timeText.text = deltaminute.ToString() + ":" + deltasecond.ToString();
         string str = string.Format("{0:D2}:{1:D2}:{2:D2}", deltahour, deltaminute, deltasecond);
         timeText.text = str;
-        Debug.Log("hour" + deltahour.ToString());
-        Debug.Log("minute" + deltaminute.ToString());
-        Debug.Log("second" + deltasecond.ToString());
-        Debug.Log(str);
+        //Debug.Log("hour" + deltahour.ToString());
+        //Debug.Log("minute" + deltaminute.ToString());
+        //Debug.Log("second" + deltasecond.ToString());
+        //Debug.Log(str);
     }
 }

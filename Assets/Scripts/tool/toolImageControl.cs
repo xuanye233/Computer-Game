@@ -45,8 +45,8 @@ public class toolImageControl : MonoBehaviour
         GameObject obj = this.gameObject.transform.parent.gameObject;
         string changename = obj.name;
         changename = changename.Substring(changename.Length - 1, 1);//显示1
-                                                                    //修改菜单
-                                                                    //从菜单中删除
+        //修改菜单
+        //从菜单中删除
         characterItems.deleteMenu(characterItems.menuControl.toolMenu[int.Parse(changename) - 1].name, characterItems.menuControl);
         //该格子名字初始化
         name = "None";
