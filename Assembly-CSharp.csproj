@@ -64,6 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Effects\Scripts\Lighting.cs" />
+    <Compile Include="Assets\Scripts\Audio\ButtonSound.cs" />
+    <Compile Include="Assets\Scripts\Audio\FireSound.cs" />
+    <Compile Include="Assets\Scripts\Audio\SetSound.cs" />
+    <Compile Include="Assets\Scripts\Audio\ToolSound.cs" />
+    <Compile Include="Assets\Scripts\Audio\WalkSound.cs" />
     <Compile Include="Assets\Scripts\Camera\AbstractTargetFollower.cs" />
     <Compile Include="Assets\Scripts\Camera\FreeLookCam.cs" />
     <Compile Include="Assets\Scripts\Camera\PivotBasedCameraRig.cs" />

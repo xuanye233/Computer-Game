@@ -11,9 +11,12 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
     GameObject bagButton;
     [SerializeField]
     GameObject bagPanel;
-
+    GameObject curPlayer;
+    ToolSound toolSound;
     private void Start()
     {
+        curPlayer = GameObject.Find("Player(Clone)");
+        toolSound = curPlayer.GetComponent<ToolSound>();
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         isThunderstormStoneClick = false;
         Debug.Log(" isThunderstormStoneClick = false;");

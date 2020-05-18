@@ -9,6 +9,7 @@ public class Teleportation : MonoBehaviourPunCallbacks
     Vector3 myPosition;
     Vector3 othersPosition;
     GameObject curPlayer;
+    ToolSound toolSound;
     CharacterItems characterItems;
     bool isClicked;
     [SerializeField]
@@ -18,6 +19,7 @@ public class Teleportation : MonoBehaviourPunCallbacks
     void Awake()
     {
         curPlayer = GameObject.Find("Player(Clone)");
+        toolSound = curPlayer.GetComponent<ToolSound>();
         characterItems = curPlayer.GetComponent<CharacterItems>();
         isClicked = false;
     }
@@ -56,6 +58,8 @@ public class Teleportation : MonoBehaviourPunCallbacks
                     //myPosition = transform.position;
                     //hit.transform.transform.position = myPosition;
                     //transform.position = othersPosition;
+                    toolSound.Teleport(curPlayer.GetComponent<PhotonView>().ViewID);
+                    toolSound.Teleport(hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
                     PhotonView.RPC("showTeleEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
                     //现在的设定是只要是一定范围内的敌人都会被影响
                     Debug.Log("wodeid " + hit.transform.gameObject.GetComponent<PhotonView>().ViewID);

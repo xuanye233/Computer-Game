@@ -60,5 +60,24 @@ MonoBehaviour:
   - showThunderEffect
   - showEffect
   - hello
+  - BlindedRpc
+  - BlindRpc
+  - EatRpc
+  - FireStoneRpc
+  - GetRpc
+  - HealRpc
+  - jumping
+  - LetNotMoveRpc
+  - normalMove
+  - NotMoveRpc
+  - quickMove
+  - SetRpc
+  - slowMove
+  - startMove
+  - StealRpc
+  - stopMove
+  - TeleportRpc
+  - StumblingBlockSound
+  - ThunderStormSound
   DisableAutoOpenWizard: 1
   ShowSettings: 1

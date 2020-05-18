@@ -245,6 +245,18 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         PhotonNetwork.Instantiate("Effects/ThunderEffect", centerPos, Quaternion.identity, 0);
     }
 
+    [PunRPC]
+    public void ThunderStormSound(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<ToolSound>().Thunder();
+    }
+
+    [PunRPC]
+    public void StumblingBlockSound(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<ToolSound>().Hurt();
+    }
+
     #region IPunObservable implementation
 
 

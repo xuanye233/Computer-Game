@@ -18,7 +18,8 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
     CharacterItems characterItems;
     [SerializeField]
     Text noTrapText;
-
+    GameObject curPlayer;
+    ToolSound toolSound;
     [SerializeField]
     GameObject bagButton;
     [SerializeField]
@@ -26,6 +27,8 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        curPlayer = GameObject.Find("Player(Clone)");
+        toolSound = curPlayer.GetComponent<ToolSound>();
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         //trapTransform = GameObject.Find("Canvas/ToolList/Trap/TrapImage").GetComponent<Transform>();
         //noTrapText = GameObject.Find("Canvas/TipsList/NoTrapText").GetComponent<Text>();

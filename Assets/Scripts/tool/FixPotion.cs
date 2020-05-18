@@ -6,24 +6,25 @@ using Photon.Pun;
 //定位药水：静止不动
 
 public class FixPotion : MonoBehaviourPunCallbacks
-{    
+{
     [SerializeField] private float minDis = 3.0f; //在这个距离内才能影响到敌人
     [SerializeField] private float fixTime = 5.0f; //静止的时间
     private GameObject[] players;
     ThirdPersonUserControl thirdPersonUserControl;
     CharacterItems characterItems;
     GameObject curPlayer;
-
+    ToolSound toolSound;
     public void Awake()
     {
         curPlayer = GameObject.Find("Player(Clone)");
+        toolSound = curPlayer.GetComponent<ToolSound>();
         thirdPersonUserControl = curPlayer.GetComponent<ThirdPersonUserControl>();
         characterItems = curPlayer.GetComponent<CharacterItems>();
     }
     public void onClicked()
     {
         Debug.Log("click");
-        if(characterItems.getFixPotion() == 0)
+        if (characterItems.getFixPotion() == 0)
         {
             return;
             //显示没有的文本
@@ -31,8 +32,10 @@ public class FixPotion : MonoBehaviourPunCallbacks
         //现在的设定是只要是一定范围内的敌人都会被影响
         //
         Debug.Log("click2");
+        toolSound.NotMove();
+        toolSound.LetNotMove(curPlayer.GetComponent<PhotonView>().ViewID);
         PhotonView.RPC("showFixEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
-        players = GameObject.FindGameObjectsWithTag("Player");        
+        players = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < players.Length; i++)
         {
             //float dis = Vector3.Distance(players[i].transform.position, transform.position);
@@ -60,7 +63,7 @@ public class FixPotion : MonoBehaviourPunCallbacks
         PhotonView.Find(ViewID).GetComponent<ThirdPersonUserControl>().canMove = true;
         //等待之后执行的动作
     }
-    
+
     [PunRPC]
     public void showFixEffect(Vector3 position, Vector3 center, float scale)
     {

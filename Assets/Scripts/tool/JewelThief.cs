@@ -14,13 +14,14 @@ public class JewelThief : MonoBehaviourPunCallbacks
     [SerializeField]
     GameObject bagPanel;
     GameObject curPlayer;
-
+    ToolSound toolSound;
     private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
         characterItems = curPlayer.GetComponent<CharacterItems>();
         player = curPlayer;
         isClicked = false;//设置为点击玩家进行偷窃
+        toolSound = curPlayer.GetComponent<ToolSound>();
     }
 
     private void Update()
@@ -54,6 +55,7 @@ public class JewelThief : MonoBehaviourPunCallbacks
             {
                 if (hit.transform.gameObject.tag == "Player")
                 {
+                    toolSound.Steal(curPlayer.GetComponent<PhotonView>().ViewID);
                     PhotonView.RPC("showJewelEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
                     //Debug.Log("wodeid " + hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
                     //Debug.Log("his jewel " + PhotonView.Find(hit.transform.gameObject.GetComponent<PhotonView>().ViewID).GetComponent<CharacterItems>().getJewel());

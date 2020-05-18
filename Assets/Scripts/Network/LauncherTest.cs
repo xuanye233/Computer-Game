@@ -56,7 +56,8 @@ namespace Com.MyCompany.MyGame
 
 
         #region Public Methods
-
+        public AudioSource sound2;
+        public AudioClip click;
 
         /// <summary>
         /// Start the connection process.
@@ -81,7 +82,53 @@ namespace Com.MyCompany.MyGame
             }
         }
 
+        public void newSound()
+        {
+            sound2 = gameObject.GetComponent<AudioSource>();
+            click = Resources.Load<AudioClip>("music/click_2");
+            sound2.clip = click;
+            sound2.Play();
+        }
 
+        public void connectSound()
+        {
+            sound2 = gameObject.GetComponent<AudioSource>();
+            click = Resources.Load<AudioClip>("music/click");
+            sound2.clip = click;
+            sound2.Play();
+        }
+
+        public void teachSound()
+        {
+            sound2 = gameObject.GetComponent<AudioSource>();
+            click = Resources.Load<AudioClip>("music/click");
+            sound2.clip = click;
+            sound2.Play();
+        }
+
+        public void guideSound()
+        {
+            sound2 = gameObject.GetComponent<AudioSource>();
+            click = Resources.Load<AudioClip>("music/click");
+            sound2.clip = click;
+            sound2.Play();
+        }
+
+        public void settingSound()
+        {
+            sound2 = gameObject.GetComponent<AudioSource>();
+            click = Resources.Load<AudioClip>("music/click");
+            sound2.clip = click;
+            sound2.Play();
+        }
+
+        public void quitSound()
+        {
+            sound2 = gameObject.GetComponent<AudioSource>();
+            click = Resources.Load<AudioClip>("music/click");
+            sound2.clip = click;
+            sound2.Play();
+        }
         #endregion
 
         #region MonoBehaviourPunCallbacks Callbacks

@@ -8,6 +8,7 @@ public class Food : MonoBehaviourPunCallbacks
 {
     CharacterItems characterItems;
     CharacterStatus characterStatus;
+    ToolSound toolSound;
     //ToolInteraction toolInteraction;
     [SerializeField]
     Text noFoodText;
@@ -18,6 +19,7 @@ public class Food : MonoBehaviourPunCallbacks
         curPlayer = GameObject.Find("Player(Clone)");
         characterItems = curPlayer.GetComponent<CharacterItems>();
         characterStatus = curPlayer.GetComponent<CharacterStatus>();
+        toolSound = curPlayer.GetComponent<ToolSound>();
         //toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
         //noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
         //noFoodText.gameObject.SetActive(false);
@@ -26,7 +28,7 @@ public class Food : MonoBehaviourPunCallbacks
 
     public void onClicked()
     {
-        
+
         //Debug.Log("Sssss");
         if (characterItems.getFood() == 0)//have no food available
         {
@@ -62,10 +64,12 @@ public class Food : MonoBehaviourPunCallbacks
         }
         else//have enough food
         {
+
             characterItems.changeFood(-1);
             characterStatus.ChangeHealth(5);
-            
+            toolSound.Eat(curPlayer.GetComponent<PhotonView>().ViewID);
             PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
+
         }
     }
     public IEnumerator noFoodWait() //fade function
@@ -82,5 +86,6 @@ public class Food : MonoBehaviourPunCallbacks
         Vector3 centerPos = position + center * scale * 1.5f;
         PhotonNetwork.Instantiate("Effects/FoodEffect", centerPos, Quaternion.identity, 0);
     }
+
 }
 

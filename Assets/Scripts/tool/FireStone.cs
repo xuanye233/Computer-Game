@@ -19,7 +19,7 @@ public class FireStone : MonoBehaviourPunCallbacks
     //GameObject bagButton;
     //[SerializeField]
     //GameObject bagPanel;
-
+    ToolSound toolSound;
     private void Start()
     {
         player = GameObject.Find("Player(Clone)");
@@ -29,6 +29,7 @@ public class FireStone : MonoBehaviourPunCallbacks
         isClicked = false;
         torch = GameObject.Find("Outside/SM_Prop_TorchStick_06/FX_Fire_01");
         torch.GetComponent<ParticleSystem>().Stop();
+        toolSound = player.GetComponent<ToolSound>();
     }
 
     private void Update()
@@ -67,6 +68,7 @@ public class FireStone : MonoBehaviourPunCallbacks
                     //Debug.Log("wodeid " + hit.transform.GetChild(1).tag);
                     Debug.Log(hit.transform.gameObject.name);
                     //PhotonView.RPC("hello", RpcTarget.All);
+                    toolSound.FireStone(player.GetComponent<PhotonView>().ViewID);
                     PhotonView.RPC("lightUP", RpcTarget.All, hit.transform.GetChild(0).GetComponent<PhotonView>().ViewID, hit.transform.GetChild(1).GetComponent<PhotonView>().ViewID);
                     //Debug.Log(hit.transform.GetChild(0).name);
                     isClicked = false;

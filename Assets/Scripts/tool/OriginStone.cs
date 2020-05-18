@@ -12,11 +12,13 @@ public class OriginStone : MonoBehaviourPunCallbacks
     GameObject curPlayer;
     [SerializeField] private float minDis = 3.0f; //在这个距离内才能影响到敌人
     private GameObject[] players;
-    private void Awake()
+    ToolSound toolSound;
+    private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
         characterItems = curPlayer.GetComponent<CharacterItems>();
         characterStatus = curPlayer.GetComponent<CharacterStatus>();
+        toolSound = curPlayer.GetComponent<ToolSound>();
     }
 
 
@@ -46,6 +48,7 @@ public class OriginStone : MonoBehaviourPunCallbacks
                 //{
                 //    break;
                 //}
+                toolSound.Teleport(curPlayer.GetComponent<PhotonView>().ViewID);
                 PhotonView.RPC("BackToOrigin", RpcTarget.All, players[i].GetComponent<PhotonView>().ViewID);
                 //players[i].GetComponent<CharacterStatus>().BackToOrigin();
             }

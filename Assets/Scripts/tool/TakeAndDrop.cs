@@ -14,6 +14,9 @@ public class TakeAndDrop : MonoBehaviourPun
     CharacterItems characterItems;
     ToolInteraction toolInteraction;
 
+    ToolSound toolSound;
+    private GameObject curPlayer;
+
 
 
     void Start()
@@ -26,7 +29,8 @@ public class TakeAndDrop : MonoBehaviourPun
         //cam = gameObject.GetComponent<Camera>();
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         //toolInteraction = GameObject.Find("Canvas/BagPanel/ToolList").GetComponent<ToolInteraction>();
-
+        curPlayer = GameObject.Find("Player(Clone)");
+        toolSound = curPlayer.GetComponent<ToolSound>();
     }
     void Update()
     {
@@ -48,12 +52,13 @@ public class TakeAndDrop : MonoBehaviourPun
                 RaycastHit hit;
                 bool isHit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 10f);
 
+                
                 if (isHit)
                 {
                     string itemTag = hit.transform.gameObject.tag;
                     if (itemTag == "food" || itemTag == "blindDrug" || itemTag == "key" || itemTag == "fireStone")
                     {
-                        
+                        toolSound.Get(curPlayer.GetComponent<PhotonView>().ViewID);
                         //PhotonNetwork.Destroy(hit.transform.gameObject);
                         PhotonView.RPC("destroyFood", RpcTarget.MasterClient, hit.transform.gameObject.GetComponent<PhotonView>().ViewID);                       
                         if (PhotonView.IsMine && itemTag == "food")

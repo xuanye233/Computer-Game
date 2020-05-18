@@ -12,6 +12,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     [SerializeField] RawImage rawImage;
     GameObject curPlayer;
     ThirdPersonUserControl thirdPersonUserControl;
+    ToolSound toolSound;
     private void Awake()
     {
         curPlayer = GameObject.Find("Player(Clone)");
@@ -21,6 +22,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         rawImage.CrossFadeAlpha(0, 1f, false);
         rawImage.gameObject.SetActive(false);
         //rawImage.color = Color.clear;
+        toolSound = curPlayer.GetComponent<ToolSound>();
         thirdPersonUserControl = GameObject.Find("Player(Clone)").GetComponent<ThirdPersonUserControl>();
     }
 
@@ -33,7 +35,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     }
     public void onClick()
     {
-        if(characterItems.getBlindDrug() == 0)
+        if (characterItems.getBlindDrug() == 0)
         {
             return;
         }
@@ -41,6 +43,9 @@ public class BlindDrug : MonoBehaviourPunCallbacks
 
         players = GameObject.FindGameObjectsWithTag("Player");
 
+        //toolSound.Blind(curPlayer.GetComponent<PhotonView>().ViewID);
+
+        //toolSound.Blinded();
         for (int i = 1; i < players.Length; i++)
         {
             PhotonView.RPC("useBlindDrug", RpcTarget.Others);
@@ -62,7 +67,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
 
     IEnumerator Wait() //fade function
     {
-        Time.timeScale = 1;       
+        Time.timeScale = 1;
         rawImage.CrossFadeAlpha(0, 0.1f, false);
         yield return new WaitForSeconds(0.1f);
         rawImage.gameObject.SetActive(true);
