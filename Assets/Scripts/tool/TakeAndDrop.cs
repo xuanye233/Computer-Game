@@ -51,20 +51,23 @@ public class TakeAndDrop : MonoBehaviourPun
                 if (isHit)
                 {
                     string itemTag = hit.transform.gameObject.tag;
-                    if (itemTag == "food" || itemTag == "trap" || itemTag == "key" || itemTag == "fireStone")
+                    if (itemTag == "food" || itemTag == "blindDrug" || itemTag == "key" || itemTag == "fireStone")
                     {
+                        
                         //PhotonNetwork.Destroy(hit.transform.gameObject);
                         PhotonView.RPC("destroyFood", RpcTarget.MasterClient, hit.transform.gameObject.GetComponent<PhotonView>().ViewID);                       
                         if (PhotonView.IsMine && itemTag == "food")
                         {
                             //Destroy(hit.transform.gameObject);
-                            Debug.Log("add 1");
+                            //Debug.Log("add 1");
                             characterItems.changeFood(1);
                         }
-                        else if (itemTag == "trap")
+                        else if (itemTag == "blindDrug")
                         {
-                            characterItems.changeTrap(1);
+                            characterItems.changeBlindDrug(1);
                         }
+                        //Debug.Log("hit");
+                        //Debug.Log(characterItems.menuControl.num);
                     }
 
                     //update relative data                   
@@ -92,6 +95,7 @@ public class TakeAndDrop : MonoBehaviourPun
     [PunRPC]
     public void destroyFood(int viewID)
     {
+        //Debug.Log(this.name);
         PhotonNetwork.Destroy(PhotonView.Find(viewID));
     }
 

@@ -13,6 +13,7 @@ public class ThirdPersonUserControl : MonoBehaviourPun
     private GameObject mapCube, mapCamera;
     private float speed;
     public bool canMove;
+    public bool canSee;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class ThirdPersonUserControl : MonoBehaviourPun
 
         speed = 1.0f;
         canMove = true;
+        canSee = true;
         // get the transform of the main camera
         if (Camera.main != null)
         {

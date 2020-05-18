@@ -86,8 +86,10 @@
     <Compile Include="Assets\Scripts\tool\EffectLife.cs" />
     <Compile Include="Assets\Scripts\tool\fireControlor.cs" />
     <Compile Include="Assets\Scripts\tool\FireStone.cs" />
+    <Compile Include="Assets\Scripts\tool\FireStoneControl.cs" />
     <Compile Include="Assets\Scripts\tool\FixPotion.cs" />
     <Compile Include="Assets\Scripts\tool\Food.cs" />
+    <Compile Include="Assets\Scripts\tool\Herbs.cs" />
     <Compile Include="Assets\Scripts\tool\JewelThief.cs" />
     <Compile Include="Assets\Scripts\tool\Key.cs" />
     <Compile Include="Assets\Scripts\tool\lightControlor.cs" />

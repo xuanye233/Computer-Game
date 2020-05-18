@@ -18,7 +18,7 @@ public class ToolMenuControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("anle1");
+            //Debug.Log("anle1");
             toolimgcontrol = GameObject.Find("Canvas/ToolsBar/Tool_1/Image").GetComponent<toolImageControl>();
             toolimgcontrol.onClick();
         }
@@ -48,8 +48,10 @@ public class ToolMenuControl : MonoBehaviour
     {
         string path = "Canvas/ToolsBar/Tool_" + id.ToString();
         //Debug.Log(path + "/Tool_" + id.ToString() + "_amount");
+        Debug.Log(path + "/Tool_" + id.ToString() + "_amount");
         Text text = GameObject.Find(path+ "/Tool_"+id.ToString()+"_amount").GetComponent<Text>();
         text.text = num.ToString();
+        //Debug.Log(text.text);
     }
 
     public void addPicture(string name,int id)

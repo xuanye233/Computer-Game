@@ -45,13 +45,17 @@ public class CharacterItems : MonoBehaviour
     int teleportation;
     int stumblingBlock;
     int thunderstormStone;
+    int herb;
     List<int> key;
 
     int jewelThief;//jewelthief的数量
     int jewel;//后续改成list，现在先用单个测试
 
+    Text fireStoneText;
+
     void Start()
     {
+        fireStoneText = GameObject.Find("Canvas/ToolsBar/Tool_0_firestone/Tool_0_amount").GetComponent<Text>();
         toolMenuControl = GameObject.Find("Canvas/ToolsBar").GetComponent<ToolMenuControl>();
         fireStone = 5;
         food = 0;
@@ -63,6 +67,7 @@ public class CharacterItems : MonoBehaviour
         teleportation = 0;
         stumblingBlock = 0;
         thunderstormStone = 0;
+        herb = 0;
 
         jewelThief = 0;
         jewel = 0;
@@ -134,33 +139,31 @@ public class CharacterItems : MonoBehaviour
     {
         return jewel;
     }
+
+    public int getHerb()
+    {
+        return herb;
+    }
     public void changeFireStone(int num)
     {
-        if(isInMenu("fireStone", menuControl) != -1)
+        if(fireStone + num < 0)
         {
-            fireStone += num;
-            if(fireStone == 0)
-            {
-                deleteMenu("fireStone", menuControl);
-            }
-            //toolMenuControl.updateNum()
-        }
-        else if(menuControl.num < 5)
-        {
-            menuControl.num++;
-            fireStone += num;
-            addMenu("fireStone", menuControl, num);
+            return;
+            //没有打火石
         }
         else
         {
-            //道具已满
+            fireStone += num;
+            fireStoneText.text = fireStone.ToString();
         }
     }
 
     public void changeFood(int num)
     {
+        //Debug.Log(menuControl.num);
         if (isInMenu("food", menuControl) != -1)
         {
+            Debug.Log("yopucuo");
             food += num;
             toolMenuControl.updateNum(isInMenu("food", menuControl), food);
             if (food == 0)
@@ -171,11 +174,16 @@ public class CharacterItems : MonoBehaviour
         }
         else if (menuControl.num < 5)
         {
+            //Debug.Log(menuControl.num);
             menuControl.num++;
+            //Debug.Log(menuControl.num);
             food += num;
             addMenu("food", menuControl, food);
+            //Debug.Log(menuControl.num);
             toolMenuControl.updateNum(isInMenu("food", menuControl), food);
+            //Debug.Log(menuControl.num);
             toolMenuControl.addPicture("food", isInMenu("food", menuControl));
+            //Debug.Log(menuControl.num);
         }
         else
         {
@@ -198,6 +206,7 @@ public class CharacterItems : MonoBehaviour
             menuControl.num++;
             trap += num;
             addMenu("trap", menuControl,num);
+            
         }
         else
         {
@@ -283,9 +292,12 @@ public class CharacterItems : MonoBehaviour
         }
         else if (menuControl.num < 5)
         {
+            Debug.Log("hahaha");
             menuControl.num++;
             blindDrug += num;
             addMenu("blindDrug", menuControl,num);
+            toolMenuControl.updateNum(isInMenu("blindDrug", menuControl), blindDrug);
+            toolMenuControl.addPicture("blindDrug", isInMenu("blindDrug", menuControl));
         }
         else
         {
@@ -403,6 +415,29 @@ public class CharacterItems : MonoBehaviour
         }
     }
 
+    public void changeHerb(int num)
+    {
+        if (isInMenu("herb", menuControl) != -1)
+        {
+            herb += num;
+            if (herb == 0)
+            {
+                deleteMenu("herb", menuControl);
+            }
+            //toolMenuControl.updateNum()
+        }
+        else if (menuControl.num < 5)
+        {
+            menuControl.num++;
+            herb += num;
+            addMenu("herb", menuControl, num);
+        }
+        else
+        {
+            //道具已满
+        }
+    }
+
     public void addKey(int index)
     {
         key.Add(index);
@@ -440,8 +475,9 @@ public class CharacterItems : MonoBehaviour
             {
                 menuControl.toolMenu[i].name = s;
                 menuControl.toolMenu[i].num = num;
-                menuControl.num++;
+                //menuControl.num++;
                 //添加道具图标
+                break;
             }
         }
     }
@@ -459,6 +495,16 @@ public class CharacterItems : MonoBehaviour
                 break;
             }
         }
+        //将本地数量改为0
+        if(s == "food")
+        {
+            food = 0;
+        }
+        else if(s == "blindDrug")
+        {
+            blindDrug = 0;
+        }
+
         //换回透明图片
         int id = i+1;
         string path = "Canvas/ToolsBar/Tool_" + id.ToString();
@@ -470,5 +516,9 @@ public class CharacterItems : MonoBehaviour
 
         toolimgcontrol = GameObject.Find(path + "/Image").GetComponent<toolImageControl>();
         toolimgcontrol.name = "None";
+
+        //左上角数字变为0
+        Text text = GameObject.Find(path + "/Tool_" + id.ToString() + "_amount").GetComponent<Text>();
+        text.text = "0";
     }
 }

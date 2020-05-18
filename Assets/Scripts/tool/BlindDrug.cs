@@ -11,6 +11,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     //[SerializeField] GameObject blackScreen;//这个blackScreen应该是对手UI界面里的黑屏？
     [SerializeField] RawImage rawImage;
     GameObject curPlayer;
+    ThirdPersonUserControl thirdPersonUserControl;
     private void Awake()
     {
         curPlayer = GameObject.Find("Player(Clone)");
@@ -20,6 +21,15 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         rawImage.CrossFadeAlpha(0, 1f, false);
         rawImage.gameObject.SetActive(false);
         //rawImage.color = Color.clear;
+        thirdPersonUserControl = GameObject.Find("Player(Clone)").GetComponent<ThirdPersonUserControl>();
+    }
+
+    private void Update()
+    {
+        if (thirdPersonUserControl.canSee)
+        {
+            StopAllCoroutines();
+        }
     }
     public void onClick()
     {
@@ -45,13 +55,14 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     public void useBlindDrug()
     {
         //blackScreen = GameObject.Find("Canvas/BlackScreen");
-        //blackScreen.GetComponent<LoseSight>().beBlind();       
+        //blackScreen.GetComponent<LoseSight>().beBlind();    
+        thirdPersonUserControl.canSee = false;
         StartCoroutine(Wait());
     }
 
     IEnumerator Wait() //fade function
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1;       
         rawImage.CrossFadeAlpha(0, 0.1f, false);
         yield return new WaitForSeconds(0.1f);
         rawImage.gameObject.SetActive(true);
@@ -59,6 +70,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(5);
         rawImage.CrossFadeAlpha(0, 2f, false);
         rawImage.gameObject.SetActive(false);
+        thirdPersonUserControl.canSee = true;
     }
 
     [PunRPC]

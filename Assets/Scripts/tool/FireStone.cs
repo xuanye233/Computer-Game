@@ -11,14 +11,14 @@ public class FireStone : MonoBehaviourPunCallbacks
     [SerializeField]
     Transform fireStoneTransform;
     GameObject player;
-    bool isClicked;
+    public bool isClicked;
     GameObject torch;
-    [SerializeField]
-    Text noFireStoneText;
-    [SerializeField]
-    GameObject bagButton;
-    [SerializeField]
-    GameObject bagPanel;
+    //[SerializeField]
+    //Text noFireStoneText;
+    //[SerializeField]
+    //GameObject bagButton;
+    //[SerializeField]
+    //GameObject bagPanel;
 
     private void Start()
     {
@@ -47,9 +47,9 @@ public class FireStone : MonoBehaviourPunCallbacks
             return;
         }
         isClicked = true;
-        fireStoneTransform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
-        bagPanel.SetActive(false);
-        bagButton.SetActive(true);
+        fireStoneTransform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+        //bagPanel.SetActive(false);
+        //bagButton.SetActive(true);
     }
 
     public void FireStoneEvent()
@@ -65,14 +65,22 @@ public class FireStone : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("wodeid " + hit.transform.GetChild(0).GetComponent<PhotonView>().ViewID);
                     //Debug.Log("wodeid " + hit.transform.GetChild(1).tag);
+                    Debug.Log(hit.transform.gameObject.name);
+                    //PhotonView.RPC("hello", RpcTarget.All);
                     PhotonView.RPC("lightUP", RpcTarget.All, hit.transform.GetChild(0).GetComponent<PhotonView>().ViewID, hit.transform.GetChild(1).GetComponent<PhotonView>().ViewID);
                     //Debug.Log(hit.transform.GetChild(0).name);
                     isClicked = false;
-                    fireStoneTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                    fireStoneTransform.localScale = new Vector3(1f, 1f, 1f);
                     characterItems.changeFireStone(-1);
                 }
             }
         }
+    }
+
+    [PunRPC]
+    public void hello()
+    {
+        Debug.Log("heeeeeeeello");
     }
 
     [PunRPC]
@@ -88,7 +96,7 @@ public class FireStone : MonoBehaviourPunCallbacks
 
     public void showNoFireStone()
     {
-        noFireStoneText.gameObject.SetActive(true);//display the tips
+        //noFireStoneText.gameObject.SetActive(true);//display the tips
         Debug.Log("noFireStone");
 
         //StartCoroutine(wait1());
@@ -98,9 +106,9 @@ public class FireStone : MonoBehaviourPunCallbacks
     IEnumerator noFireStoneWait() //fade function
     {
         //yield return new WaitForSeconds(5);
-        noFireStoneText.CrossFadeAlpha(1, 1f, false);
+        //noFireStoneText.CrossFadeAlpha(1, 1f, false);
         yield return new WaitForSeconds(1);
-        noFireStoneText.CrossFadeAlpha(0, 1f, false);
+        //noFireStoneText.CrossFadeAlpha(0, 1f, false);
     }
 }
 

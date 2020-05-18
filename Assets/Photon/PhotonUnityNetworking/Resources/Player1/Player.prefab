@@ -2806,6 +2806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 0
+  canSee: 0
 --- !u!114 &6607838714141692804
 MonoBehaviour:
   m_ObjectHideFlags: 0

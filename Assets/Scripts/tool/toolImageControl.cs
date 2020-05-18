@@ -10,6 +10,10 @@ public class toolImageControl : MonoBehaviour
     ToolMenuControl toolMenuControl;
     CharacterItems characterItems;
     Food food;
+    [SerializeField]
+    FireStone fireStone;
+    [SerializeField]
+    BlindDrug blindDrug;
 
     private void Start()
     {
@@ -29,6 +33,7 @@ public class toolImageControl : MonoBehaviour
 
     public void onClick()
     {
+        Debug.Log(name);
         if (toolMenuControl.isQuit && name != "None")
         {
             quitTool();
@@ -37,14 +42,22 @@ public class toolImageControl : MonoBehaviour
         {
             food.onClicked();
         }
+        else if(name == "fireStone")
+        {
+            fireStone.onClicked();
+        }
+        else if(name == "blindDrug")
+        {
+            blindDrug.onClick();
+        }
     } 
 
     private void quitTool()
     {
         //toolMenuControl.delete(1);
         GameObject obj = this.gameObject.transform.parent.gameObject;
-        string changename = obj.name;
-        changename = changename.Substring(changename.Length - 1, 1);//显示1
+        string changename = obj.name;//点击图标的物体名字
+        changename = changename.Substring(changename.Length - 1, 1);
         //修改菜单
         //从菜单中删除
         characterItems.deleteMenu(characterItems.menuControl.toolMenu[int.Parse(changename) - 1].name, characterItems.menuControl);

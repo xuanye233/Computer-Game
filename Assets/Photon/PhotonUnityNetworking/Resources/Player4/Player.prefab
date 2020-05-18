@@ -1990,6 +1990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 0
+  canSee: 0
 --- !u!114 &4082456934030657556
 MonoBehaviour:
   m_ObjectHideFlags: 0
