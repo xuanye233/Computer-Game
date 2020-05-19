@@ -13,7 +13,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     GameObject curPlayer;
     ThirdPersonUserControl thirdPersonUserControl;
     ToolSound toolSound;
-    private void Awake()
+    private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
         characterItems = curPlayer.GetComponent<CharacterItems>();
@@ -43,9 +43,9 @@ public class BlindDrug : MonoBehaviourPunCallbacks
 
         players = GameObject.FindGameObjectsWithTag("Player");
 
-        //toolSound.Blind(curPlayer.GetComponent<PhotonView>().ViewID);
+        toolSound.Blind(curPlayer.GetComponent<PhotonView>().ViewID);
 
-        //toolSound.Blinded();
+        toolSound.Blinded();
         for (int i = 1; i < players.Length; i++)
         {
             PhotonView.RPC("useBlindDrug", RpcTarget.Others);

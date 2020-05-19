@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
+using UnityEngine.EventSystems;
 public class TakeAndDrop : MonoBehaviourPun
 {
     public GameObject preFabCube;
@@ -47,14 +47,22 @@ public class TakeAndDrop : MonoBehaviourPun
         //{
             if (Input.GetMouseButtonUp(0))
             {
+              
+                //Debug.LogError("hahah111");
                 //no using tool
                 timeHit = 0f;
                 RaycastHit hit;
                 bool isHit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 10f);
-
+                
                 
                 if (isHit)
                 {
+                    
+                    //Debug.Log(hit.transform.gameObject.name);
+                    //if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                    //{
+                    //    Debug.Log("点击到UGUI的UI界面，会返回true");
+                    //}
                     string itemTag = hit.transform.gameObject.tag;
                     if (itemTag == "food" || itemTag == "blindDrug" || itemTag == "key" || itemTag == "fireStone")
                     {

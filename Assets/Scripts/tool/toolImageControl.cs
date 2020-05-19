@@ -33,7 +33,7 @@ public class toolImageControl : MonoBehaviour
 
     public void onClick()
     {
-        Debug.Log(name);
+        Debug.LogError(name);
         if (toolMenuControl.isQuit && name != "None")
         {
             quitTool();

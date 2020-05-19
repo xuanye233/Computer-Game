@@ -27,8 +27,8 @@ public class FireStone : MonoBehaviourPunCallbacks
         //toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
         //fireStoneTransform = GameObject.Find("Canvas/ToolList/FireStone/FireStoneImage").GetComponent<Transform>();
         isClicked = false;
-        torch = GameObject.Find("Outside/SM_Prop_TorchStick_06/FX_Fire_01");
-        torch.GetComponent<ParticleSystem>().Stop();
+        //torch = GameObject.Find("Outside/SM_Prop_TorchStick_06/FX_Fire_01");
+        //torch.GetComponent<ParticleSystem>().Stop();
         toolSound = player.GetComponent<ToolSound>();
     }
 
@@ -60,8 +60,12 @@ public class FireStone : MonoBehaviourPunCallbacks
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 20.0f))
         {
+            //Debug.Log(hit.transform.gameObject.name);
+            //Debug.Log(hit.transform.GetChild(0));
+            //Debug.Log(hit.transform.GetChild(1));
             if (hit.transform.GetChild(0) && hit.transform.GetChild(1))
             {
+                //Debug.Log("???");
                 if (hit.transform.GetChild(0).GetComponent<Light>())
                 {
                     Debug.Log("wodeid " + hit.transform.GetChild(0).GetComponent<PhotonView>().ViewID);

@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/PolygonDungeon/Scenes/Laucher.unity
+    path: Assets/Scenes/Laucher.unity
     guid: d9390e1caaa359d45867191eb1385712
   - enabled: 1
-    path: Assets/PolygonDungeon/Scenes/Room for 1.unity
+    path: Assets/Scenes/Room for 1.unity
     guid: a1bf2f57e1e665d4ea14d94c806963ac
+  - enabled: 1
+    path: Assets/Scenes/Demo.unity
+    guid: 7dd3b3b67a8b56d4e8640fa6891eaf3b
   m_configObjects: {}

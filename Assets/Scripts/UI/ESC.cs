@@ -21,6 +21,12 @@ public class ESC : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !isEsc)
         {
             EscPanel.SetActive(true);
+            isEsc = true;
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape) && isEsc)
+        {
+            EscPanel.SetActive(false);
+            isEsc = false;
         }
     }
 }

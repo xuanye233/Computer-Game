@@ -384,7 +384,7 @@ namespace Photon.Pun
 
             if (PhotonNetwork.LogLevel >= PunLogLevel.Full)
             {
-                Debug.Log("Received RPC: " + inMethodName);
+                //Debug.Log("Received RPC: " + inMethodName);
             }
 
 
@@ -1069,7 +1069,7 @@ namespace Photon.Pun
 
             if (PhotonNetwork.LogLevel >= PunLogLevel.Full)
             {
-                Debug.Log("Sending RPC \"" + methodName + "\" to target: " + target + " or player:" + player + ".");
+                //Debug.Log("Sending RPC \"" + methodName + "\" to target: " + target + " or player:" + player + ".");
             }
 
 

@@ -169,7 +169,7 @@ namespace Com.MyCompany.MyGame
                 Debug.Log("room name is " + PhotonNetwork.CurrentRoom.Name);
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel(1);
+                PhotonNetwork.LoadLevel(2);
                 //PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 20f, -40f), Quaternion.identity, 0);
             }
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
