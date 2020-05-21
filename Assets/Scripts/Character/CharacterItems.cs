@@ -46,6 +46,7 @@ public class CharacterItems : MonoBehaviour
     int stumblingBlock;
     int thunderstormStone;
     int herb;
+    int id;
     List<int> key;
 
     int jewelThief;//jewelthief的数量
@@ -68,6 +69,7 @@ public class CharacterItems : MonoBehaviour
         stumblingBlock = 0;
         thunderstormStone = 0;
         herb = 0;
+        id = GlobalData.characterIndex;
 
         jewelThief = 0;
         jewel = 0;
@@ -78,6 +80,17 @@ public class CharacterItems : MonoBehaviour
             Item item = new Item(i);
             menuControl.toolMenu.Add(item);
         }
+
+        //if (id == 4)
+        //{
+        //    jewel = 1;
+        //}
+        //changeFood(10);
+        //changeBlindDrug(5);
+    }
+    public int getID()
+    {
+        return id;
     }
 
     public int getOriginStone()
@@ -160,7 +173,7 @@ public class CharacterItems : MonoBehaviour
 
     public void changeFood(int num)
     {
-        Debug.Log(menuControl.num);
+        //Debug.Log(menuControl.num);
         if (isInMenu("food", menuControl) != -1)
         {
             Debug.Log("yopucuo");

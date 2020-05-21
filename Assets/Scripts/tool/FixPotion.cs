@@ -44,14 +44,25 @@ public class FixPotion : MonoBehaviourPunCallbacks
             //{
             //    players[i].GetComponent<ThirdPersonUserControl>().ForbidMove(fixTime);
             //}
-            PhotonView.RPC("ForbidMove", RpcTarget.All, players[i].GetComponent<PhotonView>().ViewID, 5.0f);
+            //PhotonView.RPC("ForbidMove", RpcTarget.All, players[i].GetComponent<PhotonView>().ViewID, 5.0f);
+            PhotonView.RPC("ForbidMove", RpcTarget.All, players[i].GetComponent<PhotonView>().ViewID);
             //执行函数  执行服务器  函数的参数
         }
     }
 
     [PunRPC]
-    public void ForbidMove(int ViewID, float fixTime)
+    public void ForbidMove(int ViewID)
     {
+        float fixTime;
+        float testID = PhotonView.Find(ViewID).GetComponent<CharacterItems>().getID();
+        if (testID == 1)
+        {
+            fixTime = 2.5f;
+        }
+        else
+        {
+            fixTime = 5.0f;
+        }
         PhotonView.Find(ViewID).GetComponent<ThirdPersonUserControl>().canMove = false;
         //Invoke("RecoverMove", fixTime);
         StartCoroutine(Wait(fixTime, ViewID));

@@ -15,6 +15,8 @@ public class ThirdPersonUserControl : MonoBehaviourPun
     public bool canMove;
     public bool canSee;
 
+    int characterNum = GlobalData.characterIndex;
+
     private void Start()
     {
         //do
@@ -24,7 +26,11 @@ public class ThirdPersonUserControl : MonoBehaviourPun
         mapCube = GameObject.Find("MapCamera/PlayerCube");
         mapCamera = GameObject.Find("MapCamera");
 
-        speed = 1.0f;
+        if (characterNum == 3)
+        {
+            speed = 1.2f;
+        }
+        else speed = 1.0f;
         canMove = true;
         canSee = true;
         // get the transform of the main camera
@@ -89,11 +95,19 @@ public class ThirdPersonUserControl : MonoBehaviourPun
         // walk speed multiplier
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = 1.2f;
+            if (characterNum == 3)
+            {
+                speed = 1.44f;
+            }
+            else speed = 1.2f;//1.2f
         }
         else
         {
-            speed = 1.0f;
+            if (characterNum == 3)
+            {
+                speed = 1.2f;
+            }
+            else speed = 1.0f;//1.0f
         }
 #endif
 

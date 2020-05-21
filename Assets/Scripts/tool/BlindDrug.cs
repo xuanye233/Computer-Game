@@ -48,7 +48,8 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         toolSound.Blinded();
         for (int i = 1; i < players.Length; i++)
         {
-            PhotonView.RPC("useBlindDrug", RpcTarget.Others);
+            PhotonView.RPC("useBlindDrug", RpcTarget.All, players[i].GetComponent<PhotonView>().ViewID);
+            //PhotonView.RPC("useBlindDrug", RpcTarget.Others);
             //players[i].GetComponent<CharacterStatus>().BackToOrigin();
 
         }
@@ -57,25 +58,37 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void useBlindDrug()
+    public void useBlindDrug(int ViewID)
     {
         //blackScreen = GameObject.Find("Canvas/BlackScreen");
-        //blackScreen.GetComponent<LoseSight>().beBlind();    
-        thirdPersonUserControl.canSee = false;
-        StartCoroutine(Wait());
+        //blackScreen.GetComponent<LoseSight>().beBlind();
+        float blindTime;
+        float testID = PhotonView.Find(ViewID).GetComponent<CharacterItems>().getID();
+        if (testID == 1)
+        {
+            blindTime = 2.5f;
+        }
+        else
+        {
+            blindTime = 5.0f;
+        }
+        //thirdPersonUserControl.canSee = false;
+        PhotonView.Find(ViewID).GetComponent<ThirdPersonUserControl>().canSee = false;
+        StartCoroutine(Wait(blindTime, ViewID));
     }
 
-    IEnumerator Wait() //fade function
+    IEnumerator Wait(float waitTime, int ViewID) //fade function
     {
         Time.timeScale = 1;
         rawImage.CrossFadeAlpha(0, 0.1f, false);
         yield return new WaitForSeconds(0.1f);
         rawImage.gameObject.SetActive(true);
         rawImage.CrossFadeAlpha(1, 1f, false);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(waitTime);
         rawImage.CrossFadeAlpha(0, 2f, false);
         rawImage.gameObject.SetActive(false);
-        thirdPersonUserControl.canSee = true;
+        //thirdPersonUserControl.canSee = true;
+        PhotonView.Find(ViewID).GetComponent<ThirdPersonUserControl>().canSee = true;
     }
 
     [PunRPC]

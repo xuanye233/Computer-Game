@@ -2,8 +2,10 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Photon.Pun;
-
+using System;
 using System.Collections;
+using System.Collections.Generic;
+
 using Photon.Pun.Demo.PunBasics;
 
 public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
@@ -13,6 +15,8 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
     CharacterItems items;
     GameObject mainCamera;
     CapsuleCollider capsuleCol;
+
+    private int lastSecond;
 
     #region Public Fields
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
@@ -46,6 +50,8 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         //{
         //    Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
         //}
+
+        lastSecond = DateTime.Now.Second;
         items = GetComponent<CharacterItems>();
         capsuleCol = GetComponent<CapsuleCollider>();
         health = 50f;
@@ -67,6 +73,25 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
             GameObject.Find("GameManager").GetComponent<GameManager>().LeaveRoom();
             //GameManager.
         }
+    }
+
+    void FixedUpdate()
+    {
+
+        if (DateTime.Now.Second != lastSecond)
+        {
+            lastSecond = DateTime.Now.Second;
+            if(GlobalData.characterIndex == 2)//如果当前角色为石头人则血量流失速度减半
+            {
+                ChangeHealth(-0.5f);
+            }
+            else
+            {
+                ChangeHealth(-1f);
+            }
+            
+        }
+      
     }
 
     void OnTriggerEnter(Collider other)
@@ -195,7 +220,12 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
             int viewID = collision.collider.gameObject.GetComponent<PhotonView>().ViewID;
             Vector3 position = GameObject.Find("MapCamera/PlayerCube").transform.position;
             Debug.Log(position);
-            PhotonView.RPC("ThunderStormEvent", RpcTarget.MasterClient,viewID, position);
+            float time = 2.0f;
+            if (GlobalData.characterIndex == 1)//第一个人物受道具负面影响降低50%
+            {
+                time = 1.0f;
+            }
+            PhotonView.RPC("ThunderStormEvent", RpcTarget.MasterClient, viewID, position, time);
         }
 
         if (collision.collider.tag == "StumblingBlock")
@@ -203,15 +233,19 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
             PhotonView.RPC("showStumblingEffect", RpcTarget.MasterClient);
             int viewID = collision.collider.gameObject.GetComponent<PhotonView>().ViewID;            
             PhotonView.RPC("StumblingBlockEvent", RpcTarget.MasterClient, viewID);
-            ChangeHealth(-20f);
+            if (GlobalData.characterIndex == 1)//第一个人物受道具负面影响降低50%
+            {
+                ChangeHealth(-10f);
+            }
+            else ChangeHealth(-20f);
         }
     }
 
     [PunRPC]
-    public void ThunderStormEvent(int viewID, Vector3 position)
+    public void ThunderStormEvent(int viewID, Vector3 position, float time)
     {
         PhotonNetwork.Destroy(PhotonView.Find(viewID));
-        StartCoroutine(Wait(position));
+        StartCoroutine(Wait(position, time));
     }
 
     [PunRPC]
@@ -220,13 +254,13 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         PhotonNetwork.Destroy(PhotonView.Find(viewID));
     }
 
-    IEnumerator Wait(Vector3 position) //fade function
+    IEnumerator Wait(Vector3 position, float time) //fade function
     {
         Time.timeScale = 1;
         GameObject gameobj;
         gameobj = PhotonNetwork.Instantiate("PlayerCube", position + new Vector3(0, -9, 0), Quaternion.identity, 0);
         //gameobj.transform.position = position + new Vector3(0,-5,0);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(time);
         PhotonNetwork.Destroy(gameobj);
         //PhotonNetwork.
     }
