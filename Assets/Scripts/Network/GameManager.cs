@@ -54,9 +54,9 @@ namespace Com.MyCompany.MyGame
                 if(PhotonNetwork.IsMasterClient)
                 {
                     //PhotonNetwork.Instantiate("food", new Vector3(1f, 6f, -40f), Quaternion.identity, 0);
-                    PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 6f, -40f), Quaternion.identity, 0);
-                    PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 8f, -40f), Quaternion.identity, 0);
-                    PhotonNetwork.Instantiate(this.blindPrefab.name, new Vector3(1f, 8f, -50f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 6f, -52f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 8f, -52f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate(this.blindPrefab.name, new Vector3(1f, 8f, -48f), Quaternion.identity, 0);
                     //Debug.Log("ahahahaha");
                 }
                 if (CharacterStatus.LocalPlayerInstance == null)
@@ -64,7 +64,7 @@ namespace Com.MyCompany.MyGame
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     int characterNum = GlobalData.characterIndex;
-                    PhotonNetwork.Instantiate("Player" + characterNum + "/" + this.playerPrefab.name, new Vector3(0f, 10f, -42f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate("Player" + characterNum + "/" + this.playerPrefab.name, new Vector3(0f, 10f, -52f), Quaternion.identity, 0);
                     //PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 20f, -40f), Quaternion.identity, 0);
                     //PhotonNetwork.Instantiate(this.mapPrefab.name, new Vector3(0f, 10f, -45f), Quaternion.identity, 0);
                     Debug.Log("chuangjian");

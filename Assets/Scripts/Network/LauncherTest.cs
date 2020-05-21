@@ -175,6 +175,11 @@ namespace Com.MyCompany.MyGame
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
         }
 
+        public void enterEdu()
+        {
+            PhotonNetwork.LoadLevel(1);
+        }
+
         #endregion
 
 

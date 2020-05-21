@@ -56,21 +56,21 @@ public class FireStone : MonoBehaviourPunCallbacks
     public void FireStoneEvent()
     {
 
-        //Debug.Log("fireStoneevent");
+        Debug.Log("fireStoneevent");
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 20.0f))
         {
-            //Debug.Log(hit.transform.gameObject.name);
-            //Debug.Log(hit.transform.GetChild(0));
-            //Debug.Log(hit.transform.GetChild(1));
+            Debug.Log(hit.transform.gameObject.name);
+            Debug.Log(hit.transform.GetChild(0));
+            Debug.Log(hit.transform.GetChild(1));
             if (hit.transform.GetChild(0) && hit.transform.GetChild(1))
             {
-                //Debug.Log("???");
+                Debug.Log("???");
                 if (hit.transform.GetChild(0).GetComponent<Light>())
                 {
                     Debug.Log("wodeid " + hit.transform.GetChild(0).GetComponent<PhotonView>().ViewID);
                     //Debug.Log("wodeid " + hit.transform.GetChild(1).tag);
-                    Debug.Log(hit.transform.gameObject.name);
+                    //Debug.Log(hit.transform.gameObject.name);
                     //PhotonView.RPC("hello", RpcTarget.All);
                     toolSound.FireStone(player.GetComponent<PhotonView>().ViewID);
                     PhotonView.RPC("lightUP", RpcTarget.All, hit.transform.GetChild(0).GetComponent<PhotonView>().ViewID, hit.transform.GetChild(1).GetComponent<PhotonView>().ViewID);

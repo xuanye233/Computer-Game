@@ -16,7 +16,14 @@ public class Food : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        curPlayer = GameObject.Find("Player(Clone)");
+        if(GameObject.Find("Player(Clone)") == null){
+            curPlayer = GameObject.Find("Player");
+        }
+        else
+        {
+            curPlayer = GameObject.Find("Player(Clone)");
+        }
+        
         characterItems = curPlayer.GetComponent<CharacterItems>();
         characterStatus = curPlayer.GetComponent<CharacterStatus>();
         toolSound = curPlayer.GetComponent<ToolSound>();
@@ -29,7 +36,8 @@ public class Food : MonoBehaviourPunCallbacks
     public void onClicked()
     {
 
-        //Debug.Log("Sssss");
+        Debug.Log("Sssss");
+        Debug.Log(characterItems.getFood());
         if (characterItems.getFood() == 0)//have no food available
         {
             noFoodText.gameObject.SetActive(true);
@@ -64,11 +72,11 @@ public class Food : MonoBehaviourPunCallbacks
         }
         else//have enough food
         {
-
+            Debug.Log("chile");
             characterItems.changeFood(-1);
             characterStatus.ChangeHealth(5);
-            toolSound.Eat(curPlayer.GetComponent<PhotonView>().ViewID);
-            PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
+            //toolSound.Eat(curPlayer.GetComponent<PhotonView>().ViewID);
+            //PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
 
         }
     }

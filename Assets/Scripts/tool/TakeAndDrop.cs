@@ -48,7 +48,7 @@ public class TakeAndDrop : MonoBehaviourPun
             if (Input.GetMouseButtonUp(0))
             {
               
-                //Debug.LogError("hahah111");
+                Debug.LogError("hahah111");
                 //no using tool
                 timeHit = 0f;
                 RaycastHit hit;
@@ -58,7 +58,7 @@ public class TakeAndDrop : MonoBehaviourPun
                 if (isHit)
                 {
                     
-                    //Debug.Log(hit.transform.gameObject.name);
+                    Debug.Log(hit.transform.gameObject.name);
                     //if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                     //{
                     //    Debug.Log("点击到UGUI的UI界面，会返回true");

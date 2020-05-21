@@ -160,7 +160,7 @@ public class CharacterItems : MonoBehaviour
 
     public void changeFood(int num)
     {
-        //Debug.Log(menuControl.num);
+        Debug.Log(menuControl.num);
         if (isInMenu("food", menuControl) != -1)
         {
             Debug.Log("yopucuo");

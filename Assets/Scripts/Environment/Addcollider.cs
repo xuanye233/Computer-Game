@@ -10,20 +10,11 @@ public class Addcollider : MonoBehaviour
                                           
     void Awake()
     {
-        buildArray.Add(GameObject.Find("Outside"));
-        buildArray.Add(GameObject.Find("Crystal_Caves"));
-        buildArray.Add(GameObject.Find("Torture_Room"));
-        buildArray.Add(GameObject.Find("Entrance"));
-        buildArray.Add(GameObject.Find("Goblin_Cave"));
-        buildArray.Add(GameObject.Find("Laboratory"));
-        buildArray.Add(GameObject.Find("Cellar"));
-        buildArray.Add(GameObject.Find("Furnace"));
-        buildArray.Add(GameObject.Find("Barracks"));
-        buildArray.Add(GameObject.Find("Long_Hall"));
-        buildArray.Add(GameObject.Find("Cells"));
-        buildArray.Add(GameObject.Find("Sewer"));
-        buildArray.Add(GameObject.Find("Center_Hall"));
-        buildArray.Add(GameObject.Find("Ritual"));
+        buildArray.Add(GameObject.Find("Map_other_part"));
+        buildArray.Add(GameObject.Find("Map_route_1"));
+        buildArray.Add(GameObject.Find("Map_route_2"));
+        buildArray.Add(GameObject.Find("Map_route_3"));
+        buildArray.Add(GameObject.Find("Map_route_4"));
 
         for (int i = 0;i < buildArray.Count; i++)
         {
@@ -38,23 +29,28 @@ public class Addcollider : MonoBehaviour
                 //}
 
                 //作用同上
-                //foreach(Transform child in outside.GetComponentsInChildren<Transform>(true))
-                //{
-                //    outsideArray.Add(child);
-                //}
-
-                ////只遍历所有的子物体，没有孙物体  ，遍历不包含本身
-                foreach (Transform child in buildArray[i].transform)
+                foreach (Transform child in buildArray[i].transform.GetComponentsInChildren<Transform>(true))
                 {
-                    //outsideArray.Add(child);
-                    //Destroy(child.gameObject.GetComponent<BoxCollider>());
                     if (child.gameObject.GetComponent<MeshCollider>() == null)
                     {
                         child.gameObject.AddComponent<MeshCollider>();
                         //Debug.Log("add ok");
+                        child.gameObject.GetComponent<MeshCollider>().convex = true;
                     }
-                    //Debug.Log(child.gameObject.name);
                 }
+
+                ////只遍历所有的子物体，没有孙物体  ，遍历不包含本身
+                //foreach (Transform child in buildArray[i].transform)
+                //{
+                //    //outsideArray.Add(child);
+                //    //Destroy(child.gameObject.GetComponent<BoxCollider>());
+                //    if (child.gameObject.GetComponent<MeshCollider>() == null)
+                //    {
+                //        child.gameObject.AddComponent<MeshCollider>();
+                //        //Debug.Log("add ok");
+                //    }
+                //    //Debug.Log(child.gameObject.name);
+                //}
             }
         }
         

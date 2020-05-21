@@ -18,7 +18,7 @@ public class ToolMenuControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            //Debug.Log("anle1");
+            Debug.Log("anle1");
             toolimgcontrol = GameObject.Find("Canvas/ToolsBar/Tool_1/Image").GetComponent<toolImageControl>();
             toolimgcontrol.onClick();
         }

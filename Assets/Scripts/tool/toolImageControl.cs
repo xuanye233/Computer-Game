@@ -14,13 +14,31 @@ public class toolImageControl : MonoBehaviour
     FireStone fireStone;
     [SerializeField]
     BlindDrug blindDrug;
+    [SerializeField]
+    EDU_process eDU_Process;
 
     private void Start()
     {
+        if(GameObject.Find("Player(Clone)") == null)
+        {
+            characterItems = GameObject.Find("Player").GetComponent<CharacterItems>();
+            //Debug.Log("1");
+        }
+        else
+        {
+            characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
+            //Debug.Log("2");
+        }
         name = "None";
         food = GameObject.Find("Canvas/ToolsBar").GetComponent<Food>();
         toolMenuControl = GameObject.Find("Canvas/ToolsBar").GetComponent<ToolMenuControl>();
-        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
+        
+        
+        //if(characterItems == null)
+        //{
+        //    Debug.Log("null");
+        //    characterItems = GameObject.Find("Player").GetComponent<CharacterItems>();
+        //}
     }
 
     private void Update()
@@ -33,14 +51,21 @@ public class toolImageControl : MonoBehaviour
 
     public void onClick()
     {
-        Debug.LogError(name);
+        //Debug.Log(name);
         if (toolMenuControl.isQuit && name != "None")
         {
             quitTool();
         }
         else if(name == "food")
         {
+            //.Log("ppp");
             food.onClicked();
+            //Debug.Log(!(GameObject.Find("Canvas/Arrows/Arrow2") == null));
+            if(!(GameObject.Find("Canvas/Arrows/Arrow2") == null))
+            {
+                //Debug.Log("duide");
+                eDU_Process.eat2Event();
+            }
         }
         else if(name == "fireStone")
         {

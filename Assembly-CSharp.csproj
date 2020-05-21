@@ -77,6 +77,12 @@
     <Compile Include="Assets\Scripts\Character\CharacterStatus.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonUserControl.cs" />
+    <Compile Include="Assets\Scripts\EDU_scripts\EDU_addcollider.cs" />
+    <Compile Include="Assets\Scripts\EDU_scripts\EDU_button.cs" />
+    <Compile Include="Assets\Scripts\EDU_scripts\EDU_fireStone.cs" />
+    <Compile Include="Assets\Scripts\EDU_scripts\EDU_firestonecontrol.cs" />
+    <Compile Include="Assets\Scripts\EDU_scripts\EDU_process.cs" />
+    <Compile Include="Assets\Scripts\EDU_scripts\EDU_takeanddrop.cs" />
     <Compile Include="Assets\Scripts\Environment\Addcollider.cs" />
     <Compile Include="Assets\Scripts\Launcher\BackgroundFit.cs" />
     <Compile Include="Assets\Scripts\Launcher\ButtonControl.cs" />
