@@ -12,6 +12,7 @@ namespace Com.MyCompany.MyGame
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
         bool isConnecting;
+        public string roomName;
 
         #endregion
 
@@ -40,6 +41,7 @@ namespace Com.MyCompany.MyGame
             // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
             PhotonNetwork.AutomaticallySyncScene = true;
             isConnecting = false;
+            roomName = "None";
         }
 
 

@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Camera\ProtectCameraFromWallClip.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterItems.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterStatus.cs" />
+    <Compile Include="Assets\Scripts\Character\LightManager.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonUserControl.cs" />
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_addcollider.cs" />
@@ -83,6 +84,8 @@
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_firestonecontrol.cs" />
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_process.cs" />
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_takeanddrop.cs" />
+    <Compile Include="Assets\Scripts\EDU_scripts\EDU_toolSound.cs" />
+    <Compile Include="Assets\Scripts\EDU_scripts\EDU_walkSound.cs" />
     <Compile Include="Assets\Scripts\Environment\Addcollider.cs" />
     <Compile Include="Assets\Scripts\Launcher\BackgroundFit.cs" />
     <Compile Include="Assets\Scripts\Launcher\ButtonControl.cs" />
@@ -100,6 +103,7 @@
     <Compile Include="Assets\Scripts\tool\FireStoneControl.cs" />
     <Compile Include="Assets\Scripts\tool\FixPotion.cs" />
     <Compile Include="Assets\Scripts\tool\Food.cs" />
+    <Compile Include="Assets\Scripts\tool\Gem.cs" />
     <Compile Include="Assets\Scripts\tool\Herbs.cs" />
     <Compile Include="Assets\Scripts\tool\JewelThief.cs" />
     <Compile Include="Assets\Scripts\tool\Key.cs" />
@@ -118,6 +122,8 @@
     <Compile Include="Assets\Scripts\UI\GlobalData.cs" />
     <Compile Include="Assets\Scripts\UI\LoseSight.cs" />
     <Compile Include="Assets\Scripts\UI\MouseOverEffect.cs" />
+    <Compile Include="Assets\Scripts\UI\NameSetButton.cs" />
+    <Compile Include="Assets\Scripts\UI\SightControl.cs" />
     <Compile Include="Assets\Scripts\UI\TimerControl.cs" />
     <Compile Include="Assets\Scripts\UI\ToolInteraction.cs" />
     <Compile Include="Assets\Scripts\UI\ToolMenuControl.cs" />

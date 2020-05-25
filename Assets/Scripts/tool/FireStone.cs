@@ -63,7 +63,7 @@ public class FireStone : MonoBehaviourPunCallbacks
             Debug.Log(hit.transform.gameObject.name);
             Debug.Log(hit.transform.GetChild(0));
             Debug.Log(hit.transform.GetChild(1));
-            if (hit.transform.GetChild(0) && hit.transform.GetChild(1))
+            if (hit.transform.CompareTag("Torch") && hit.transform.GetChild(0).GetComponent<Light>().range == 0)
             {
                 Debug.Log("???");
                 if (hit.transform.GetChild(0).GetComponent<Light>())

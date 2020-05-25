@@ -12,6 +12,7 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
 {
     //[SerializeField] GameObject healthUI; //show the current health
     float health; //Character HP
+    string username;
     CharacterItems items;
     GameObject mainCamera;
     CapsuleCollider capsuleCol;
@@ -32,6 +33,8 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
         DontDestroyOnLoad(this.gameObject);
+        username = GlobalData.playerName;
+        Debug.Log("your name:" + username);
     }
 
     void Start()
@@ -183,7 +186,7 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
     IEnumerator ChangePosWhileBlack()
     {
         yield return new WaitForSeconds(0.5f);
-        transform.position = new Vector3(0f, 10f, -42f);
+        transform.position = new Vector3(0f, 5f, -52f);
         if (PhotonView.IsMine)
         {
             mainCamera.transform.position = new Vector3(0f, 10f, -4f);

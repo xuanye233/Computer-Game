@@ -25,7 +25,7 @@ public class BloodControl : MonoBehaviour
         //{
         //    StartCoroutine(Wait(5.0f));
         //} while (!GameObject.Find("Player(Clone)"));
-        bloodSloder = FindObjectOfType<Slider>();
+        //bloodSloder = FindObjectOfType<Slider>();
         //player = GameObject.Find("Player").GetComponent<Player>();
         bloodSloder.value = characterStatus.GetHealth();
     }
@@ -41,15 +41,15 @@ public class BloodControl : MonoBehaviour
     {
         if(bloodSloder.value >= 70)
         {
-            bloodSloder.fillRect.transform.GetComponent<Image>().color = Color.green;
+            bloodSloder.fillRect.transform.GetComponent<Image>().color = new Color(98f / 255f, 197f / 255f, 179f / 255f);
         }
         else if(bloodSloder.value >= 30)
         {
-            bloodSloder.fillRect.transform.GetComponent<Image>().color = Color.yellow;
+            bloodSloder.fillRect.transform.GetComponent<Image>().color = new Color(197f / 255f, 194f / 255f, 98f / 255f);
         }
         else
         {
-            bloodSloder.fillRect.transform.GetComponent<Image>().color = Color.red;
+            bloodSloder.fillRect.transform.GetComponent<Image>().color = new Color(197f / 255f, 114f / 255f, 98f / 255f);
         }
     }
 

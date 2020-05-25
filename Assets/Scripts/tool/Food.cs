@@ -9,6 +9,7 @@ public class Food : MonoBehaviourPunCallbacks
     CharacterItems characterItems;
     CharacterStatus characterStatus;
     ToolSound toolSound;
+    EDU_toolSound eduToolSound;
     //ToolInteraction toolInteraction;
     [SerializeField]
     Text noFoodText;
@@ -26,7 +27,14 @@ public class Food : MonoBehaviourPunCallbacks
         
         characterItems = curPlayer.GetComponent<CharacterItems>();
         characterStatus = curPlayer.GetComponent<CharacterStatus>();
-        toolSound = curPlayer.GetComponent<ToolSound>();
+        if (curPlayer.GetComponent<ToolSound>() == null)
+        {
+            eduToolSound = curPlayer.GetComponent<EDU_toolSound>();
+        }
+        else
+        {
+            toolSound = curPlayer.GetComponent<ToolSound>();
+        }
         //toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
         //noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
         //noFoodText.gameObject.SetActive(false);
@@ -75,8 +83,15 @@ public class Food : MonoBehaviourPunCallbacks
             Debug.Log("chile");
             characterItems.changeFood(-1);
             characterStatus.ChangeHealth(5);
-            //toolSound.Eat(curPlayer.GetComponent<PhotonView>().ViewID);
-            //PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
+            if (curPlayer.GetComponent<ToolSound>() == null)
+            {
+                eduToolSound.Eat();
+            }
+            else
+            {
+                toolSound.Eat(curPlayer.GetComponent<PhotonView>().ViewID);
+            }
+            PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
 
         }
     }

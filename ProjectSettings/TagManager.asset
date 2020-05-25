@@ -11,6 +11,12 @@ TagManager:
   - StumblingBlock
   - food
   - torch1
+  - Torch
+  - blindDrug
+  - gemA
+  - gemB
+  - gemC
+  - gemD
   layers:
   - Default
   - TransparentFX

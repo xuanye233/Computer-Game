@@ -15,7 +15,7 @@ public class EDU_takeanddrop : MonoBehaviour
     CharacterItems characterItems;
     ToolInteraction toolInteraction;
 
-    ToolSound toolSound;
+    EDU_toolSound toolSound;
     private GameObject curPlayer;
 
 
@@ -31,7 +31,7 @@ public class EDU_takeanddrop : MonoBehaviour
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         //toolInteraction = GameObject.Find("Canvas/BagPanel/ToolList").GetComponent<ToolInteraction>();
         curPlayer = GameObject.Find("Player(Clone)");
-        toolSound = curPlayer.GetComponent<ToolSound>();
+        toolSound = curPlayer.GetComponent<EDU_toolSound>();
     }
     void Update()
     {
@@ -71,6 +71,7 @@ public class EDU_takeanddrop : MonoBehaviour
                     characterItems.changeFood(1);
                     Destroy(hit.transform.gameObject);
                     eDU_Process.eatEvent();
+                    toolSound.Get();
                 }
 
                 //update relative data                   

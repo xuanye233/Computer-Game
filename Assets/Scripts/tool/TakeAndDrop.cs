@@ -17,6 +17,8 @@ public class TakeAndDrop : MonoBehaviourPun
     ToolSound toolSound;
     private GameObject curPlayer;
 
+    Gem gem;
+
 
 
     void Start()
@@ -31,6 +33,7 @@ public class TakeAndDrop : MonoBehaviourPun
         //toolInteraction = GameObject.Find("Canvas/BagPanel/ToolList").GetComponent<ToolInteraction>();
         curPlayer = GameObject.Find("Player(Clone)");
         toolSound = curPlayer.GetComponent<ToolSound>();
+        gem = GameObject.Find("Canvas/Gems").GetComponent<Gem>();
     }
     void Update()
     {
@@ -64,7 +67,7 @@ public class TakeAndDrop : MonoBehaviourPun
                     //    Debug.Log("点击到UGUI的UI界面，会返回true");
                     //}
                     string itemTag = hit.transform.gameObject.tag;
-                    if (itemTag == "food" || itemTag == "blindDrug" || itemTag == "key" || itemTag == "fireStone")
+                    if (itemTag == "food" || itemTag == "blindDrug" || itemTag == "fireStone" || itemTag == "gemA" || itemTag == "gemB" || itemTag == "gemC" || itemTag == "gemD")
                     {
                         toolSound.Get(curPlayer.GetComponent<PhotonView>().ViewID);
                         //PhotonNetwork.Destroy(hit.transform.gameObject);
@@ -75,13 +78,29 @@ public class TakeAndDrop : MonoBehaviourPun
                             //Debug.Log("add 1");
                             characterItems.changeFood(1);
                         }
-                        else if (itemTag == "blindDrug")
+                        else if (PhotonView.IsMine && itemTag == "blindDrug")
                         {
                             characterItems.changeBlindDrug(1);
                         }
-                        //Debug.Log("hit");
-                        //Debug.Log(characterItems.menuControl.num);
-                    }
+                        else if(PhotonView.IsMine && itemTag == "gemA")
+                        {
+                            gem.changeA(1);
+                        }
+                        else if (PhotonView.IsMine && itemTag == "gemB")
+                        {
+                            gem.changeB(1);
+                        }
+                        else if (PhotonView.IsMine && itemTag == "gemC")
+                        {
+                            gem.changeC(1);
+                        }
+                        else if (PhotonView.IsMine && itemTag == "gemD")
+                        {
+                            gem.changeD(1);
+                        }
+                    //Debug.Log("hit");
+                    //Debug.Log(characterItems.menuControl.num);
+                }
 
                     //update relative data                   
                 }
