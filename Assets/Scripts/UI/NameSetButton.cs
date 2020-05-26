@@ -7,6 +7,10 @@ public class NameSetButton : MonoBehaviour
 {
     public InputField inputField;
     Button setNameButton;
+    [SerializeField]
+    GameObject playerNameobj;
+    [SerializeField]
+    GameObject roomNameobj;
 
     string nameText;
     void Start()
@@ -28,5 +32,7 @@ public class NameSetButton : MonoBehaviour
     public void NameClick()
     {
         GlobalData.playerName = inputField.text;
+        playerNameobj.SetActive(false);
+        roomNameobj.SetActive(true);
     }
 }

@@ -72,12 +72,14 @@ namespace Com.MyCompany.MyGame
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected)
             {
+                Debug.Log("PhotonNetwork.IsConnected");
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
                 PhotonNetwork.JoinRandomRoom();
                 //Debug.Log("room name is " + PhotonNetwork.CurrentRoom.Name);
             }
             else
             {
+                Debug.Log("!PhotonNetwork.IsConnected");
                 // #Critical, we must first and foremost connect to Photon Online Server.
                 PhotonNetwork.ConnectUsingSettings();
                 PhotonNetwork.GameVersion = gameVersion;
@@ -138,11 +140,21 @@ namespace Com.MyCompany.MyGame
 
         public override void OnConnectedToMaster()
         {
+            Debug.Log("OnConnectedToMaster");
             if (isConnecting)
             {
                 // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-                PhotonNetwork.JoinRandomRoom();
-                isConnecting = false;
+                if (roomName == "None")
+                {
+                    PhotonNetwork.JoinRandomRoom();
+                    isConnecting = false;
+                }
+                else
+                {
+                    //PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+                    PhotonNetwork.JoinRoom(roomName);
+                    isConnecting = false;
+                }
             }
 
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
@@ -159,7 +171,13 @@ namespace Com.MyCompany.MyGame
             Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
             // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-            PhotonNetwork.CreateRoom("iam1", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+            PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        }
+
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            base.OnJoinRoomFailed(returnCode, message);
+            PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
         }
 
         public override void OnJoinedRoom()

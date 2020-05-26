@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Launcher\BackgroundFit.cs" />
     <Compile Include="Assets\Scripts\Launcher\ButtonControl.cs" />
     <Compile Include="Assets\Scripts\Launcher\ButtonCtrl.cs" />
+    <Compile Include="Assets\Scripts\Launcher\RoomName.cs" />
     <Compile Include="Assets\Scripts\Launcher\setting\bgmControl.cs" />
     <Compile Include="Assets\Scripts\Network\CameraWork.cs" />
     <Compile Include="Assets\Scripts\Network\GameManager.cs" />
