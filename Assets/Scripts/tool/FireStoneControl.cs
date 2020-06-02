@@ -28,7 +28,9 @@ public class FireStoneControl : MonoBehaviour
 
     public void onClick()
     {
-        Debug.Log("anle");
+        Sprite loadImage = Resources.Load("Picture/Tool_selected", typeof(Sprite)) as Sprite;
+        toolMenuControl.bgImages[0].sprite = loadImage;
+        //Debug.Log(toolMenuControl.bgImages.Count);
         fireStone.onClicked();
     }
 

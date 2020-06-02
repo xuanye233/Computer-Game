@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class Teleportation : MonoBehaviourPunCallbacks
 {
@@ -16,12 +17,24 @@ public class Teleportation : MonoBehaviourPunCallbacks
     GameObject bagButton;
     [SerializeField]
     GameObject bagPanel;
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    string Playername;
+    //public Text SliderText;
+    [SerializeField]
+    ToolMenuControl toolMenuControl;
     void Awake()
     {
         curPlayer = GameObject.Find("Player(Clone)");
         toolSound = curPlayer.GetComponent<ToolSound>();
         characterItems = curPlayer.GetComponent<CharacterItems>();
         isClicked = false;
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        Playername = curPlayer.GetComponent<CharacterStatus>().username;
+        //SliderText = GameObject.Find("Canvas/slider/SliderImage/SliderText").GetComponent<Text>();
     }
 
     private void Update()
@@ -40,8 +53,6 @@ public class Teleportation : MonoBehaviourPunCallbacks
             return;
         }
         isClicked = true;
-        bagButton.SetActive(true);
-        bagPanel.SetActive(false);
     }
 
     private void TeleportationEvent()
@@ -61,7 +72,7 @@ public class Teleportation : MonoBehaviourPunCallbacks
                     toolSound.Teleport(curPlayer.GetComponent<PhotonView>().ViewID);
                     toolSound.Teleport(hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
                     PhotonView.RPC("showTeleEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
-                    //现在的设定是只要是一定范围内的敌人都会被影响
+                    PhotonView.RPC("showTeleTips", RpcTarget.All, Playername);
                     Debug.Log("wodeid " + hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
 
                     myPosition = curPlayer.transform.position;
@@ -70,6 +81,7 @@ public class Teleportation : MonoBehaviourPunCallbacks
                     characterItems.changeTeleportation(-1);
 
                     isClicked = false;
+                    toolMenuControl.transparent();
                 }
             }
         }
@@ -86,5 +98,28 @@ public class Teleportation : MonoBehaviourPunCallbacks
     {
         Vector3 centerPos = position + center * scale * 1.5f;
         PhotonNetwork.Instantiate("Effects/TeleEffect", centerPos, Quaternion.identity, 0);
+    }
+
+    [PunRPC]
+    public void showTeleTips(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>移形换位</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>移形换位</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>移形换位</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>移形换位</color> ";
+        }
     }
 }

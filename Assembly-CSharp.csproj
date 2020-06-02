@@ -64,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Effects\Scripts\Lighting.cs" />
+    <Compile Include="Assets\Scripts\AnimTrigger\chestOpen.cs" />
+    <Compile Include="Assets\Scripts\AnimTrigger\stoneDoorOpen.cs" />
+    <Compile Include="Assets\Scripts\AnimTrigger\stoneDoorOpen_2.cs" />
     <Compile Include="Assets\Scripts\Audio\ButtonSound.cs" />
     <Compile Include="Assets\Scripts\Audio\FireSound.cs" />
     <Compile Include="Assets\Scripts\Audio\SetSound.cs" />
@@ -111,8 +114,10 @@
     <Compile Include="Assets\Scripts\tool\lightControlor.cs" />
     <Compile Include="Assets\Scripts\tool\OriginStone.cs" />
     <Compile Include="Assets\Scripts\tool\StumblingBlock.cs" />
+    <Compile Include="Assets\Scripts\tool\StumblingCollider.cs" />
     <Compile Include="Assets\Scripts\tool\TakeAndDrop.cs" />
     <Compile Include="Assets\Scripts\tool\Teleportation.cs" />
+    <Compile Include="Assets\Scripts\tool\ThunderstormCollider.cs" />
     <Compile Include="Assets\Scripts\tool\ThunderstormStone.cs" />
     <Compile Include="Assets\Scripts\tool\toolImageControl.cs" />
     <Compile Include="Assets\Scripts\tool\Trap.cs" />
@@ -121,6 +126,7 @@
     <Compile Include="Assets\Scripts\UI\CharaSetButton.cs" />
     <Compile Include="Assets\Scripts\UI\ESC.cs" />
     <Compile Include="Assets\Scripts\UI\GlobalData.cs" />
+    <Compile Include="Assets\Scripts\UI\Killfeed.cs" />
     <Compile Include="Assets\Scripts\UI\LoseSight.cs" />
     <Compile Include="Assets\Scripts\UI\MouseOverEffect.cs" />
     <Compile Include="Assets\Scripts\UI\NameSetButton.cs" />

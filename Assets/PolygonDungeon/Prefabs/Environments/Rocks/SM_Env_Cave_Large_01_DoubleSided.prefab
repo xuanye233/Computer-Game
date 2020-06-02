@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 406762}
   - component: {fileID: 3340006}
   - component: {fileID: 2384342}
+  - component: {fileID: 8279863421405284448}
   m_Layer: 0
   m_Name: SM_Env_Cave_Large_01_DoubleSided
   m_TagString: Untagged
@@ -77,3 +78,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8279863421405284448
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185884}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: f040b3f137cc8a94e826ca5e9053c58e, type: 3}

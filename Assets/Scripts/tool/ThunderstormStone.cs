@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
+using UnityEngine.UI;
 public class ThunderstormStone : MonoBehaviourPunCallbacks
 {
     CharacterItems characterItems;
@@ -13,6 +13,13 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
     GameObject bagPanel;
     GameObject curPlayer;
     ToolSound toolSound;
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    string Playername;
+    [SerializeField]
+    ToolMenuControl toolMenuControl;
+    //public Text SliderText;
     private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
@@ -20,6 +27,11 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
         characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
         isThunderstormStoneClick = false;
         Debug.Log(" isThunderstormStoneClick = false;");
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        Playername = curPlayer.GetComponent<CharacterStatus>().username;
+        //SliderText = GameObject.Find("Canvas/slider/SliderImage/SliderText").GetComponent<Text>();
     }
 
     void Update()
@@ -46,8 +58,6 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
             //Debug.Log("2");
             isThunderstormStoneClick = true;
             //trapTransform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
-            bagButton.SetActive(true);
-            bagPanel.SetActive(false);
         }
     }
 
@@ -60,6 +70,7 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
             //GameObject newTrap = (GameObject)GameObject.Instantiate(Resources.Load("SM_Prop_Bricks_04"));
             //create the object in the scene
             //newTrap.transform.position = hit.point;
+            PhotonView.RPC("showThunderTips", RpcTarget.All, Playername);
             PhotonView.RPC("createThunderstorm", RpcTarget.MasterClient, hit.point);
             isThunderstormStoneClick = false;
             //reset the flag
@@ -69,6 +80,7 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
             //update the num of the traps
             //trapTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             characterItems.changeThunderstormStone(-1);
+            toolMenuControl.transparent();
         }
     }
 
@@ -77,14 +89,36 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
     [PunRPC]
     public void createThunderstorm(Vector3 position)
     {
-        PhotonNetwork.Instantiate("Tool_Thunderstorm_Stone", position, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Thunderstorm2", position, Quaternion.identity, 0);
     }
 
+    [PunRPC]
+    public void showThunderTips(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>雷暴石</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>雷暴石</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>雷暴石</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>雷暴石</color> ";
+        }
+    }
     //void exposure()
     //{
     //    PhotonNetwork.Instantiate("PlayerCube", GameObject.Find("MapCamera/PlayerCube").transform.position, Quaternion.identity, 0);
 
     //}
 
-    
+
 }

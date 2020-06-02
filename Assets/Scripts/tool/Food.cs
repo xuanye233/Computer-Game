@@ -9,32 +9,30 @@ public class Food : MonoBehaviourPunCallbacks
     CharacterItems characterItems;
     CharacterStatus characterStatus;
     ToolSound toolSound;
-    EDU_toolSound eduToolSound;
+    string Playername;
     //ToolInteraction toolInteraction;
     [SerializeField]
     Text noFoodText;
     GameObject curPlayer;
-
+    GameObject canvas;
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    public EDU_process eDU_Process;
+    //public Text SliderText;
     private void Start()
     {
-        if(GameObject.Find("Player(Clone)") == null){
-            curPlayer = GameObject.Find("Player");
-        }
-        else
-        {
-            curPlayer = GameObject.Find("Player(Clone)");
-        }
-        
+        curPlayer = GameObject.Find("Player(Clone)");
         characterItems = curPlayer.GetComponent<CharacterItems>();
         characterStatus = curPlayer.GetComponent<CharacterStatus>();
-        if (curPlayer.GetComponent<ToolSound>() == null)
-        {
-            eduToolSound = curPlayer.GetComponent<EDU_toolSound>();
-        }
-        else
-        {
-            toolSound = curPlayer.GetComponent<ToolSound>();
-        }
+        toolSound = curPlayer.GetComponent<ToolSound>();
+        //SliderText = GameObject.Find("Canvas/slider/SliderImage/SliderText").GetComponent<Text>();
+        //print(SliderText);
+        Playername = curPlayer.GetComponent<CharacterStatus>().username;
+        canvas = GameObject.Find("Canvas");
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
         //toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
         //noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
         //noFoodText.gameObject.SetActive(false);
@@ -44,8 +42,7 @@ public class Food : MonoBehaviourPunCallbacks
     public void onClicked()
     {
 
-        Debug.Log("Sssss");
-        Debug.Log(characterItems.getFood());
+        //Debug.Log("Sssss");
         if (characterItems.getFood() == 0)//have no food available
         {
             noFoodText.gameObject.SetActive(true);
@@ -80,19 +77,20 @@ public class Food : MonoBehaviourPunCallbacks
         }
         else//have enough food
         {
-            Debug.Log("chile");
+
             characterItems.changeFood(-1);
             characterStatus.ChangeHealth(5);
-            if (curPlayer.GetComponent<ToolSound>() == null)
+            if(GameObject.Find("Cellar") != null)
             {
-                eduToolSound.Eat();
+                eDU_Process.eat2Event();
             }
             else
             {
                 toolSound.Eat(curPlayer.GetComponent<PhotonView>().ViewID);
+                PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
+                PhotonView.RPC("showFoodTips", RpcTarget.All, Playername);
             }
-            PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
-
+            
         }
     }
     public IEnumerator noFoodWait() //fade function
@@ -110,5 +108,27 @@ public class Food : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("Effects/FoodEffect", centerPos, Quaternion.identity, 0);
     }
 
+    [PunRPC]
+    public void showFoodTips(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>魔法鸡腿</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>魔法鸡腿</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>魔法鸡腿</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>魔法鸡腿</color> ";
+        }
+    }
 }
 

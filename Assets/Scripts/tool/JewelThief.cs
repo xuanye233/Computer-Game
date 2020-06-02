@@ -15,6 +15,14 @@ public class JewelThief : MonoBehaviourPunCallbacks
     GameObject bagPanel;
     GameObject curPlayer;
     ToolSound toolSound;
+    //public Text SliderText;
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    string Playername;
+    string Targetname;
+    [SerializeField]
+    ToolMenuControl toolMenuControl;
     private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
@@ -22,6 +30,11 @@ public class JewelThief : MonoBehaviourPunCallbacks
         player = curPlayer;
         isClicked = false;//设置为点击玩家进行偷窃
         toolSound = curPlayer.GetComponent<ToolSound>();
+        //SliderText = GameObject.Find("Canvas/slider/SliderImage/SliderText").GetComponent<Text>();
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        Playername = curPlayer.GetComponent<CharacterStatus>().username;
     }
 
     private void Update()
@@ -55,6 +68,8 @@ public class JewelThief : MonoBehaviourPunCallbacks
             {
                 if (hit.transform.gameObject.tag == "Player")
                 {
+                    Targetname = hit.transform.gameObject.GetComponent<CharacterStatus>().username;
+                    PhotonView.RPC("showJewelTips", RpcTarget.All, Playername,Targetname);
                     toolSound.Steal(curPlayer.GetComponent<PhotonView>().ViewID);
                     PhotonView.RPC("showJewelEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
                     //Debug.Log("wodeid " + hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
@@ -62,6 +77,7 @@ public class JewelThief : MonoBehaviourPunCallbacks
                     PhotonView.RPC("useJewelThief", RpcTarget.Others, hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
                     
                     characterItems.changeJewelThief(-1);
+                    toolMenuControl.transparent();
                 }
             }
         }
@@ -74,20 +90,41 @@ public class JewelThief : MonoBehaviourPunCallbacks
         //int index = Random.Range(0, totalJewelNum);//随机指定偷取某种颜色的宝石
 
         int p1 = Random.Range(0, 100);
-        int p2 = Random.Range(0, 100);
+        int num = Random.Range(0, 3);
+        //int p2 = Random.Range(0, 100);
         //int jewelNum = PhotonView.Find(viewID).getJewelNum(index);
-        int jewelNum = PhotonView.Find(viewID).GetComponent<CharacterItems>().getJewel();
+        int jewelNum = PhotonView.Find(viewID).GetComponent<Gem>().gemA + PhotonView.Find(viewID).GetComponent<Gem>().gemB + PhotonView.Find(viewID).GetComponent<Gem>().gemC + PhotonView.Find(viewID).GetComponent<Gem>().gemD;
 
         if (jewelNum > 0)//可以被偷
         {
             Debug.Log("keyitoua");
-            if (-1 <= p1)//偷成功的概率设置为大于一半
+            if (50 <= p1)//偷成功的概率设置为大于一半
             {
+                if(num == 0 && PhotonView.Find(viewID).GetComponent<Gem>().gemA > 0)
+                {
+                    PhotonView.Find(viewID).GetComponent<Gem>().changeA(-1);
+                    curPlayer.GetComponent<Gem>().changeA(1);
+                }
+                else if (num == 1 && PhotonView.Find(viewID).GetComponent<Gem>().gemB > 0)
+                {
+                    PhotonView.Find(viewID).GetComponent<Gem>().changeB(-1);
+                    curPlayer.GetComponent<Gem>().changeB(1);
+                }
+                else if (num == 2 && PhotonView.Find(viewID).GetComponent<Gem>().gemC > 0)
+                {
+                    PhotonView.Find(viewID).GetComponent<Gem>().changeC(-1);
+                    curPlayer.GetComponent<Gem>().changeC(1);
+                }
+                else if (num == 3 && PhotonView.Find(viewID).GetComponent<Gem>().gemD > 0)
+                {
+                    PhotonView.Find(viewID).GetComponent<Gem>().changeD(-1);
+                    curPlayer.GetComponent<Gem>().changeD(1);
+                }
                 //PhotonView.Find(viewID).changeJewel(index, -1);
-                PhotonView.Find(viewID).GetComponent<CharacterItems>().changeJewel(-1);
+                //PhotonView.Find(viewID).GetComponent<CharacterItems>().changeJewel(-1);
                 //Debug.Log("his jewel " + PhotonView.Find(viewID).GetComponent<CharacterItems>().getJewel());
                 //characterItems.changeJewel(index,1);
-                characterItems.changeJewel(1);
+                //characterItems.changeJewel(1);
                 //己方文字提示“偷取成功！”
                 //对方文字提示“您的宝石被偷了！”
             }
@@ -99,5 +136,28 @@ public class JewelThief : MonoBehaviourPunCallbacks
     {
         Vector3 centerPos = position + center * scale * 1.5f;
         PhotonNetwork.Instantiate("Effects/JewelEffect", centerPos, Quaternion.identity, 0);
+    }
+
+    [PunRPC]
+    public void showJewelTips(string user,string target)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i>" + user + "</i> 对 <i>" + target + "</i> 使用了 <color=#73ccd5ff>宝石大盗</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i>" + user + "</i> 对 <i>" + target + "</i> 使用了 <color=#73ccd5ff>宝石大盗</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i>" + user + "</i> 对 <i>" + target + "</i> 使用了 <color=#73ccd5ff>宝石大盗</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i>" + user + "</i> 对 <i>" + target + "</i> 使用了 <color=#73ccd5ff>宝石大盗</color> ";
+        }
     }
 }

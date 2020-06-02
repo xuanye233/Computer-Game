@@ -15,30 +15,28 @@ public class toolImageControl : MonoBehaviour
     [SerializeField]
     BlindDrug blindDrug;
     [SerializeField]
-    EDU_process eDU_Process;
+    OriginStone originStone;
+    [SerializeField]
+    StumblingBlock stumblingBlock;
+    [SerializeField]
+    FixPotion fixPotion;
+    [SerializeField]
+    ThunderstormStone thunderstormStone;
+    [SerializeField]
+    Teleportation teleportation;
+    [SerializeField]
+    JewelThief jewelThief;
+    [SerializeField]
+    Herbs herbs;
+    //[SerializeField]
+    //MoonStone mooonStone;
 
     private void Start()
     {
-        if(GameObject.Find("Player(Clone)") == null)
-        {
-            characterItems = GameObject.Find("Player").GetComponent<CharacterItems>();
-            //Debug.Log("1");
-        }
-        else
-        {
-            characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
-            //Debug.Log("2");
-        }
         name = "None";
         food = GameObject.Find("Canvas/ToolsBar").GetComponent<Food>();
         toolMenuControl = GameObject.Find("Canvas/ToolsBar").GetComponent<ToolMenuControl>();
-        
-        
-        //if(characterItems == null)
-        //{
-        //    Debug.Log("null");
-        //    characterItems = GameObject.Find("Player").GetComponent<CharacterItems>();
-        //}
+        characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
     }
 
     private void Update()
@@ -47,25 +45,25 @@ public class toolImageControl : MonoBehaviour
         {
             toolMenuControl.isQuit = true;
         }
+        //Debug.Log(name);
     }
 
     public void onClick()
     {
-        //Debug.Log(name);
+        GameObject obj = this.gameObject.transform.parent.gameObject;
+        string changename = obj.name;//点击图标的物体名字
+        changename = changename.Substring(changename.Length - 1, 1);
+     
+        Sprite loadImage = Resources.Load("Picture/Tool_selected", typeof(Sprite)) as Sprite;
+        toolMenuControl.bgImages[int.Parse(changename)].sprite = loadImage;
+        //Debug.LogError(name);
         if (toolMenuControl.isQuit && name != "None")
         {
             quitTool();
         }
         else if(name == "food")
         {
-            //.Log("ppp");
             food.onClicked();
-            //Debug.Log(!(GameObject.Find("Canvas/Arrows/Arrow2") == null));
-            if(!(GameObject.Find("Canvas/Arrows/Arrow2") == null))
-            {
-                //Debug.Log("duide");
-                eDU_Process.eat2Event();
-            }
         }
         else if(name == "fireStone")
         {
@@ -75,6 +73,38 @@ public class toolImageControl : MonoBehaviour
         {
             blindDrug.onClick();
         }
+        else if (name == "originStone")
+        {
+            originStone.onClicked();
+        }
+        else if (name == "stumblingBlock")
+        {
+            stumblingBlock.onClicked();
+        }
+        else if (name == "fixPotion")
+        {
+            fixPotion.onClicked();
+        }
+        else if (name == "thunderstormStone")
+        {
+            thunderstormStone.onClicked();
+        }
+        else if (name == "teleportation")
+        {
+            teleportation.onClicked();
+        }
+        else if (name == "jewelThief")
+        {
+            jewelThief.onClicked();
+        }
+        else if (name == "herb")
+        {
+            herbs.onClicked();
+        }
+        //else if (name == "moonStone")
+        //{
+        //    moonStone.onClicked();
+        //}
     } 
 
     private void quitTool()

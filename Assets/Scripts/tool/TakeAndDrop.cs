@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 public class TakeAndDrop : MonoBehaviourPun
 {
     public GameObject preFabCube;
@@ -13,13 +14,14 @@ public class TakeAndDrop : MonoBehaviourPun
 
     CharacterItems characterItems;
     ToolInteraction toolInteraction;
-
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    string Playername;
     ToolSound toolSound;
     private GameObject curPlayer;
 
     Gem gem;
-
-
 
     void Start()
     {
@@ -33,6 +35,10 @@ public class TakeAndDrop : MonoBehaviourPun
         //toolInteraction = GameObject.Find("Canvas/BagPanel/ToolList").GetComponent<ToolInteraction>();
         curPlayer = GameObject.Find("Player(Clone)");
         toolSound = curPlayer.GetComponent<ToolSound>();
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        Playername = curPlayer.GetComponent<CharacterStatus>().username;
         gem = GameObject.Find("Canvas/Gems").GetComponent<Gem>();
     }
     void Update()
@@ -48,63 +54,113 @@ public class TakeAndDrop : MonoBehaviourPun
         //timeHit += Time.deltaTime;
         //if (timeHit > 0.2f)
         //{
-            if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
+        {
+
+            //Debug.LogError("hahah111");
+            //no using tool
+            timeHit = 0f;
+            RaycastHit hit;
+            bool isHit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 10f);
+
+
+            if (isHit)
             {
-              
-                Debug.LogError("hahah111");
-                //no using tool
-                timeHit = 0f;
-                RaycastHit hit;
-                bool isHit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 10f);
-                
-                
-                if (isHit)
+
+                //Debug.Log(hit.transform.gameObject.name);
+                //if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                //{
+                //    Debug.Log("点击到UGUI的UI界面，会返回true");
+                //}
+                string itemTag = hit.transform.gameObject.tag;
+                Debug.Log(hit.transform.gameObject.name);
+                if (itemTag == "food" || itemTag == "blindDrug" || itemTag == "key" || itemTag == "fireStone" || itemTag == "gemA" || itemTag == "gemB" || itemTag == "gemC" || itemTag == "gemD" || itemTag == "BirthStone" || itemTag == "Stumbling" || itemTag == "Thunderstorm" || itemTag == "Still" || itemTag == "Teleportation" || itemTag == "JewelThief" || itemTag == "Herbs" || itemTag == "MoonStone")
                 {
-                    
-                    Debug.Log(hit.transform.gameObject.name);
-                    //if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-                    //{
-                    //    Debug.Log("点击到UGUI的UI界面，会返回true");
-                    //}
-                    string itemTag = hit.transform.gameObject.tag;
-                    if (itemTag == "food" || itemTag == "blindDrug" || itemTag == "fireStone" || itemTag == "gemA" || itemTag == "gemB" || itemTag == "gemC" || itemTag == "gemD")
+                    Debug.Log("jinru");
+                    toolSound.Get(curPlayer.GetComponent<PhotonView>().ViewID);
+                    //PhotonNetwork.Destroy(hit.transform.gameObject);
+                    PhotonView.RPC("destroyFood", RpcTarget.MasterClient, hit.transform.gameObject.GetComponent<PhotonView>().ViewID);
+                    if (PhotonView.IsMine && itemTag == "food")
                     {
-                        toolSound.Get(curPlayer.GetComponent<PhotonView>().ViewID);
-                        //PhotonNetwork.Destroy(hit.transform.gameObject);
-                        PhotonView.RPC("destroyFood", RpcTarget.MasterClient, hit.transform.gameObject.GetComponent<PhotonView>().ViewID);                       
-                        if (PhotonView.IsMine && itemTag == "food")
-                        {
-                            //Destroy(hit.transform.gameObject);
-                            //Debug.Log("add 1");
-                            characterItems.changeFood(1);
-                        }
-                        else if (PhotonView.IsMine && itemTag == "blindDrug")
-                        {
-                            characterItems.changeBlindDrug(1);
-                        }
-                        else if(PhotonView.IsMine && itemTag == "gemA")
-                        {
-                            gem.changeA(1);
-                        }
-                        else if (PhotonView.IsMine && itemTag == "gemB")
-                        {
-                            gem.changeB(1);
-                        }
-                        else if (PhotonView.IsMine && itemTag == "gemC")
-                        {
-                            gem.changeC(1);
-                        }
-                        else if (PhotonView.IsMine && itemTag == "gemD")
-                        {
-                            gem.changeD(1);
-                        }
+                        //Destroy(hit.transform.gameObject);
+                        //Debug.Log("add 1");
+                        characterItems.changeFood(1);
+                        showTakeFood(Playername);
+                        //PhotonView.RPC("showTakeFood", RpcTarget.All, Playername);
+                    }
+                    else if (itemTag == "blindDrug")
+                    {
+                        characterItems.changeBlindDrug(1);
+                        showTakeBlindDrug(Playername);
+                        //PhotonView.RPC("showTakeBlindDrug", RpcTarget.All, Playername);
+                    }
+                    else if (itemTag == "fireStone")
+                    {
+                        characterItems.changeBlindDrug(1);
+                        showTakeFireStone(Playername);
+                        //PhotonView.RPC("showTakeFireStone", RpcTarget.All, Playername);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "gemA")
+                    {
+                        gem.changeA(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "gemB")
+                    {
+                        gem.changeB(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "gemC")
+                    {
+                        gem.changeC(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "gemD")
+                    {
+                        gem.changeD(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "BirthStone")
+                    {
+                        characterItems.changeOriginStone(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "Stumbling")
+                    {
+                        characterItems.changeStumblingBolack(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "Thunderstorm")
+                    {
+                        characterItems.changeThunderstormStone(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "Still")
+                    {
+                        characterItems.changeFixPotion(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "Teleportation")
+                    {
+                        characterItems.changeThunderstormStone(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "JewelThief")
+                    {
+                        characterItems.changeJewelThief(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "Herbs")
+                    {
+                        characterItems.changeHerb(1);
+                    }
+                    else if (PhotonView.IsMine && itemTag == "Moonstone")
+                    {
+                        characterItems.changeMoonStone(1);
+                    }
+
                     //Debug.Log("hit");
                     //Debug.Log(characterItems.menuControl.num);
                 }
-
-                    //update relative data                   
+                else if (PhotonView.IsMine && itemTag == "chest")
+                {
+                    Debug.Log("haha");
+                    chestOpen chestopen = hit.transform.gameObject.GetComponentInChildren<chestOpen>();
+                    chestopen.chestOpenEvent();
                 }
+                //update relative data                   
             }
+        }
         //}
         //以下用于丢出物体
         //if (Input.GetKeyDown(KeyCode.G) && equipNum > 0)
@@ -135,5 +191,93 @@ public class TakeAndDrop : MonoBehaviourPun
     {
         yield return new WaitForSeconds(waitTime);
         //等待之后执行的动作
+    }
+
+    public void showTakeFood(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>魔法鸡腿</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>魔法鸡腿</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>魔法鸡腿</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>魔法鸡腿</color> ";
+        }
+    }
+
+    public void showTakeBlindDrug(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>失明药水</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>失明药水</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>失明药水</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>失明药水</color> ";
+        }
+    }
+
+    public void showTakeKey(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>钥匙</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>钥匙</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>钥匙</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>钥匙</color> ";
+        }
+    }
+
+    public void showTakeFireStone(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>打火石</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>打火石</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>打火石</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>打火石</color> ";
+        }
     }
 }

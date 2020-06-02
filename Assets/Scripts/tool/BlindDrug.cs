@@ -13,6 +13,11 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     GameObject curPlayer;
     ThirdPersonUserControl thirdPersonUserControl;
     ToolSound toolSound;
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    string Playername;
+    //public Text SliderText;
     private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
@@ -24,6 +29,11 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         //rawImage.color = Color.clear;
         toolSound = curPlayer.GetComponent<ToolSound>();
         thirdPersonUserControl = GameObject.Find("Player(Clone)").GetComponent<ThirdPersonUserControl>();
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        Playername = curPlayer.GetComponent<CharacterStatus>().username;
+        //SliderText = GameObject.Find("Canvas/slider/SliderImage/SliderText").GetComponent<Text>();
     }
 
     private void Update()
@@ -40,7 +50,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
             return;
         }
         PhotonView.RPC("showBlindEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
-
+        PhotonView.RPC("showBlindTips", RpcTarget.All, Playername);
         players = GameObject.FindGameObjectsWithTag("Player");
 
         toolSound.Blind(curPlayer.GetComponent<PhotonView>().ViewID);
@@ -96,5 +106,28 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     {
         Vector3 centerPos = position + center * scale * 1.5f;
         PhotonNetwork.Instantiate("Effects/BlindEffect", centerPos, Quaternion.identity, 0);
+    }
+
+    [PunRPC]
+    public void showBlindTips(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>失明药水</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>失明药水</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>失明药水</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>失明药水</color> ";
+        }
     }
 }

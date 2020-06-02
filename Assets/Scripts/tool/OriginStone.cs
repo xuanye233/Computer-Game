@@ -1,24 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 
 //原生之石：使敌人回到出发点
 
 public class OriginStone : MonoBehaviourPunCallbacks
 {
+    [SerializeField]
+    ToolMenuControl toolMenuControl;
     CharacterItems characterItems;
     CharacterStatus characterStatus;
     GameObject curPlayer;
     [SerializeField] private float minDis = 3.0f; //在这个距离内才能影响到敌人
     private GameObject[] players;
     ToolSound toolSound;
+    //public Text SliderText;
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    string Playername;
     private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
         characterItems = curPlayer.GetComponent<CharacterItems>();
         characterStatus = curPlayer.GetComponent<CharacterStatus>();
         toolSound = curPlayer.GetComponent<ToolSound>();
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        Playername = curPlayer.GetComponent<CharacterStatus>().username;
+        //SliderText = GameObject.Find("Canvas/slider/SliderImage/SliderText").GetComponent<Text>();
     }
 
 
@@ -32,6 +45,7 @@ public class OriginStone : MonoBehaviourPunCallbacks
         }
         Debug.Log("222 " + curPlayer.transform.position);
         PhotonView.RPC("showOriginEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
+        PhotonView.RPC("showOriginTips", RpcTarget.All, Playername);
         //现在的设定是只要是一定范围内的敌人都会被影响
         players = GameObject.FindGameObjectsWithTag("Player");
         Vector3 position = (players[0].transform.position);
@@ -55,6 +69,7 @@ public class OriginStone : MonoBehaviourPunCallbacks
         }
         
         characterItems.changeOriginStone(-1);
+        toolMenuControl.transparent();
     }
 
     [PunRPC]
@@ -71,5 +86,28 @@ public class OriginStone : MonoBehaviourPunCallbacks
     {
         Vector3 centerPos = position + center * scale * 1.5f;
         PhotonNetwork.Instantiate("Effects/OriginEffect", centerPos, Quaternion.identity, 0);
+    }
+
+    [PunRPC]
+    public void showOriginTips(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>源生之石</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>源生之石</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>源生之石</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>源生之石</color> ";
+        }
     }
 }

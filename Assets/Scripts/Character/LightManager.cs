@@ -15,9 +15,13 @@ public class LightManager : MonoBehaviour
     {
         //lights = GameObject.FindGameObjectsWithTag("PointLight");
         //curPlayer2 = transform.Find("Player(Clone)");
+        //for (int i = 0; i < torchs.Length; i++)
+        //{
+        //    lights[i] = torchs[i].transform.GetChild(0).GetComponent<Light>();
+        //}
         curPlayer = GameObject.Find("Player(Clone)");
-        maxIntesnity = 0.01f;
-        UpdateLightIntensity();        
+        maxIntesnity = 0.002f;
+        UpdateLightIntensity();
     }
 
     // Update is called once per frame

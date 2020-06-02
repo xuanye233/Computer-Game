@@ -144,6 +144,7 @@ public class EDU_process : MonoBehaviour
 
     public IEnumerator EatWait() //fade function
     {
+        Debug.Log("gaocuole");
         //pickUpText.CrossFadeAlpha(1, 1f, false);
         foodArrow.SetActive(false);
         pickUpText.CrossFadeAlpha(0, 1f, false);
@@ -157,6 +158,7 @@ public class EDU_process : MonoBehaviour
 
     public IEnumerator Eat2Wait() //fade function
     {
+        Debug.Log("zhendecuole");
         foodUIArrow.SetActive(false);
         useFoodText.CrossFadeAlpha(0, 1f, false);
         yield return new WaitForSeconds(1);

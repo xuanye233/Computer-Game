@@ -1671,7 +1671,6 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
-  eDU_Process: {fileID: 846061668}
 --- !u!114 &197899827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2101,7 +2100,6 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
-  eDU_Process: {fileID: 0}
 --- !u!114 &241123494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7516,7 +7514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2183add58e34c47b108186f087cdd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodSloder: {fileID: 0}
+  bloodSloder: {fileID: 756777674}
 --- !u!1001 &767350716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7823,7 +7821,6 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
-  eDU_Process: {fileID: 0}
 --- !u!114 &791919413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9015,7 +9012,6 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
-  eDU_Process: {fileID: 0}
 --- !u!114 &899531210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11322,7 +11318,6 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
-  eDU_Process: {fileID: 0}
 --- !u!114 &1075761352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15786,7 +15781,6 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 0}
-  eDU_Process: {fileID: 846061668}
 --- !u!114 &1481277913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17584,7 +17578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c115f25170fa1bd4c9f941b4da7a5e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildArray: []
 --- !u!4 &1714097603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 412208, guid: 2bcc13328f8e4a44abdb601fda7419a4,
@@ -25802,6 +25795,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isQuit: 0
+  fireStoneControl: {fileID: 0}
+  eDU_Firestonecontrol: {fileID: 1481277916}
+  bgImages: []
 --- !u!114 &4278742998222896981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25815,6 +25811,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noFoodText: {fileID: 0}
+  K1: {fileID: 0}
+  K2: {fileID: 0}
+  K3: {fileID: 0}
+  eDU_Process: {fileID: 846061668}
 --- !u!114 &4278742998222896982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25828,6 +25828,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawImage: {fileID: 1362365992}
+  K1: {fileID: 0}
+  K2: {fileID: 0}
+  K3: {fileID: 0}
 --- !u!114 &4278742998222896983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29909,6 +29912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c92508c0deaf84eb33bc138f80b887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  username: 
 --- !u!114 &8829297007216517021
 MonoBehaviour:
   m_ObjectHideFlags: 0

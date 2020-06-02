@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Gem : MonoBehaviour
 {
-    int gemA;
-    int gemB;
-    int gemC;
-    int gemD;
+    public int gemA;
+    public int gemB;
+    public int gemC;
+    public int gemD;
     [SerializeField]
     Text gemAtext;
     [SerializeField]
@@ -17,14 +17,27 @@ public class Gem : MonoBehaviour
     Text gemCtext;
     [SerializeField]
     Text gemDtext;
-
+    GameObject curPlayer;
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    string Playername;
 
     private void Start()
     {
+        curPlayer = GameObject.Find("Player(Clone)");
         gemA = 0;
         gemB = 0;
         gemC = 0;
         gemD = 0;
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        gemAtext = GameObject.Find("Canvas/Gems/blockGemA/Gem_A_amount").GetComponent<Text>();
+        gemBtext = GameObject.Find("Canvas/Gems/blockGemB/Gem_B_amount").GetComponent<Text>();
+        gemCtext = GameObject.Find("Canvas/Gems/blockGemC/Gem_C_amount").GetComponent<Text>();
+        gemDtext = GameObject.Find("Canvas/Gems/blockGemD/Gem_D_amount").GetComponent<Text>();
+        Playername = curPlayer.GetComponent<CharacterStatus>().username;
     }
 
     public void changeA(int num)

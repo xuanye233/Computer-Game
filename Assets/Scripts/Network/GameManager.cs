@@ -21,13 +21,25 @@ namespace Com.MyCompany.MyGame
         public GameObject foodPrefab;
         public List<Transform> outsideArray;
         public GameObject blindPrefab;
+        public GameObject birthStonePrefab;
+        public GameObject stumblingPrefab;
+        public GameObject thunderstormPrefab;
+        public GameObject stillPrefab;
+        public GameObject teleportationPrefab;
+        public GameObject jewelThiefPrefab;
+        public GameObject herbsPrefab;
+        public GameObject moonstonePrefab;
         //public GameObject mapPrefab;
         public GameObject gemA;
         public GameObject gemB;
         public GameObject gemC;
         public GameObject gemD;
+
+        public GameObject[] foodPos;
+        public GameObject[] blindPos;
+
         [SerializeField]
-        RawImage blackScreen;
+        public RawImage blackScreen;
 
         #endregion
 
@@ -58,10 +70,20 @@ namespace Com.MyCompany.MyGame
                 if(PhotonNetwork.IsMasterClient)
                 {
                     //PhotonNetwork.Instantiate("food", new Vector3(1f, 6f, -40f), Quaternion.identity, 0);
-                    PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 6f, -52f), Quaternion.identity, 0);
-                    PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 8f, -52f), Quaternion.identity, 0);
-                    PhotonNetwork.Instantiate(this.blindPrefab.name, new Vector3(1f, 8f, -48f), Quaternion.identity, 0);
-                    PhotonNetwork.Instantiate(this.gemA.name, new Vector3(1f, 4f, -48f), Quaternion.identity, 0);
+                    for (int i = 0; i < foodPos.Length; i++)
+                    {
+                        PhotonNetwork.Instantiate(this.foodPrefab.name, foodPos[i].transform.position+ new Vector3(UnityEngine.Random.Range(-5f, 5f), 0, UnityEngine.Random.Range(-5f, 5f)), Quaternion.identity, 0);
+                    }
+                    for (int i = 0; i < blindPos.Length; i++)
+                    {
+                        PhotonNetwork.Instantiate(this.blindPrefab.name, foodPos[i].transform.position + new Vector3(UnityEngine.Random.Range(-5f, 5f), 0, UnityEngine.Random.Range(-5f, 5f)), Quaternion.identity, 0);
+                    }
+                    //PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 6f, -52f), Quaternion.identity, 0);
+                    //PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 8f, -52f), Quaternion.identity, 0);
+                    //PhotonNetwork.Instantiate(this.blindPrefab.name, new Vector3(1f, 8f, -48f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate(this.thunderstormPrefab.name, new Vector3(1f, 4f, -48f), Quaternion.identity, 0);
+                    //PhotonNetwork.Instantiate(this.teleportationPrefab.name, new Vector3(1f, 4f, -48f), Quaternion.identity, 0);
+                    //PhotonNetwork.Instantiate(this.jewelThiefPrefab.name, new Vector3(1f, 4f, -48f), Quaternion.identity, 0);
                     //Debug.Log("ahahahaha");
                 }
                 if (CharacterStatus.LocalPlayerInstance == null)
@@ -94,8 +116,8 @@ namespace Com.MyCompany.MyGame
 
         public void LeaveRoom()
         {
+            Debug.Log("test LeaveRoom");
             PhotonNetwork.LeaveRoom();
-
         }
 
 
@@ -111,8 +133,7 @@ namespace Com.MyCompany.MyGame
                 Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
             }
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            //PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel(1);
+            //PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);//把这句删掉，有玩家退出不用重载场景
         }
 
 
@@ -142,14 +163,15 @@ namespace Com.MyCompany.MyGame
             Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
 
 
-            //if (PhotonNetwork.IsMasterClient)
-            //{
-            //    Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
 
 
-            //    LoadArena();
-            //}
-            LoadArena();
+                LoadArena();
+            }
+            //LoadArena();
+            //改动：本来上面那段if是被注释掉的，保留下面的LoadArena()
         }
 
 

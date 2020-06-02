@@ -6,7 +6,6 @@ TagManager:
   tags:
   - ThunderStorm
   - fallPlane
-  - key
   - fireStone
   - StumblingBlock
   - food
@@ -17,6 +16,17 @@ TagManager:
   - gemB
   - gemC
   - gemD
+  - chest
+  - BirthStone
+  - Stumbling
+  - Thunderstorm
+  - Still
+  - Teleportation
+  - JewelThief
+  - Herbs
+  - Moonstone
+  - Stumbling2
+  - Thunderstorm2
   layers:
   - Default
   - TransparentFX

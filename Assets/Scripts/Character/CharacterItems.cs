@@ -46,6 +46,7 @@ public class CharacterItems : MonoBehaviour
     int stumblingBlock;
     int thunderstormStone;
     int herb;
+    int moonStone;
     int id;
     List<int> key;
 
@@ -69,6 +70,7 @@ public class CharacterItems : MonoBehaviour
         stumblingBlock = 0;
         thunderstormStone = 0;
         herb = 0;
+        moonStone = 0;
         id = GlobalData.characterIndex;
 
         jewelThief = 0;
@@ -96,6 +98,11 @@ public class CharacterItems : MonoBehaviour
     public int getOriginStone()
     {
         return originStone;
+    }
+
+    public int getMoonStone()
+    {
+        return moonStone;
     }
 
     public int getFixPotion()
@@ -231,17 +238,59 @@ public class CharacterItems : MonoBehaviour
     {
         if (isInMenu("originStone", menuControl) != -1)
         {
+            Debug.Log("yopucuo");
             originStone += num;
+            toolMenuControl.updateNum(isInMenu("originStone", menuControl), originStone);
             if (originStone == 0)
             {
+                Debug.Log("originStone=0");
                 deleteMenu("originStone", menuControl);
             }
         }
         else if (menuControl.num < 5)
         {
+            //Debug.Log(menuControl.num);
             menuControl.num++;
+            //Debug.Log(menuControl.num);
             originStone += num;
-            addMenu("originStone", menuControl,num);
+            addMenu("originStone", menuControl, originStone);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.updateNum(isInMenu("originStone", menuControl), originStone);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.addPicture("originStone", isInMenu("originStone", menuControl));
+            //Debug.Log(menuControl.num);
+        }
+        else
+        {
+            //道具已满
+        }
+    }
+
+    public void changeMoonStone(int num)
+    {
+        if (isInMenu("moonStone", menuControl) != -1)
+        {
+            Debug.Log("yopucuo");
+            moonStone += num;
+            toolMenuControl.updateNum(isInMenu("moonStone", menuControl), moonStone);
+            if (moonStone == 0)
+            {
+                Debug.Log("moonStone=0");
+                deleteMenu("moonStone", menuControl);
+            }
+        }
+        else if (menuControl.num < 5)
+        {
+            //Debug.Log(menuControl.num);
+            menuControl.num++;
+            //Debug.Log(menuControl.num);
+            moonStone += num;
+            addMenu("moonStone", menuControl, moonStone);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.updateNum(isInMenu("moonStone", menuControl), moonStone);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.addPicture("moonStone", isInMenu("moonStone", menuControl));
+            //Debug.Log(menuControl.num);
         }
         else
         {
@@ -251,19 +300,29 @@ public class CharacterItems : MonoBehaviour
 
     public void changeStumblingBolack(int num)
     {
-        if (isInMenu("stumblingBolack", menuControl) != -1)
+        if (isInMenu("stumblingBlock", menuControl) != -1)
         {
-            stumblingBolack += num;
-            if (stumblingBolack == 0)
+            Debug.Log("yopucuo");
+            stumblingBlock += num;
+            toolMenuControl.updateNum(isInMenu("stumblingBlock", menuControl), stumblingBlock);
+            if (stumblingBlock == 0)
             {
-                deleteMenu("stumblingBolack", menuControl);
+                Debug.Log("stumblingBlock=0");
+                deleteMenu("stumblingBlock", menuControl);
             }
         }
         else if (menuControl.num < 5)
         {
+            //Debug.Log(menuControl.num);
             menuControl.num++;
-            stumblingBolack += num;
-            addMenu("stumblingBolack", menuControl,num);
+            //Debug.Log(menuControl.num);
+            stumblingBlock += num;
+            addMenu("stumblingBlock", menuControl, stumblingBlock);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.updateNum(isInMenu("stumblingBlock", menuControl), stumblingBlock);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.addPicture("stumblingBlock", isInMenu("stumblingBlock", menuControl));
+            //Debug.Log(menuControl.num);
         }
         else
         {
@@ -275,17 +334,27 @@ public class CharacterItems : MonoBehaviour
     {
         if (isInMenu("fixPotion", menuControl) != -1)
         {
+            Debug.Log("yopucuo");
             fixPotion += num;
+            toolMenuControl.updateNum(isInMenu("fixPotion", menuControl), fixPotion);
             if (fixPotion == 0)
             {
+                Debug.Log("fixPotion=0");
                 deleteMenu("fixPotion", menuControl);
             }
         }
         else if (menuControl.num < 5)
         {
+            //Debug.Log(menuControl.num);
             menuControl.num++;
+            //Debug.Log(menuControl.num);
             fixPotion += num;
-            addMenu("fixPotion", menuControl,num);
+            addMenu("fixPotion", menuControl, fixPotion);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.updateNum(isInMenu("fixPotion", menuControl), fixPotion);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.addPicture("fixPotion", isInMenu("fixPotion", menuControl));
+            //Debug.Log(menuControl.num);
         }
         else
         {
@@ -322,17 +391,27 @@ public class CharacterItems : MonoBehaviour
     {
         if (isInMenu("teleportation", menuControl) != -1)
         {
+            Debug.Log("yopucuo");
             teleportation += num;
+            toolMenuControl.updateNum(isInMenu("teleportation", menuControl), teleportation);
             if (teleportation == 0)
             {
+                Debug.Log("teleportation=0");
                 deleteMenu("teleportation", menuControl);
             }
         }
         else if (menuControl.num < 5)
         {
+            //Debug.Log(menuControl.num);
             menuControl.num++;
+            //Debug.Log(menuControl.num);
             teleportation += num;
-            addMenu("teleportation", menuControl,num);
+            addMenu("teleportation", menuControl, teleportation);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.updateNum(isInMenu("teleportation", menuControl), teleportation);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.addPicture("teleportation", isInMenu("teleportation", menuControl));
+            //Debug.Log(menuControl.num);
         }
         else
         {
@@ -344,17 +423,27 @@ public class CharacterItems : MonoBehaviour
     {
         if (isInMenu("stumblingBlock", menuControl) != -1)
         {
+            Debug.Log("yopucuo");
             stumblingBlock += num;
+            toolMenuControl.updateNum(isInMenu("stumblingBlock", menuControl), stumblingBlock);
             if (stumblingBlock == 0)
             {
+                Debug.Log("stumblingBlock=0");
                 deleteMenu("stumblingBlock", menuControl);
             }
         }
         else if (menuControl.num < 5)
         {
+            //Debug.Log(menuControl.num);
             menuControl.num++;
+            //Debug.Log(menuControl.num);
             stumblingBlock += num;
-            addMenu("stumblingBlock", menuControl,num);
+            addMenu("stumblingBlock", menuControl, stumblingBlock);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.updateNum(isInMenu("stumblingBlock", menuControl), stumblingBlock);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.addPicture("stumblingBlock", isInMenu("stumblingBlock", menuControl));
+            //Debug.Log(menuControl.num);
         }
         else
         {
@@ -366,17 +455,27 @@ public class CharacterItems : MonoBehaviour
     {
         if (isInMenu("thunderstormStone", menuControl) != -1)
         {
+            Debug.Log("yopucuo");
             thunderstormStone += num;
+            toolMenuControl.updateNum(isInMenu("thunderstormStone", menuControl), thunderstormStone);
             if (thunderstormStone == 0)
             {
+                Debug.Log("thunderstormStone=0");
                 deleteMenu("thunderstormStone", menuControl);
             }
         }
         else if (menuControl.num < 5)
         {
+            //Debug.Log(menuControl.num);
             menuControl.num++;
+            //Debug.Log(menuControl.num);
             thunderstormStone += num;
-            addMenu("thunderstormStone", menuControl,num);
+            addMenu("thunderstormStone", menuControl, thunderstormStone);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.updateNum(isInMenu("thunderstormStone", menuControl), thunderstormStone);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.addPicture("thunderstormStone", isInMenu("thunderstormStone", menuControl));
+            //Debug.Log(menuControl.num);
         }
         else
         {
@@ -388,17 +487,27 @@ public class CharacterItems : MonoBehaviour
     {
         if (isInMenu("jewelThief", menuControl) != -1)
         {
+            Debug.Log("yopucuo");
             jewelThief += num;
+            toolMenuControl.updateNum(isInMenu("jewelThief", menuControl), jewelThief);
             if (jewelThief == 0)
             {
+                Debug.Log("jewelThief=0");
                 deleteMenu("jewelThief", menuControl);
             }
         }
         else if (menuControl.num < 5)
         {
+            //Debug.Log(menuControl.num);
             menuControl.num++;
+            //Debug.Log(menuControl.num);
             jewelThief += num;
-            addMenu("jewelThief", menuControl,num);
+            addMenu("jewelThief", menuControl, jewelThief);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.updateNum(isInMenu("jewelThief", menuControl), jewelThief);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.addPicture("jewelThief", isInMenu("jewelThief", menuControl));
+            //Debug.Log(menuControl.num);
         }
         else
         {
@@ -406,44 +515,32 @@ public class CharacterItems : MonoBehaviour
         }
     }
 
-    public void changeJewel(int num)//新增
-    {
-        if (isInMenu("jewel", menuControl) != -1)
-        {
-            jewel += num;
-            if (jewel == 0)
-            {
-                deleteMenu("jewel", menuControl);
-            }
-        }
-        else if (menuControl.num < 5)
-        {
-            menuControl.num++;
-            jewel += num;
-            addMenu("jewel", menuControl,num);
-        }
-        else
-        {
-            //道具已满
-        }
-    }
 
     public void changeHerb(int num)
     {
         if (isInMenu("herb", menuControl) != -1)
         {
+            Debug.Log("yopucuo");
             herb += num;
+            toolMenuControl.updateNum(isInMenu("herb", menuControl), herb);
             if (herb == 0)
             {
+                Debug.Log("herb=0");
                 deleteMenu("herb", menuControl);
             }
-            //toolMenuControl.updateNum()
         }
         else if (menuControl.num < 5)
         {
+            //Debug.Log(menuControl.num);
             menuControl.num++;
+            //Debug.Log(menuControl.num);
             herb += num;
-            addMenu("herb", menuControl, num);
+            addMenu("herb", menuControl, herb);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.updateNum(isInMenu("herb", menuControl), herb);
+            //Debug.Log(menuControl.num);
+            toolMenuControl.addPicture("herb", isInMenu("stumblingBlock", menuControl));
+            //Debug.Log(menuControl.num);
         }
         else
         {
@@ -451,22 +548,6 @@ public class CharacterItems : MonoBehaviour
         }
     }
 
-    public void addKey(int index)
-    {
-        key.Add(index);
-    }
-
-
-    public List<int> getKeys()
-    {
-        return key;
-    }
-
-    public void LostKeys()
-    {
-        //钥匙被偷了
-        key.Clear();
-    }
 
     public int isInMenu(string s , MenuControl menuControl)
     {

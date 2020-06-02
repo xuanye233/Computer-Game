@@ -12,10 +12,12 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
 {
     //[SerializeField] GameObject healthUI; //show the current health
     float health; //Character HP
-    string username;
+    public string username;
     CharacterItems items;
     GameObject mainCamera;
     CapsuleCollider capsuleCol;
+
+    RawImage rawImage;
 
     private int lastSecond;
 
@@ -53,6 +55,7 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         //{
         //    Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
         //}
+        rawImage = GameObject.Find("GameManager").GetComponent<Com.MyCompany.MyGame.GameManager>().blackScreen;
 
         lastSecond = DateTime.Now.Second;
         items = GetComponent<CharacterItems>();
@@ -64,22 +67,33 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    void Update()
+    //void Update()
+    //{
+    //    if (!PhotonView.IsMine && PhotonNetwork.IsConnected)
+    //    {
+    //        return;
+    //    }
+    //    if (health <= 0)
+    //    {
+    //        //GameObject.Find("GameManager").SendMessage("LeaveRoom()");
+    //        GameObject.Find("GameManager").GetComponent<GameManager>().LeaveRoom();
+    //        //GameManager.
+    //    }
+    //}
+
+    void FixedUpdate()
     {
         if (!PhotonView.IsMine && PhotonNetwork.IsConnected)
         {
             return;
         }
-        if (health <= 0)
-        {
-            //GameObject.Find("GameManager").SendMessage("LeaveRoom()");
-            GameObject.Find("GameManager").GetComponent<GameManager>().LeaveRoom();
-            //GameManager.
-        }
-    }
-
-    void FixedUpdate()
-    {
+        //if (health <= 0)
+        //{
+        //    rawImage.gameObject.SetActive(true);
+        //    rawImage.CrossFadeAlpha(1, 0.5f, false);
+        //    StartCoroutine(getBlack(1.0f));//页面变黑
+        //    return;
+        //}//生命值为0时返回主界面
 
         if (DateTime.Now.Second != lastSecond)
         {
@@ -103,84 +117,26 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         {
             StartCoroutine(ChangePosWhileBlack());//黑屏时改变人物和相机的位置
         }
+        if (other.gameObject.CompareTag("Thunderstorm2"))
+        {
+            //Debug.Log("huaweihuawei");
+            PhotonNetwork.Destroy(other.gameObject);
+            PhotonView.RPC("createPlayerCube", RpcTarget.MasterClient);
+        }
+        if (other.gameObject.CompareTag("Stumbling2"))
+        {
+            //Debug.Log("huaweihuawei");
+            health -= 30;
+            PhotonView.RPC("deleteStumblingBlock", RpcTarget.MasterClient, other.gameObject.GetComponent<PhotonView>().ViewID);
+        }
+    }
 
-        //#if false
-        //        if (other.gameObject.CompareTag("Food"))
-        //        {
-        //            //碰到食物后增加一些体力
-        //            /*------------------------*/
-        //            //IncreaseHealth(10f);
-        //            //healthUI.GetComponent<IncreaseHealth>().increaseScore(10);
-        //            Debug.Log("体力增加了");
-        //            other.gameObject.SetActive(false);
-        //        }
-
-
-        //        else if (other.gameObject.CompareTag("Sewage"))
-        //        {
-        //            //碰到污水减少体力
-        //            //------------------------
-        //            //DecreaseHealth(10f)
-        //            //healthUI.GetComponent<DecreaseHealth>().decreaseScore(10);
-        //            Debug.Log("碰到污水体力减少");
-        //        }
-
-        //        else if (other.gameObject.CompareTag("Mice"))
-        //        {
-        //            //碰到鼠群减少体力
-        //            //-------------------------
-        //            //DecreaseHealth(10f)
-        //            //healthUI.GetComponent<DecreaseHealth>().decreaseScore(10);
-        //            Debug.Log("碰到老鼠群体力减少");
-        //        }
-
-        //        else if (other.gameObject.CompareTag("Key"))
-        //        {
-        //            //碰到钥匙后增加钥匙（不是碰到就能捡起来，应该还要加一些交互操作
-        //            //-----------------------------
-        //            int index = -1;
-        //            //index=other的钥匙index值
-        //            items.addKey(index);
-        //            Debug.Log("捡到了钥匙" + index);
-        //        }
-
-        //        else if (other.gameObject.CompareTag("Firestone"))
-        //        {
-        //            //捡到打火石，需要补充交互操作
-        //            //-----------------------------
-        //            items.increaseFirestone(1);
-        //            Debug.Log("捡到一个打火石");
-        //        }
-
-        //        else if (other.gameObject.CompareTag("Player"))
-        //        {
-        //            //偷钥匙？？
-        //            //加一些玩家交互操作---------------------------------
-        //            //-----------------------------
-        //            //偷钥匙成功
-        //            List<int> oppKeys = other.GetComponent<CharacterItems>().getKeys();
-        //            for (int i = 0; i < oppKeys.Count; i++)
-        //            {
-        //                items.addKey(oppKeys[i]);
-        //            }
-
-        //        }
-
-        //        else if (other.gameObject.CompareTag("Door"))
-        //        {
-        //            //开门
-        //            int index = 0;
-        //            //index = 门的index
-        //            if (items.getKeys().Contains(index))
-        //            {
-        //                Debug.Log("开门成功");
-        //            }
-        //            else
-        //            {
-        //                Debug.Log("你没有符合条件的钥匙");
-        //            }
-        //        }
-        //#endif
+    IEnumerator getBlack(float waitTime) //新增，页面渐变成黑色
+    {
+        Debug.Log("???");
+        yield return new WaitForSeconds(waitTime);
+        //rawImage.gameObject.SetActive(false);
+        GameObject.Find("GameManager").GetComponent<Com.MyCompany.MyGame.GameManager>().LeaveRoom();
     }
 
     IEnumerator ChangePosWhileBlack()
@@ -292,6 +248,27 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
     public void StumblingBlockSound(int viewID)
     {
         PhotonView.Find(viewID).GetComponent<ToolSound>().Hurt();
+    }
+
+    [PunRPC]
+    public void createPlayerCube()
+    {
+        StartCoroutine(Wait());
+    }
+
+    public IEnumerator Wait() //fade function
+    {
+        GameObject obj;
+        obj = PhotonNetwork.Instantiate("PlayerCube", GameObject.Find("MapCamera/PlayerCube").transform.position, Quaternion.identity, 0);
+        yield return new WaitForSeconds(5);
+        PhotonNetwork.Destroy(obj);
+        Debug.Log("qwer");
+    }
+
+    [PunRPC]
+    public void deleteStumblingBlock(int ViewID)
+    {
+        PhotonNetwork.Destroy(PhotonView.Find(ViewID));
     }
 
     #region IPunObservable implementation

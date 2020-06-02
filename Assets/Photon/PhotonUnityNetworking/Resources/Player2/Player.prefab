@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 3809891405130543961}
   - component: {fileID: 4014062601142349336}
   - component: {fileID: 1564837748760337016}
+  - component: {fileID: 3473090239934133584}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -143,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c92508c0deaf84eb33bc138f80b887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  username: 
 --- !u!114 &2186086156093434046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +247,9 @@ MonoBehaviour:
   preFabCube: {fileID: 0}
   cam: {fileID: 0}
   equipNum: 0
+  K1: {fileID: 0}
+  K2: {fileID: 0}
+  K3: {fileID: 0}
 --- !u!82 &8405210508849202018
 AudioSource:
   m_ObjectHideFlags: 0
@@ -586,6 +591,29 @@ MonoBehaviour:
   sound3: {fileID: 0}
   jump: {fileID: 0}
   walk: {fileID: 0}
+--- !u!114 &3473090239934133584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186086156093434037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74721a0643227784ab82d7f0fb2a46f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gemA: 0
+  gemB: 0
+  gemC: 0
+  gemD: 0
+  gemAtext: {fileID: 0}
+  gemBtext: {fileID: 0}
+  gemCtext: {fileID: 0}
+  gemDtext: {fileID: 0}
+  K1: {fileID: 0}
+  K2: {fileID: 0}
+  K3: {fileID: 0}
 --- !u!1 &2249958487205708989
 GameObject:
   m_ObjectHideFlags: 0

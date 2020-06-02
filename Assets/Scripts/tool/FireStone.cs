@@ -13,6 +13,11 @@ public class FireStone : MonoBehaviourPunCallbacks
     GameObject player;
     public bool isClicked;
     GameObject torch;
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    string Playername;
+    //public Text SliderText;
     //[SerializeField]
     //Text noFireStoneText;
     //[SerializeField]
@@ -20,6 +25,8 @@ public class FireStone : MonoBehaviourPunCallbacks
     //[SerializeField]
     //GameObject bagPanel;
     ToolSound toolSound;
+    [SerializeField]
+    ToolMenuControl toolMenuControl;
     private void Start()
     {
         player = GameObject.Find("Player(Clone)");
@@ -30,6 +37,11 @@ public class FireStone : MonoBehaviourPunCallbacks
         //torch = GameObject.Find("Outside/SM_Prop_TorchStick_06/FX_Fire_01");
         //torch.GetComponent<ParticleSystem>().Stop();
         toolSound = player.GetComponent<ToolSound>();
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        Playername = player.GetComponent<CharacterStatus>().username;
+        //SliderText = GameObject.Find("Canvas/slider/SliderImage/SliderText").GetComponent<Text>();
     }
 
     private void Update()
@@ -63,7 +75,7 @@ public class FireStone : MonoBehaviourPunCallbacks
             Debug.Log(hit.transform.gameObject.name);
             Debug.Log(hit.transform.GetChild(0));
             Debug.Log(hit.transform.GetChild(1));
-            if (hit.transform.CompareTag("Torch") && hit.transform.GetChild(0).GetComponent<Light>().range == 0)
+            if (hit.transform.GetChild(0) && hit.transform.GetChild(1))
             {
                 Debug.Log("???");
                 if (hit.transform.GetChild(0).GetComponent<Light>())
@@ -74,10 +86,12 @@ public class FireStone : MonoBehaviourPunCallbacks
                     //PhotonView.RPC("hello", RpcTarget.All);
                     toolSound.FireStone(player.GetComponent<PhotonView>().ViewID);
                     PhotonView.RPC("lightUP", RpcTarget.All, hit.transform.GetChild(0).GetComponent<PhotonView>().ViewID, hit.transform.GetChild(1).GetComponent<PhotonView>().ViewID);
+                    PhotonView.RPC("showFireStoneTips", RpcTarget.All, Playername);
                     //Debug.Log(hit.transform.GetChild(0).name);
                     isClicked = false;
                     fireStoneTransform.localScale = new Vector3(1f, 1f, 1f);
                     characterItems.changeFireStone(-1);
+                    toolMenuControl.transparent();
                 }
             }
         }
@@ -92,7 +106,7 @@ public class FireStone : MonoBehaviourPunCallbacks
     [PunRPC]
     public void lightUP(int viewID_1, int viewID_2)
     {
-        PhotonView.Find(viewID_1).GetComponent<Light>().range = 7;
+        PhotonView.Find(viewID_1).GetComponent<Light>().range = 40;
         Debug.Log("111" + PhotonView.Find(viewID_2).name);
         PhotonView.Find(viewID_2).GetComponent<ParticleSystem>().Play();
         //Debug.Log(tag);
@@ -115,6 +129,28 @@ public class FireStone : MonoBehaviourPunCallbacks
         //noFireStoneText.CrossFadeAlpha(1, 1f, false);
         yield return new WaitForSeconds(1);
         //noFireStoneText.CrossFadeAlpha(0, 1f, false);
+    }
+    [PunRPC]
+    public void showFireStoneTips(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>打火石</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>打火石</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>打火石</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>打火石</color> ";
+        }
     }
 }
 

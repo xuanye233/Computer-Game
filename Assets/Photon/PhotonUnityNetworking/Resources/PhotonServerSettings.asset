@@ -79,5 +79,17 @@ MonoBehaviour:
   - TeleportRpc
   - StumblingBlockSound
   - ThunderStormSound
+  - showBlindTips
+  - showFireStoneTips
+  - showFixTips
+  - showFoodTips
+  - showHealTips
+  - showJewelTips
+  - showOriginTips
+  - showTeleTips
+  - showThunderTips
+  - showTrapTips
+  - chestopen
+  - createPlayerCube
   DisableAutoOpenWizard: 1
   ShowSettings: 1

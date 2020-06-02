@@ -24,7 +24,13 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
     GameObject bagButton;
     [SerializeField]
     GameObject bagPanel;
-
+    [SerializeField]
+    ToolMenuControl toolMenuControl;
+    //public Text SliderText;
+    public Text K1;
+    public Text K2;
+    public Text K3;
+    string Playername;
     void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
@@ -34,11 +40,16 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
         //noTrapText = GameObject.Find("Canvas/TipsList/NoTrapText").GetComponent<Text>();
         isTrapClick = false;
         noTrapText.gameObject.SetActive(false);
+        K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
+        K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
+        K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        Playername = curPlayer.GetComponent<CharacterStatus>().username;
+        //SliderText = GameObject.Find("Canvas/slider/SliderImage/SliderText").GetComponent<Text>();
     }
 
     void Update()
     {
-        noTrapText.gameObject.SetActive(false);
+        //noTrapText.gameObject.SetActive(false);
         if (isTrapClick && Input.GetMouseButtonDown(0) && characterItems.getStumblingBlock() > 0)
         {
             trapEvent();
@@ -47,6 +58,7 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
 
     public void onClicked()
     {
+        //Debug.Log("ssssssss");
         if (characterItems.getStumblingBlock() == 0)
         {
             showNoTrap();
@@ -55,9 +67,6 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
         else
         {
             isTrapClick = true;
-            trapTransform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
-            bagButton.SetActive(true);
-            bagPanel.SetActive(false);
         }
     }
 
@@ -102,6 +111,7 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
             //GameObject newTrap = (GameObject)GameObject.Instantiate(Resources.Load("SM_Prop_Bricks_04"));
             //create the object in the scene
             //newTrap.transform.position = hit.point;
+            //PhotonView.RPC("showTrapTips", RpcTarget.All, Playername);
             PhotonView.RPC("createStumblingBlock", RpcTarget.MasterClient, hit.point);
             isTrapClick = false;
             //reset the flag
@@ -109,21 +119,45 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
             //Debug.DrawRay(hit.point, hit.normal, Color.green);
 
             //update the num of the traps
-            trapTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-            characterItems.changeTrap(-1);
+            //trapTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            characterItems.changeStumblingBlock(-1);
+            toolMenuControl.transparent();
+            isTrapClick = false;
         }
     }
 
     [PunRPC]
     public void createStumblingBlock(Vector3 position)
     {
-        PhotonNetwork.Instantiate("Tool_Stumbling_Block", position, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Stumbling2", position, Quaternion.identity, 0);
     }
 
+    [PunRPC]
+    public void showTrapTips(string name)
+    {
+        if (K1.text == "")
+        {
+            K1.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>绊脚石</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>绊脚石</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>绊脚石</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i>" + name + "</i> 放置了 <color=#73ccd5ff>绊脚石</color> ";
+        }
+    }
 
     //[PunRPC]
     //public void deleteStumblingBlock(int ViewID)
     //{
-        
+
     //}
 }
