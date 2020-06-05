@@ -13,6 +13,8 @@ public class EDU_fireStone : MonoBehaviour
     GameObject player;
     public bool isClicked;
     GameObject torch;
+    [SerializeField]
+    ToolMenuControl toolMenuControl;
     //[SerializeField]
     //Text noFireStoneText;
     //[SerializeField]
@@ -81,6 +83,7 @@ public class EDU_fireStone : MonoBehaviour
                     fireStoneTransform.localScale = new Vector3(1f, 1f, 1f);
                     characterItems.changeFireStone(-1);
                     eDU_Process.clickTorchEvent();
+                    toolMenuControl.transparent();
                 }
             }
         }

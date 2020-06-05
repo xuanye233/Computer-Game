@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
 
-public class NameSetButton : MonoBehaviour
+public class NameSetButton : MonoBehaviourPunCallbacks
 {
     public InputField inputField;
     Button setNameButton;
@@ -32,6 +33,7 @@ public class NameSetButton : MonoBehaviour
     public void NameClick()
     {
         GlobalData.playerName = inputField.text;
+        PhotonNetwork.NickName = GlobalData.playerName;
         playerNameobj.SetActive(false);
         roomNameobj.SetActive(true);
     }

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 
 namespace Com.MyCompany.MyGame
@@ -8,6 +11,9 @@ namespace Com.MyCompany.MyGame
     public class LauncherTest : MonoBehaviourPunCallbacks
     {
         public GameObject foodPrefab;
+        public GameObject loadScreen;
+        public Slider slider;
+        public Text text;
         #region Private Serializable Fields
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
@@ -189,10 +195,29 @@ namespace Com.MyCompany.MyGame
                 Debug.Log("room name is " + PhotonNetwork.CurrentRoom.Name);
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel(2);
+                //PhotonNetwork.LoadLevel(2);
                 //PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 20f, -40f), Quaternion.identity, 0);
+                StartCoroutine(Loadlevel());
             }
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+        }
+
+        IEnumerator Loadlevel()
+        {
+            loadScreen.SetActive(true);
+            AsyncOperation operation = SceneManager.LoadSceneAsync(2);
+            operation.allowSceneActivation = false;
+            while (!operation.isDone)
+            {
+                slider.value = operation.progress;
+                if (operation.progress >= 0.9f)
+                {
+                    slider.value = 1;
+                    text.text = "Ready!";
+                    operation.allowSceneActivation = true;
+                }
+                yield return null;
+            }
         }
 
         public void enterEdu()

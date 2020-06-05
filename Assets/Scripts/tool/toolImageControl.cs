@@ -105,6 +105,7 @@ public class toolImageControl : MonoBehaviour
         //{
         //    moonStone.onClicked();
         //}
+        toolMenuControl.transparent();
     } 
 
     private void quitTool()

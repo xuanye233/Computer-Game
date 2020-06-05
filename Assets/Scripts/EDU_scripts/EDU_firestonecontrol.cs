@@ -30,6 +30,8 @@ public class EDU_firestonecontrol : MonoBehaviour
 
     public void onClick()
     {
+        Sprite loadImage = Resources.Load("Picture/Tool_selected", typeof(Sprite)) as Sprite;
+        toolMenuControl.bgImages[0].sprite = loadImage;
         Debug.Log("anle");
         fireStone.onClicked();
         eDU_Process.fireStoneEvent();

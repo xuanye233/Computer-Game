@@ -30,7 +30,17 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (PhotonView.IsMine)
         {
-            PlayerManager.LocalPlayerInstance = this.gameObject;           
+            UILabel lbl = this.gameObject.transform.Find("NamePanel").GetComponentInChildren<UILabel>();
+            lbl.text = PhotonNetwork.NickName;
+            Debug.Log("lbl.text=" + lbl.text);
+            PlayerManager.LocalPlayerInstance = this.gameObject;          
+        }
+        else
+        {
+            UILabel lbl = this.gameObject.transform.Find("NamePanel").GetComponentInChildren<UILabel>();
+            lbl.text = PhotonView.Owner.NickName;
+            Debug.Log("lbl.text=" + lbl.text);
+            PlayerManager.LocalPlayerInstance = this.gameObject;
         }
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
@@ -67,33 +77,19 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    //void Update()
-    //{
-    //    if (!PhotonView.IsMine && PhotonNetwork.IsConnected)
-    //    {
-    //        return;
-    //    }
-    //    if (health <= 0)
-    //    {
-    //        //GameObject.Find("GameManager").SendMessage("LeaveRoom()");
-    //        GameObject.Find("GameManager").GetComponent<GameManager>().LeaveRoom();
-    //        //GameManager.
-    //    }
-    //}
-
     void FixedUpdate()
     {
         if (!PhotonView.IsMine && PhotonNetwork.IsConnected)
         {
             return;
         }
-        //if (health <= 0)
-        //{
-        //    rawImage.gameObject.SetActive(true);
-        //    rawImage.CrossFadeAlpha(1, 0.5f, false);
-        //    StartCoroutine(getBlack(1.0f));//页面变黑
-        //    return;
-        //}//生命值为0时返回主界面
+        if (health <= 0 /*&& aliveFlag==true*/)
+        {
+            rawImage.gameObject.SetActive(true);
+            rawImage.CrossFadeAlpha(1, 0.5f, false);
+            StartCoroutine(getBlack(1.0f));//页面变黑
+            return;
+        }
 
         if (DateTime.Now.Second != lastSecond)
         {
@@ -251,6 +247,12 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
+    public void deleteStumblingBlock(int ViewID)
+    {
+        PhotonNetwork.Destroy(PhotonView.Find(ViewID));
+    }
+
+    [PunRPC]
     public void createPlayerCube()
     {
         StartCoroutine(Wait());
@@ -263,12 +265,6 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         yield return new WaitForSeconds(5);
         PhotonNetwork.Destroy(obj);
         Debug.Log("qwer");
-    }
-
-    [PunRPC]
-    public void deleteStumblingBlock(int ViewID)
-    {
-        PhotonNetwork.Destroy(PhotonView.Find(ViewID));
     }
 
     #region IPunObservable implementation

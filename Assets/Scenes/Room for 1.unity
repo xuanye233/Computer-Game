@@ -1671,6 +1671,13 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
+  originStone: {fileID: 0}
+  stumblingBlock: {fileID: 0}
+  fixPotion: {fileID: 0}
+  thunderstormStone: {fileID: 0}
+  teleportation: {fileID: 0}
+  jewelThief: {fileID: 0}
+  herbs: {fileID: 0}
 --- !u!114 &197899827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2100,6 +2107,13 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
+  originStone: {fileID: 0}
+  stumblingBlock: {fileID: 0}
+  fixPotion: {fileID: 0}
+  thunderstormStone: {fileID: 0}
+  teleportation: {fileID: 0}
+  jewelThief: {fileID: 0}
+  herbs: {fileID: 0}
 --- !u!114 &241123494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7821,6 +7835,13 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
+  originStone: {fileID: 0}
+  stumblingBlock: {fileID: 0}
+  fixPotion: {fileID: 0}
+  thunderstormStone: {fileID: 0}
+  teleportation: {fileID: 0}
+  jewelThief: {fileID: 0}
+  herbs: {fileID: 0}
 --- !u!114 &791919413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9012,6 +9033,13 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
+  originStone: {fileID: 0}
+  stumblingBlock: {fileID: 0}
+  fixPotion: {fileID: 0}
+  thunderstormStone: {fileID: 0}
+  teleportation: {fileID: 0}
+  jewelThief: {fileID: 0}
+  herbs: {fileID: 0}
 --- !u!114 &899531210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11318,6 +11346,13 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 4278742998222896982}
+  originStone: {fileID: 0}
+  stumblingBlock: {fileID: 0}
+  fixPotion: {fileID: 0}
+  thunderstormStone: {fileID: 0}
+  teleportation: {fileID: 0}
+  jewelThief: {fileID: 0}
+  herbs: {fileID: 0}
 --- !u!114 &1075761352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15781,6 +15816,13 @@ MonoBehaviour:
   name: 
   fireStone: {fileID: 0}
   blindDrug: {fileID: 0}
+  originStone: {fileID: 0}
+  stumblingBlock: {fileID: 0}
+  fixPotion: {fileID: 0}
+  thunderstormStone: {fileID: 0}
+  teleportation: {fileID: 0}
+  jewelThief: {fileID: 0}
+  herbs: {fileID: 0}
 --- !u!114 &1481277913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25868,6 +25910,7 @@ MonoBehaviour:
   eDU_Process: {fileID: 846061668}
   fireStoneTransform: {fileID: 1481277911}
   isClicked: 0
+  toolMenuControl: {fileID: 4278742998222896980}
 --- !u!1 &4278742998248942968
 GameObject:
   m_ObjectHideFlags: 0
