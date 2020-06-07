@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45eded282df42b8408a256ce2a6d6edb, type: 3}
+  m_Name: teleportAc
+  m_EditorClassIdentifier: 
+  id: 9
+  header: "\u79FB\u5F62\u6362\u5F71"
+  statement: 
+  icon_lock: {fileID: 21300000, guid: 967f3640626a02b4193bc526cd202f39, type: 3}
+  icon_unlock: {fileID: 21300000, guid: a874768336cb9c2428a2e597ef2ce475, type: 3}
+  isUnlocked: 0
+  progress: 0

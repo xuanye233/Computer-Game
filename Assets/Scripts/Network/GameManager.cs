@@ -35,12 +35,17 @@ namespace Com.MyCompany.MyGame
         public GameObject gemC;
         public GameObject gemD;
 
+        public GameObject Chest_gemA;
+        public GameObject Chest_gemB;
+        public GameObject Chest_gemC;
+        public GameObject Chest_gemD;
+
         public GameObject[] foodPos;
         public GameObject[] blindPos;
 
         [SerializeField]
         public RawImage blackScreen;
-
+        public CharacterItems characterItems;
         #endregion
 
         #region Photon Callbacks
@@ -82,6 +87,7 @@ namespace Com.MyCompany.MyGame
                     //PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 8f, -52f), Quaternion.identity, 0);
                     //PhotonNetwork.Instantiate(this.blindPrefab.name, new Vector3(1f, 8f, -48f), Quaternion.identity, 0);
                     PhotonNetwork.Instantiate(this.thunderstormPrefab.name, new Vector3(1f, 4f, -48f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate(this.Chest_gemD.name, new Vector3(-6.511127f, -0.1917197f, -54.88586f), Quaternion.identity, 0);
                     //PhotonNetwork.Instantiate(this.teleportationPrefab.name, new Vector3(1f, 4f, -48f), Quaternion.identity, 0);
                     //PhotonNetwork.Instantiate(this.jewelThiefPrefab.name, new Vector3(1f, 4f, -48f), Quaternion.identity, 0);
                     //Debug.Log("ahahahaha");
@@ -92,6 +98,13 @@ namespace Com.MyCompany.MyGame
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     int characterNum = GlobalData.characterIndex;
                     PhotonNetwork.Instantiate("Player" + characterNum + "/" + this.playerPrefab.name, new Vector3(0f, 5f, -52f), Quaternion.identity, 0);
+                    //characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
+                    //if (characterNum == 4)
+                    //{
+                    //    //如果是骷髅塞拉斯
+                    //    characterItems.changeJewelThief(3);
+                    //    Debug.Log("hello123");
+                    //}
                     //PhotonNetwork.Instantiate(this.foodPrefab.name, new Vector3(1f, 20f, -40f), Quaternion.identity, 0);
                     //PhotonNetwork.Instantiate(this.mapPrefab.name, new Vector3(0f, 10f, -45f), Quaternion.identity, 0);
                     Debug.Log("chuangjian");

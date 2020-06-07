@@ -91,5 +91,6 @@ MonoBehaviour:
   - showTrapTips
   - chestopen
   - createPlayerCube
+  - pickGem
   DisableAutoOpenWizard: 1
   ShowSettings: 1

@@ -38,6 +38,13 @@ public class Gem : MonoBehaviour
         gemCtext = GameObject.Find("Canvas/Gems/blockGemC/Gem_C_amount").GetComponent<Text>();
         gemDtext = GameObject.Find("Canvas/Gems/blockGemD/Gem_D_amount").GetComponent<Text>();
         Playername = curPlayer.GetComponent<CharacterStatus>().username;
+        
+    }
+
+    private void Update()
+    {
+        Debug.Log("hahaha");
+        Debug.Log(gameObject.name);
     }
 
     public void changeA(int num)

@@ -17,6 +17,11 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     public Text K2;
     public Text K3;
     string Playername;
+    GameObject k1;
+    GameObject k2;
+    GameObject k3;
+    Killfeed killfeed;
+    GameObject achieve;
     //public Text SliderText;
     private void Start()
     {
@@ -33,6 +38,11 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
         K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
         Playername = curPlayer.GetComponent<CharacterStatus>().username;
+        k1 = GameObject.Find("Canvas/Killfeed/K1");
+        k2 = GameObject.Find("Canvas/Killfeed/K2");
+        k3 = GameObject.Find("Canvas/Killfeed/K3");
+        killfeed = GameObject.Find("Canvas").GetComponent<Killfeed>();
+        achieve = GameObject.Find("AchievementManager");
         //SliderText = GameObject.Find("Canvas/slider/SliderImage/SliderText").GetComponent<Text>();
     }
 
@@ -54,8 +64,10 @@ public class BlindDrug : MonoBehaviourPunCallbacks
         players = GameObject.FindGameObjectsWithTag("Player");
 
         toolSound.Blind(curPlayer.GetComponent<PhotonView>().ViewID);
-
         toolSound.Blinded();
+
+        achieve.GetComponent<SimpleAchievements.Main.AchievementsControl>().AddProgressAchievementByID(0, 1);
+
         for (int i = 1; i < players.Length; i++)
         {
             PhotonView.RPC("useBlindDrug", RpcTarget.All, players[i].GetComponent<PhotonView>().ViewID);
@@ -111,6 +123,18 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     [PunRPC]
     public void showBlindTips(string name)
     {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
         if (K1.text == "")
         {
             K1.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>失明药水</color> ";
@@ -129,5 +153,6 @@ public class BlindDrug : MonoBehaviourPunCallbacks
             K2.text = K3.text;
             K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>失明药水</color> ";
         }
+        killfeed.textcount++;
     }
 }

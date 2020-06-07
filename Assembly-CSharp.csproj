@@ -63,6 +63,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Achievements\Scripts\Main\AchievementsControl.cs" />
+    <Compile Include="Assets\Achievements\Scripts\Main\AchievementsList.cs" />
+    <Compile Include="Assets\Achievements\Scripts\Main\ScriptableObject\Achievement.cs" />
+    <Compile Include="Assets\Achievements\Scripts\Main\ScriptableObject\ProgressAchievement.cs" />
+    <Compile Include="Assets\Achievements\Scripts\Other\AchievementElement.cs" />
+    <Compile Include="Assets\Achievements\Scripts\Other\AchievementsObserver.cs" />
+    <Compile Include="Assets\Achievements\Scripts\Other\ProgressAchievementHandle.cs" />
     <Compile Include="Assets\Effects\Scripts\Lighting.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />

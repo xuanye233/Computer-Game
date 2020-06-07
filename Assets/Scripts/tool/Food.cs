@@ -19,6 +19,11 @@ public class Food : MonoBehaviourPunCallbacks
     public Text K2;
     public Text K3;
     public EDU_process eDU_Process;
+    GameObject k1;
+    GameObject k2;
+    GameObject k3;
+    Killfeed killfeed;
+    GameObject achieve;
     //public Text SliderText;
     private void Start()
     {
@@ -33,6 +38,11 @@ public class Food : MonoBehaviourPunCallbacks
         K1 = GameObject.Find("Canvas/Killfeed/K1/Text").GetComponent<Text>();
         K2 = GameObject.Find("Canvas/Killfeed/K2/Text").GetComponent<Text>();
         K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
+        k1 = GameObject.Find("Canvas/Killfeed/K1");
+        k2 = GameObject.Find("Canvas/Killfeed/K2");
+        k3 = GameObject.Find("Canvas/Killfeed/K3");
+        achieve = GameObject.Find("AchievementManager");
+        killfeed = GameObject.Find("Canvas").GetComponent<Killfeed>();
         //toolInteraction = GameObject.Find("Canvas/ToolList").GetComponent<ToolInteraction>();
         //noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
         //noFoodText.gameObject.SetActive(false);
@@ -87,6 +97,7 @@ public class Food : MonoBehaviourPunCallbacks
             else
             {
                 toolSound.Eat(curPlayer.GetComponent<PhotonView>().ViewID);
+                achieve.GetComponent<SimpleAchievements.Main.AchievementsControl>().AddProgressAchievementByID(7, 1);
                 PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
                 PhotonView.RPC("showFoodTips", RpcTarget.All, Playername);
             }
@@ -111,6 +122,18 @@ public class Food : MonoBehaviourPunCallbacks
     [PunRPC]
     public void showFoodTips(string name)
     {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
         if (K1.text == "")
         {
             K1.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>魔法鸡腿</color> ";
@@ -129,6 +152,7 @@ public class Food : MonoBehaviourPunCallbacks
             K2.text = K3.text;
             K3.text = "<i>" + name + "</i> 使用了 <color=#73ccd5ff>魔法鸡腿</color> ";
         }
+        killfeed.textcount++;
     }
 }
 

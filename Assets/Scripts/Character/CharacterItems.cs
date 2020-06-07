@@ -89,6 +89,12 @@ public class CharacterItems : MonoBehaviour
         //}
         //changeFood(10);
         //changeBlindDrug(5);
+
+        if(GlobalData.characterIndex == 4)
+        {
+            changeJewelThief(3);
+            Debug.Log("wohaole");
+        }
     }
     public int getID()
     {

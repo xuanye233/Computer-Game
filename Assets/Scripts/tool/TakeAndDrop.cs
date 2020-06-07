@@ -17,10 +17,13 @@ public class TakeAndDrop : MonoBehaviourPun
     public Text K1;
     public Text K2;
     public Text K3;
-    string Playername;
+    public string Playername;
     ToolSound toolSound;
     private GameObject curPlayer;
-
+    GameObject k1;
+    GameObject k2;
+    GameObject k3;
+    Killfeed killfeed;
     Gem gem;
 
     void Start()
@@ -40,6 +43,10 @@ public class TakeAndDrop : MonoBehaviourPun
         K3 = GameObject.Find("Canvas/Killfeed/K3/Text").GetComponent<Text>();
         Playername = curPlayer.GetComponent<CharacterStatus>().username;
         gem = GameObject.Find("Canvas/Gems").GetComponent<Gem>();
+        k1 = GameObject.Find("Canvas/Killfeed/K1");
+        k2 = GameObject.Find("Canvas/Killfeed/K2");
+        k3 = GameObject.Find("Canvas/Killfeed/K3");
+        killfeed = GameObject.Find("Canvas").GetComponent<Killfeed>();
     }
     void Update()
     {
@@ -103,50 +110,62 @@ public class TakeAndDrop : MonoBehaviourPun
                     else if (PhotonView.IsMine && itemTag == "gemA")
                     {
                         gem.changeA(1);
+                        showTakeGemA(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "gemB")
                     {
                         gem.changeB(1);
+                        showTakeGemB(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "gemC")
                     {
                         gem.changeC(1);
+                        showTakeGemC(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "gemD")
                     {
                         gem.changeD(1);
+                        showTakeGemD(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "BirthStone")
                     {
                         characterItems.changeOriginStone(1);
+                        showTakeBirthStone(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "Stumbling")
                     {
                         characterItems.changeStumblingBolack(1);
+                        showTakeStumbling(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "Thunderstorm")
                     {
                         characterItems.changeThunderstormStone(1);
+                        showTakeThunderstorm(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "Still")
                     {
                         characterItems.changeFixPotion(1);
+                        showTakeStill(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "Teleportation")
                     {
                         characterItems.changeThunderstormStone(1);
+                        showTakeTeleportation(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "JewelThief")
                     {
                         characterItems.changeJewelThief(1);
+                        showTakeJewelThief(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "Herbs")
                     {
                         characterItems.changeHerb(1);
+                        showTakeHerbs(Playername);
                     }
                     else if (PhotonView.IsMine && itemTag == "Moonstone")
                     {
                         characterItems.changeMoonStone(1);
+                        showTakeMoonstone(Playername);
                     }
 
                     //Debug.Log("hit");
@@ -195,6 +214,18 @@ public class TakeAndDrop : MonoBehaviourPun
 
     public void showTakeFood(string name)
     {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
         if (K1.text == "")
         {
             K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>魔法鸡腿</color> ";
@@ -213,10 +244,23 @@ public class TakeAndDrop : MonoBehaviourPun
             K2.text = K3.text;
             K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>魔法鸡腿</color> ";
         }
+        killfeed.textcount++;
     }
 
     public void showTakeBlindDrug(string name)
     {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
         if (K1.text == "")
         {
             K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>失明药水</color> ";
@@ -235,10 +279,23 @@ public class TakeAndDrop : MonoBehaviourPun
             K2.text = K3.text;
             K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>失明药水</color> ";
         }
+        killfeed.textcount++;
     }
 
     public void showTakeKey(string name)
     {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
         if (K1.text == "")
         {
             K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>钥匙</color> ";
@@ -257,10 +314,23 @@ public class TakeAndDrop : MonoBehaviourPun
             K2.text = K3.text;
             K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>钥匙</color> ";
         }
+        killfeed.textcount++;
     }
 
     public void showTakeFireStone(string name)
     {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
         if (K1.text == "")
         {
             K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>打火石</color> ";
@@ -279,5 +349,415 @@ public class TakeAndDrop : MonoBehaviourPun
             K2.text = K3.text;
             K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>打火石</color> ";
         }
+        killfeed.textcount++;
+    }
+    public void showTakeGemA(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石A</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石A</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石A</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石A</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeGemB(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石B</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石B</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石B</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石B</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeGemC(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石C</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石C</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石C</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石C</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeGemD(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石D</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石D</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石D</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石D</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeBirthStone(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>起源之石</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>起源之石</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>起源之石</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>起源之石</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeStumbling(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>绊脚石</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>绊脚石</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>绊脚石</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>绊脚石</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeThunderstorm(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>雷暴石</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>雷暴石</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>雷暴石</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>雷暴石</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeStill(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>定位药水</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>定位药水</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>定位药水</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>定位药水</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeTeleportation(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>移形换位</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>移形换位</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>移形换位</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>移形换位</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeJewelThief(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石大盗</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石大盗</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石大盗</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>宝石大盗</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeHerbs(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>神秘草药</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>神秘草药</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>神秘草药</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>神秘草药</color> ";
+        }
+        killfeed.textcount++;
+    }
+    public void showTakeMoonstone(string name)
+    {
+        if (killfeed.textcount == 0)
+        {
+            k1.SetActive(true);
+        }
+        else if (killfeed.textcount == 1)
+        {
+            k2.SetActive(true);
+        }
+        else if (killfeed.textcount == 2)
+        {
+            k3.SetActive(true);
+        }
+        if (K1.text == "")
+        {
+            K1.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>月亮石</color> ";
+        }
+        else if (K2.text == "")
+        {
+            K2.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>月亮石</color> ";
+        }
+        else if (K3.text == "")
+        {
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>月亮石</color> ";
+        }
+        else
+        {
+            K1.text = K2.text;
+            K2.text = K3.text;
+            K3.text = "<i> 你 </i> 拾取了 <color=#e43b72ff>月亮石</color> ";
+        }
+        killfeed.textcount++;
     }
 }
+

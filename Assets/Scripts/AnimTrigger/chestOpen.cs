@@ -6,10 +6,18 @@ using Photon.Pun;
 public class chestOpen : MonoBehaviourPunCallbacks
 {
     private Animation animation;  //动画播放控制
+    bool isOpen;
+    bool isPick;
+    Gem gem;
+    TakeAndDrop takeAndDrop;
 
     void Start()
     {
         animation = gameObject.GetComponent<Animation>();
+        isOpen = false;
+        isPick = false;
+        gem = GameObject.Find("Canvas/Gems").GetComponent<Gem>();
+        takeAndDrop = GameObject.Find("Player(Clone)").GetComponent<TakeAndDrop>();
     }
 
     //void Update()
@@ -25,7 +33,23 @@ public class chestOpen : MonoBehaviourPunCallbacks
     public void chestOpenEvent()
     {
         //需要添加选择打开方式界面
-        PhotonView.RPC("chestopen", RpcTarget.All);
+        if (isPick)
+        {
+            return;
+        }
+        else if (isOpen)
+        {
+            //拿宝石
+            PhotonView.RPC("pickGem", RpcTarget.MasterClient);
+            isPick = true;
+            return;
+        }
+        else
+        {
+            PhotonView.RPC("chestopen", RpcTarget.All);
+            isOpen = true;
+        }
+
     }
 
     [PunRPC]
@@ -33,5 +57,32 @@ public class chestOpen : MonoBehaviourPunCallbacks
     {
         animation.Play("Chest_Open");
         Debug.Log("Chest opened");
+    }
+
+    [PunRPC]
+    public void pickGem()
+    {
+        GameObject obj = gameObject.transform.parent.gameObject.transform.GetChild(0).gameObject;
+        if (obj.tag == "gemA")
+        {
+            gem.changeA(1);
+            takeAndDrop.showTakeGemA(takeAndDrop.Playername);
+        }
+        else if (obj.tag == "gemB")
+        {
+            gem.changeB(1);
+            takeAndDrop.showTakeGemB(takeAndDrop.Playername);
+        }
+        else if (obj.tag == "gemC")
+        {
+            gem.changeC(1);
+            takeAndDrop.showTakeGemC(takeAndDrop.Playername);
+        }
+        else if (obj.tag == "gemD")
+        {
+            gem.changeD(1);
+            takeAndDrop.showTakeGemD(takeAndDrop.Playername);
+        }
+        PhotonNetwork.Destroy(obj);
     }
 }
