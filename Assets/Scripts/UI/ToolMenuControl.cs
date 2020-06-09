@@ -24,7 +24,9 @@ public class ToolMenuControl : MonoBehaviour
         bgImages.Add(GameObject.Find("Canvas/ToolsBar/Tool_3").GetComponent<Image>());
         bgImages.Add(GameObject.Find("Canvas/ToolsBar/Tool_4").GetComponent<Image>());
         bgImages.Add(GameObject.Find("Canvas/ToolsBar/Tool_5").GetComponent<Image>());
-        
+        GameObject obj = GameObject.FindGameObjectWithTag("door");
+        Debug.Log("position");
+        Debug.Log(obj.transform.position);
     }
 
     private void Update()

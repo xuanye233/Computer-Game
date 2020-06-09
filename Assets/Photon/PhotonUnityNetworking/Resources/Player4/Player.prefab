@@ -2115,6 +2115,7 @@ MonoBehaviour:
   K1: {fileID: 0}
   K2: {fileID: 0}
   K3: {fileID: 0}
+  Playername: 
 --- !u!82 &4211153152927671796
 AudioSource:
   m_ObjectHideFlags: 0

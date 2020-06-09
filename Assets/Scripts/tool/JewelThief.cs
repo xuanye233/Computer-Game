@@ -64,8 +64,8 @@ public class JewelThief : MonoBehaviourPunCallbacks
             return;
         }
         isClicked = true;
-        bagButton.SetActive(true);
-        bagPanel.SetActive(false);
+        //bagButton.SetActive(true);
+        //bagPanel.SetActive(false);
     }
 
     private void jewelThiefEvent()

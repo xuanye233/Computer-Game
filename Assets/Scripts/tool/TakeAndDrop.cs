@@ -177,6 +177,44 @@ public class TakeAndDrop : MonoBehaviourPun
                     chestOpen chestopen = hit.transform.gameObject.GetComponentInChildren<chestOpen>();
                     chestopen.chestOpenEvent();
                 }
+                else if(PhotonView.IsMine && itemTag == "door1" || itemTag == "door2")
+                {
+                    //开门
+                    DoorOpen doorOpen = hit.transform.parent.GetComponent<DoorOpen>();
+                    if(hit.transform.parent.tag == "door11")
+                    {
+                        doorOpen.doorEvent11();
+                    }
+                    else if (hit.transform.parent.tag == "door12")
+                    {
+                        doorOpen.doorEvent12();
+                    }
+                    else if (hit.transform.parent.tag == "door13")
+                    {
+                        doorOpen.doorEvent13();
+                    }
+                    else if (hit.transform.parent.tag == "door31")
+                    {
+                        doorOpen.doorEvent31();
+                    }
+                    else if (hit.transform.parent.tag == "door32")
+                    {
+                        doorOpen.doorEvent32();
+                    }
+                    else if (hit.transform.parent.tag == "door33")
+                    {
+                        doorOpen.doorEvent33();
+                    }
+                    else if (hit.transform.parent.tag == "door41")
+                    {
+                        doorOpen.doorEvent41();
+                    }
+                    else if (hit.transform.parent.tag == "door42")
+                    {
+                        doorOpen.doorEvent42();
+                    }
+
+                }
                 //update relative data                   
             }
         }

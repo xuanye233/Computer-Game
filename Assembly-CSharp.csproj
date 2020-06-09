@@ -228,6 +228,7 @@
     <Compile Include="Assets\Scripts\Character\LightManager.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonUserControl.cs" />
+    <Compile Include="Assets\Scripts\Door\DoorOpen.cs" />
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_addcollider.cs" />
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_button.cs" />
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_fireStone.cs" />
@@ -247,6 +248,10 @@
     <Compile Include="Assets\Scripts\Network\Launcher.cs" />
     <Compile Include="Assets\Scripts\Network\LauncherTest.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerNameInputField.cs" />
+    <Compile Include="Assets\Scripts\River\BoatRider.cs" />
+    <Compile Include="Assets\Scripts\River\FloatObject.cs" />
+    <Compile Include="Assets\Scripts\River\WaterManager.cs" />
+    <Compile Include="Assets\Scripts\River\WaveManager.cs" />
     <Compile Include="Assets\Scripts\tool\BlindDrug.cs" />
     <Compile Include="Assets\Scripts\tool\EffectLife.cs" />
     <Compile Include="Assets\Scripts\tool\fireControlor.cs" />

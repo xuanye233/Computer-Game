@@ -25,6 +25,8 @@ public class Food : MonoBehaviourPunCallbacks
     Killfeed killfeed;
     GameObject achieve;
     //public Text SliderText;
+    [SerializeField]
+    ToolMenuControl toolMenuControl;
     private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
@@ -47,6 +49,7 @@ public class Food : MonoBehaviourPunCallbacks
         //noFoodText = GameObject.Find("Canvas/TipsList/NoFoodText").GetComponent<Text>();
         //noFoodText.gameObject.SetActive(false);
         //Debug.Log("setfalse");
+        
     }
 
     public void onClicked()
@@ -90,9 +93,10 @@ public class Food : MonoBehaviourPunCallbacks
 
             characterItems.changeFood(-1);
             characterStatus.ChangeHealth(5);
-            if(GameObject.Find("Cellar") != null)
+            if(GameObject.Find("Crystal_Caves") != null)
             {
                 eDU_Process.eat2Event();
+                toolMenuControl.transparent();
             }
             else
             {

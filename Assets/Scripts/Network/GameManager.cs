@@ -98,6 +98,8 @@ namespace Com.MyCompany.MyGame
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     int characterNum = GlobalData.characterIndex;
                     PhotonNetwork.Instantiate("Player" + characterNum + "/" + this.playerPrefab.name, new Vector3(0f, 5f, -52f), Quaternion.identity, 0);
+                    //门前
+                    //PhotonNetwork.Instantiate("Player" + characterNum + "/" + this.playerPrefab.name, new Vector3(-47.1f, 4f, -38.8f), Quaternion.identity, 0);
                     //characterItems = GameObject.Find("Player(Clone)").GetComponent<CharacterItems>();
                     //if (characterNum == 4)
                     //{

@@ -27,6 +27,17 @@ TagManager:
   - Moonstone
   - Stumbling2
   - Thunderstorm2
+  - door
+  - door1
+  - door2
+  - door11
+  - door12
+  - door13
+  - door31
+  - door32
+  - door33
+  - door41
+  - door42
   layers:
   - Default
   - TransparentFX

@@ -56,7 +56,8 @@ public class toolImageControl : MonoBehaviour
      
         Sprite loadImage = Resources.Load("Picture/Tool_selected", typeof(Sprite)) as Sprite;
         toolMenuControl.bgImages[int.Parse(changename)].sprite = loadImage;
-        //Debug.LogError(name);
+        Debug.Log(toolMenuControl.bgImages[int.Parse(changename)].gameObject.name);
+        Debug.Log("zenmehuishi");
         if (toolMenuControl.isQuit && name != "None")
         {
             quitTool();
@@ -105,7 +106,7 @@ public class toolImageControl : MonoBehaviour
         //{
         //    moonStone.onClicked();
         //}
-        toolMenuControl.transparent();
+        //toolMenuControl.transparent();
     } 
 
     private void quitTool()
