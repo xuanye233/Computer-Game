@@ -71,6 +71,7 @@
     <Compile Include="Assets\Achievements\Scripts\Other\AchievementsObserver.cs" />
     <Compile Include="Assets\Achievements\Scripts\Other\ProgressAchievementHandle.cs" />
     <Compile Include="Assets\Effects\Scripts\Lighting.cs" />
+    <Compile Include="Assets\EnterBirthStone.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Assets\Scripts\Character\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonUserControl.cs" />
     <Compile Include="Assets\Scripts\Door\DoorOpen.cs" />
+    <Compile Include="Assets\Scripts\Door\FinalDoorOpen.cs" />
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_addcollider.cs" />
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_button.cs" />
     <Compile Include="Assets\Scripts\EDU_scripts\EDU_fireStone.cs" />

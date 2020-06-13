@@ -73,6 +73,14 @@ public class EDU_takeanddrop : MonoBehaviour
                     eDU_Process.eatEvent();
                     toolSound.Get();
                 }
+                if(itemTag=="BirthStone")
+                {
+                    Debug.Log("birthsone!");
+                    characterItems.changeOriginStone(1);
+                    Destroy(hit.transform.gameObject);
+                    eDU_Process.pickOriginStoneEvent();
+                    toolSound.Get();
+                }
 
                 //update relative data                   
             }

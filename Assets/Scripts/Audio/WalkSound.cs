@@ -36,6 +36,7 @@ public class WalkSound : MonoBehaviourPunCallbacks
 
     }
 
+
     // Update is called once per frame
     void turnToWalk()
     {
@@ -72,7 +73,8 @@ public class WalkSound : MonoBehaviourPunCallbacks
     {
         sound1.pitch = 1.2f;
         sound1.volume = 0.8f;
-
+        if(GlobalData.characterIndex==3)
+        sound1.pitch = 1.44f;
     }
 
 
@@ -88,6 +90,8 @@ public class WalkSound : MonoBehaviourPunCallbacks
     {
         sound1.pitch = 0.74f;
         sound1.volume = 0.05f;
+        if (GlobalData.characterIndex == 3)
+        sound1.pitch = 0.88f;
 
     }
 
@@ -103,7 +107,8 @@ public class WalkSound : MonoBehaviourPunCallbacks
     {
         sound1.pitch = 1.0f;
         sound1.volume = 0.6f;
-
+        if (GlobalData.characterIndex == 3)
+        sound1.pitch = 1.2f;
     }
 
     public void NormalMove1()
@@ -141,42 +146,49 @@ public class WalkSound : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && !isJumping&&!isWalking)
-        {
-            PhotonView.RPC("startMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
-            StartMove1();
-        }
-
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && isWalking)
+        if (gameObject.GetComponent<ThirdPersonUserControl>().canMove == false)
         {
             PhotonView.RPC("stopMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
             StopMove1();
         }
-
-        if (Input.GetKey(KeyCode.LeftShift) && isWalking&&!isQuickMove )
+        else
         {
-            PhotonView.RPC("quickMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
-            QuickMove1();
-        }
+            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && !isJumping && !isWalking)
+            {
+                PhotonView.RPC("startMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
+                StartMove1();
+            }
 
-        if (Input.GetKey(KeyCode.C) && isWalking&&!isSlowMove )
-        {
-            PhotonView.RPC("slowMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
-            SlowMove1();
-        }
+            if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && isWalking)
+            {
+                PhotonView.RPC("stopMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
+                StopMove1();
+            }
 
-        if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C)&&isWalking&&!isNormalMove)
-        {
-            PhotonView.RPC("normalMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
-            NormalMove1();
-        }
+            if (Input.GetKey(KeyCode.LeftShift) && isWalking && !isQuickMove)
+            {
+                PhotonView.RPC("quickMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
+                QuickMove1();
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space) &&!isJumping&&!isSlowMove )
-        {
-            PhotonView.RPC("jumping", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
-            Jumping1();
-        }
+            if (Input.GetKey(KeyCode.C) && isWalking && !isSlowMove)
+            {
+                PhotonView.RPC("slowMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
+                SlowMove1();
+            }
 
+            if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C) && isWalking && !isNormalMove)
+            {
+                PhotonView.RPC("normalMove", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
+                NormalMove1();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && !isJumping && !isSlowMove)
+            {
+                PhotonView.RPC("jumping", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
+                Jumping1();
+            }
+        }
     }
 
     [PunRPC]

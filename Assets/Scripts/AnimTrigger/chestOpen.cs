@@ -6,6 +6,8 @@ using Photon.Pun;
 public class chestOpen : MonoBehaviourPunCallbacks
 {
     private Animation animation;  //动画播放控制
+    GameObject curPlayer;
+    ToolSound toolSound;
     bool isOpen;
     bool isPick;
     Gem gem;
@@ -13,6 +15,8 @@ public class chestOpen : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        curPlayer = GameObject.Find("Player(Clone)");
+        toolSound = curPlayer.GetComponent<ToolSound>();
         animation = gameObject.GetComponent<Animation>();
         isOpen = false;
         isPick = false;
@@ -41,12 +45,14 @@ public class chestOpen : MonoBehaviourPunCallbacks
         {
             //拿宝石
             PhotonView.RPC("pickGem", RpcTarget.MasterClient);
+            toolSound.Get(curPlayer.GetComponent<PhotonView>().ViewID);
             isPick = true;
             return;
         }
         else
         {
             PhotonView.RPC("chestopen", RpcTarget.All);
+            toolSound.OpenCase(curPlayer.GetComponent<PhotonView>().ViewID);
             isOpen = true;
         }
 

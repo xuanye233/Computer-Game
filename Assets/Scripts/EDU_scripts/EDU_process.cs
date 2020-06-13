@@ -16,11 +16,25 @@ public class EDU_process : MonoBehaviour
     [SerializeField]
     Text useFoodText;
     [SerializeField]
+    Text useFoodText_1;
+    [SerializeField]
     Text useFireStoneText;
+    [SerializeField]
+    Text useFireStoneText_1;
     [SerializeField]
     Text clickTorchText;
     [SerializeField]
     Text endText;
+    [SerializeField]
+    Text pickBirthStoneText;
+    [SerializeField]
+    Text useBirthStoneText;
+    [SerializeField]
+    Text hintBirthStoneText;
+    [SerializeField]
+    Text putBirthStoneText;
+    [SerializeField]
+    Text hintBirthStoneText_2;
 
     [SerializeField]
     GameObject foodArrow;
@@ -111,16 +125,31 @@ public class EDU_process : MonoBehaviour
         StartCoroutine(clickTorchWait());
     }
 
+    public void pickOriginStoneEvent()
+    {
+        StartCoroutine(pickOriginStoneWait());
+    }
+
+    public void useOriginStoneEvent()   // 踩中起源之石
+    {
+        StartCoroutine(useOriginStoneWait());
+    }
+
+    public void putOriginStoneEvent()   // 放置起源之石
+    {
+        StartCoroutine(putOriginStoneWait());
+    }
+
     public IEnumerator welcomeWait() //fade function
     {
         //yield return new WaitForSeconds(5);
         welcomeText.CrossFadeAlpha(0, 1f, false);
         welcomeText.gameObject.SetActive(true);
         welcomeText.CrossFadeAlpha(1, 1f, false);
-        yield return new WaitForSeconds(3);
-        welcomeText.CrossFadeAlpha(0, 1f, false);
-        yield return new WaitForSeconds(1);
-        moveText.CrossFadeAlpha(0, 1f, false);
+        yield return new WaitForSeconds(3); //  Continue Start() to see if the player has pressed WASD and Space, waite for 3s,
+        welcomeText.CrossFadeAlpha(0, 1f, false);   // and "Welcome" text disappears
+        yield return new WaitForSeconds(1); //  waite for 1s,
+        moveText.CrossFadeAlpha(0, 1f, false);  // and "Move" text appears
         moveText.gameObject.SetActive(true);
         moveText.CrossFadeAlpha(1, 1f, false);
     }
@@ -150,6 +179,10 @@ public class EDU_process : MonoBehaviour
         pickUpText.CrossFadeAlpha(0, 1f, false);
         
         yield return new WaitForSeconds(1);
+        useFoodText_1.CrossFadeAlpha(0, 1f, false);
+        useFoodText_1.gameObject.SetActive(true);
+        useFoodText_1.CrossFadeAlpha(1, 1f, false);
+        yield return new WaitForSeconds(1);
         useFoodText.CrossFadeAlpha(0, 1f, false);
         useFoodText.gameObject.SetActive(true);
         useFoodText.CrossFadeAlpha(1, 1f, false);
@@ -161,6 +194,11 @@ public class EDU_process : MonoBehaviour
         Debug.Log("zhendecuole");
         foodUIArrow.SetActive(false);
         useFoodText.CrossFadeAlpha(0, 1f, false);
+        useFoodText_1.CrossFadeAlpha(0, 1f, false);
+        yield return new WaitForSeconds(1);
+        useFireStoneText_1.CrossFadeAlpha(0, 1f, false);
+        useFireStoneText_1.gameObject.SetActive(true);
+        useFireStoneText_1.CrossFadeAlpha(1, 1f, false);
         yield return new WaitForSeconds(1);
         useFireStoneText.CrossFadeAlpha(0, 1f, false);
         useFireStoneText.gameObject.SetActive(true);
@@ -172,6 +210,7 @@ public class EDU_process : MonoBehaviour
     {
         fireStoneArrow.SetActive(false);
         useFireStoneText.CrossFadeAlpha(0, 1f, false);
+        useFireStoneText_1.CrossFadeAlpha(0, 1f, false);
         yield return new WaitForSeconds(1);
         //显示点击火把文字和箭头
         clickTorchText.CrossFadeAlpha(0, 1f, false);
@@ -185,8 +224,50 @@ public class EDU_process : MonoBehaviour
         torchArrow.SetActive(false);
         clickTorchText.CrossFadeAlpha(0, 1f, false);
         yield return new WaitForSeconds(1);
-        endText.CrossFadeAlpha(0, 1f, false);
+        pickBirthStoneText.CrossFadeAlpha(0, 1f, false);
+        pickBirthStoneText.gameObject.SetActive(true);
+        pickBirthStoneText.CrossFadeAlpha(1, 1f, false);
+    }
+
+    public IEnumerator pickOriginStoneWait()
+    {
+        pickBirthStoneText.CrossFadeAlpha(0, 1f, false);
+        yield return new WaitForSeconds(1);
+        useBirthStoneText.CrossFadeAlpha(0, 1f, false);
+        useBirthStoneText.gameObject.SetActive(true);
+        useBirthStoneText.CrossFadeAlpha(1, 1f, false);
+    }
+
+    public IEnumerator useOriginStoneWait()
+    {
+        useBirthStoneText.CrossFadeAlpha(0, 1f, false);
+        yield return new WaitForSeconds(1);
+        hintBirthStoneText.CrossFadeAlpha(0, 1f, false);
+        hintBirthStoneText.gameObject.SetActive(true);
+        hintBirthStoneText.CrossFadeAlpha(1, 1f, false);
+        yield return new WaitForSeconds(3);
+        hintBirthStoneText.CrossFadeAlpha(0, 1f, false);
+        yield return new WaitForSeconds(1);
+        putBirthStoneText.CrossFadeAlpha(0, 1f, false);
+        putBirthStoneText.gameObject.SetActive(true);
+        putBirthStoneText.CrossFadeAlpha(1, 1f, false);
+    }
+
+    public IEnumerator putOriginStoneWait()
+    {
+        putBirthStoneText.CrossFadeAlpha(0, 1f, false);   // and "Welcome" text disappears
+        yield return new WaitForSeconds(3); //  waite for 1s,
+        hintBirthStoneText_2.CrossFadeAlpha(0, 1f, false);
+        hintBirthStoneText_2.gameObject.SetActive(true);
+        hintBirthStoneText_2.CrossFadeAlpha(1, 1f, false);
+        yield return new WaitForSeconds(3);
+        hintBirthStoneText_2.CrossFadeAlpha(0, 1f, false);
+        yield return new WaitForSeconds(1);
+        endText.CrossFadeAlpha(0, 1f, false);  // and "Move" text appears
         endText.gameObject.SetActive(true);
         endText.CrossFadeAlpha(1, 1f, false);
     }
+
+    
+
 }

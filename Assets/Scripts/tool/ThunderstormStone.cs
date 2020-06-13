@@ -82,7 +82,8 @@ public class ThunderstormStone : MonoBehaviourPunCallbacks
             //newTrap.transform.position = hit.point;
             PhotonView.RPC("showThunderTips", RpcTarget.All, Playername);
             PhotonView.RPC("createThunderstorm", RpcTarget.MasterClient, hit.point);
-            //achieve.GetComponent<SimpleAchievements.Main.AchievementsControl>().AddProgressAchievementByID(1, 1);
+            curPlayer.GetComponent<ToolSound>().Set(curPlayer.GetComponent<PhotonView>().ViewID);
+            achieve.GetComponent<SimpleAchievements.Main.AchievementsControl>().AddProgressAchievementByID(1, 1);
             isThunderstormStoneClick = false;
             //reset the flag
             //Debug.Log(hit.point);

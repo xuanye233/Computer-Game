@@ -181,6 +181,8 @@ public class TakeAndDrop : MonoBehaviourPun
                 {
                     //开门
                     DoorOpen doorOpen = hit.transform.parent.GetComponent<DoorOpen>();
+                    doorOpen.doopMove();
+                    /*
                     if(hit.transform.parent.tag == "door11")
                     {
                         doorOpen.doorEvent11();
@@ -213,7 +215,7 @@ public class TakeAndDrop : MonoBehaviourPun
                     {
                         doorOpen.doorEvent42();
                     }
-
+                    */
                 }
                 //update relative data                   
             }

@@ -123,6 +123,7 @@ public class StumblingBlock : MonoBehaviourPunCallbacks
             //newTrap.transform.position = hit.point;
             //PhotonView.RPC("showTrapTips", RpcTarget.All, Playername);
             PhotonView.RPC("createStumblingBlock", RpcTarget.MasterClient, hit.point);
+            curPlayer.GetComponent<ToolSound>().Set(curPlayer.GetComponent<PhotonView>().ViewID);
             achieve.GetComponent<SimpleAchievements.Main.AchievementsControl>().AddProgressAchievementByID(8, 1);
             isTrapClick = false;
             //reset the flag

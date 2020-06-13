@@ -92,5 +92,9 @@ MonoBehaviour:
   - chestopen
   - createPlayerCube
   - pickGem
+  - OpenBigdoor
+  - OpenSmalldoor
+  - OpenCaseRpc
+  - StumblingBlockSoundWoman
   DisableAutoOpenWizard: 1
   ShowSettings: 1

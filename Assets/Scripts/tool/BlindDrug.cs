@@ -23,6 +23,8 @@ public class BlindDrug : MonoBehaviourPunCallbacks
     Killfeed killfeed;
     GameObject achieve;
     //public Text SliderText;
+    [SerializeField]
+    ToolMenuControl toolMenuControl;
     private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
@@ -76,6 +78,7 @@ public class BlindDrug : MonoBehaviourPunCallbacks
 
         }
         characterItems.changeBlindDrug(-1);
+        toolMenuControl.transparent();
         //blackScreen.GetComponent<LoseSight>().beBlind();
     }
 

@@ -125,5 +125,6 @@ public class toolImageControl : MonoBehaviour
         toolMenuControl.delete(int.Parse(changename));
 
         toolMenuControl.isQuit = false;
+        toolMenuControl.transparent();
     }
 }

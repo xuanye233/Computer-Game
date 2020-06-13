@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 
 //原生之石：使敌人回到出发点
@@ -26,6 +27,13 @@ public class OriginStone : MonoBehaviourPunCallbacks
     GameObject k3;
     Killfeed killfeed;
     GameObject achieve;
+
+    // 教学关
+    [SerializeField]
+    GameObject OriginStone_onfloor;
+    [SerializeField]
+    EDU_process eDU_Process;
+
     private void Start()
     {
         curPlayer = GameObject.Find("Player(Clone)");
@@ -47,16 +55,34 @@ public class OriginStone : MonoBehaviourPunCallbacks
 
     public void onClicked()
     {
-        if(characterItems.getOriginStone() == 0)
+
+        // 教学关
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        if (sceneName == "Room for 1")
+        {
+                      
+            characterItems.changeOriginStone(-1);
+            toolMenuControl.transparent();
+            Instantiate(OriginStone_onfloor, curPlayer.transform.position, Quaternion.identity);
+            eDU_Process.putOriginStoneEvent();
+            return;
+        }
+
+
+        if (characterItems.getOriginStone() == 0)
         {
             //执行文字提示
             //
             return;
         }
+        
         Debug.Log("222 " + curPlayer.transform.position);
         PhotonView.RPC("showOriginEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
         PhotonView.RPC("showOriginTips", RpcTarget.All, Playername);
         achieve.GetComponent<SimpleAchievements.Main.AchievementsControl>().AddProgressAchievementByID(5, 1);
+        toolSound.Teleport(curPlayer.GetComponent<PhotonView>().ViewID);
         //现在的设定是只要是一定范围内的敌人都会被影响
         players = GameObject.FindGameObjectsWithTag("Player");
         Vector3 position = (players[0].transform.position);
@@ -73,12 +99,15 @@ public class OriginStone : MonoBehaviourPunCallbacks
                 //{
                 //    break;
                 //}
-                toolSound.Teleport(curPlayer.GetComponent<PhotonView>().ViewID);
+                toolSound.Teleport(players[i].GetComponent<PhotonView>().ViewID);
                 PhotonView.RPC("BackToOrigin", RpcTarget.All, players[i].GetComponent<PhotonView>().ViewID);
                 //players[i].GetComponent<CharacterStatus>().BackToOrigin();
             }
         }
+
         
+        
+
         characterItems.changeOriginStone(-1);
         toolMenuControl.transparent();
     }

@@ -31,6 +31,10 @@ public class ToolSound : MonoBehaviourPunCallbacks
     public AudioClip teleport;
     public AudioClip thunder;
     public AudioClip victory;
+    public AudioClip openCase;
+    public AudioClip openbigdoor;
+    public AudioClip opensmalldoor;
+    public AudioClip opendoorerror;
     int curViewID;
     GameObject curPlayer;
     // Start is called before the first frame update
@@ -63,6 +67,10 @@ public class ToolSound : MonoBehaviourPunCallbacks
         victory = Resources.Load<AudioClip>("music/victory");
         curPlayer = GameObject.Find("Player(Clone)");
         curViewID = curPlayer.GetComponent<PhotonView>().ViewID;
+        openCase = Resources.Load<AudioClip>("music/openCase");
+        openbigdoor = Resources.Load<AudioClip>("music/openbigdoor");
+        opensmalldoor = Resources.Load<AudioClip>("music/opensmalldoor");
+        opendoorerror = Resources.Load<AudioClip>("music/opendoorerror");
     }
 
     // Update is called once per frame
@@ -206,6 +214,34 @@ public class ToolSound : MonoBehaviourPunCallbacks
     {
         PhotonView.RPC("NotMoveRpc", RpcTarget.Others);
     }
+
+    public void OpenCase(int viewID)
+    {
+        PhotonView.RPC("OpenCaseRpc", RpcTarget.All, viewID);
+    }
+
+    public void OpenCaseSound()
+    {
+        sound2.clip = openCase;
+        sound2.Play();
+    }
+
+    public void Openbigdoor(int viewID)
+    {
+        PhotonView.RPC("OpenBigdoor", RpcTarget.All, viewID);
+    }
+
+    public void Opensmalldoor(int viewID)
+    {
+        PhotonView.RPC("OpenSmalldoor", RpcTarget.All, viewID);
+    }
+
+    public void Opendoorerror()
+    {
+        sound2.clip = opendoorerror;
+        sound2.Play();
+    }
+
     public void NotMoveSound()
     {
         sound2.clip = notMove;
@@ -243,6 +279,18 @@ public class ToolSound : MonoBehaviourPunCallbacks
     public void Teleport(int viewID)
     {
         PhotonView.RPC("TeleportRpc", RpcTarget.All, viewID);
+    }
+
+    public void bigdoorSound()
+    {
+        sound2.clip = openbigdoor;
+        sound2.Play();
+    }
+
+    public void smalldoorSound()
+    {
+        sound2.clip = opensmalldoor;
+        sound2.Play();
     }
 
     public void TeleportSound()
@@ -327,5 +375,23 @@ public class ToolSound : MonoBehaviourPunCallbacks
     public void TeleportRpc(int viewID)
     {
         PhotonView.Find(viewID).GetComponent<ToolSound>().TeleportSound();
+    }
+
+    [PunRPC]
+    public void OpenCaseRpc(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<ToolSound>().OpenCaseSound();
+    }
+
+    [PunRPC]
+    public void OpenSmalldoor(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<ToolSound>().smalldoorSound();
+    }
+
+    [PunRPC]
+    public void OpenBigdoor(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<ToolSound>().bigdoorSound();
     }
 }

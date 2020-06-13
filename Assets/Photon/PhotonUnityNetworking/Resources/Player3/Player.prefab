@@ -1698,6 +1698,10 @@ MonoBehaviour:
   teleport: {fileID: 0}
   thunder: {fileID: 0}
   victory: {fileID: 0}
+  openCase: {fileID: 0}
+  openbigdoor: {fileID: 0}
+  opensmalldoor: {fileID: 0}
+  opendoorerror: {fileID: 0}
 --- !u!114 &9053648663117005646
 MonoBehaviour:
   m_ObjectHideFlags: 0

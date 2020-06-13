@@ -96,11 +96,11 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
             lastSecond = DateTime.Now.Second;
             if(GlobalData.characterIndex == 2)//如果当前角色为石头人则血量流失速度减半
             {
-                ChangeHealth(-0.5f);
+                ChangeHealth(-0.05f);
             }
             else
             {
-                ChangeHealth(-1f);
+                ChangeHealth(-0.1f);
             }
             
         }
@@ -118,12 +118,18 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
             //Debug.Log("huaweihuawei");
             PhotonNetwork.Destroy(other.gameObject);
             PhotonView.RPC("createPlayerCube", RpcTarget.MasterClient);
+            PhotonView.RPC("ThunderStormSound", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID);
         }
         if (other.gameObject.CompareTag("Stumbling2"))
         {
             //Debug.Log("huaweihuawei");
             health -= 30;
             PhotonView.RPC("deleteStumblingBlock", RpcTarget.MasterClient, other.gameObject.GetComponent<PhotonView>().ViewID);
+
+            if(GlobalData.characterIndex==3)
+            PhotonView.RPC("StumblingBlockSoundWoman", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID);
+            else
+            PhotonView.RPC("StumblingBlockSound", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID);
         }
     }
 
@@ -181,6 +187,7 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
                 time = 1.0f;
             }
             PhotonView.RPC("ThunderStormEvent", RpcTarget.MasterClient, viewID, position, time);
+            Debug.Log("111");
         }
 
         if (collision.collider.tag == "StumblingBlock")
@@ -244,6 +251,12 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
     public void StumblingBlockSound(int viewID)
     {
         PhotonView.Find(viewID).GetComponent<ToolSound>().Hurt();
+    }
+
+    [PunRPC]
+    public void StumblingBlockSoundWoman(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<ToolSound>().HurtWoman();
     }
 
     [PunRPC]

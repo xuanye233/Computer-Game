@@ -40,21 +40,27 @@ public class Gem : MonoBehaviour
         Playername = curPlayer.GetComponent<CharacterStatus>().username;
         if(GlobalData.characterIndex == 1)
         {
-            changeA(99);
+            changeA(66);
         }
-        else if(GlobalData.characterIndex == 2)
+        else if (GlobalData.characterIndex == 2)
         {
-            changeB(99);
+            changeB(66);
         }
         else if (GlobalData.characterIndex == 3)
         {
-            changeC(99);
+            changeC(66);
         }
         else if (GlobalData.characterIndex == 4)
         {
-            changeD(99);
+            changeD(66);
         }
+
     }
+
+    //private void Update()
+    //{
+    //    Debug.Log(gemD);
+    //}
 
 
     public void changeA(int num)

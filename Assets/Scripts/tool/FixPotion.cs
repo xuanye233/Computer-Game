@@ -56,7 +56,7 @@ public class FixPotion : MonoBehaviourPunCallbacks
         PhotonView.RPC("showFixTips", RpcTarget.All, Playername);
         achieve.GetComponent<SimpleAchievements.Main.AchievementsControl>().AddProgressAchievementByID(2, 1);
         players = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 1; i < players.Length; i++)
         {
             //float dis = Vector3.Distance(players[i].transform.position, transform.position);
 

@@ -93,17 +93,21 @@ public class Food : MonoBehaviourPunCallbacks
 
             characterItems.changeFood(-1);
             characterStatus.ChangeHealth(5);
-            if(GameObject.Find("Crystal_Caves") != null)
+
+            if (GameObject.Find("Map_route_2") == null)
             {
                 eDU_Process.eat2Event();
                 toolMenuControl.transparent();
+                Debug.Log("Ea1t");
             }
             else
             {
+                Debug.Log("Eat");
                 toolSound.Eat(curPlayer.GetComponent<PhotonView>().ViewID);
                 achieve.GetComponent<SimpleAchievements.Main.AchievementsControl>().AddProgressAchievementByID(7, 1);
                 PhotonView.RPC("showFoodEffect", RpcTarget.MasterClient, curPlayer.transform.position, curPlayer.GetComponent<CapsuleCollider>().center, curPlayer.transform.localScale.y);
                 PhotonView.RPC("showFoodTips", RpcTarget.All, Playername);
+                toolMenuControl.transparent();
             }
             
         }
