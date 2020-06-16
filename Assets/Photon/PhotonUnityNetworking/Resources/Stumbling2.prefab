@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2394572}
   - component: {fileID: 7558041875004551983}
   - component: {fileID: 939555638370337150}
+  - component: {fileID: 114732951449475592}
   m_Layer: 0
   m_Name: Stumbling2
   m_TagString: Stumbling2
@@ -94,10 +95,10 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 114732951449475592}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -114,3 +115,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.35902405, y: 0.3549366, z: 0.4343891}
   m_Center: {x: -0.0772171, y: 0.0051851273, z: 0.046448708}
+--- !u!114 &114732951449475592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

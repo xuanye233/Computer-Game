@@ -16,6 +16,7 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
     CharacterItems items;
     GameObject mainCamera;
     CapsuleCollider capsuleCol;
+    PickUpUI pickUpUI;
 
     RawImage rawImage;
 
@@ -33,7 +34,8 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
             UILabel lbl = this.gameObject.transform.Find("NamePanel").GetComponentInChildren<UILabel>();
             lbl.text = PhotonNetwork.NickName;
             Debug.Log("lbl.text=" + lbl.text);
-            PlayerManager.LocalPlayerInstance = this.gameObject;          
+            PlayerManager.LocalPlayerInstance = this.gameObject;
+            pickUpUI = GameObject.Find("Canvas").GetComponent<PickUpUI>();
         }
         else
         {
@@ -113,14 +115,14 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
         {
             StartCoroutine(ChangePosWhileBlack());//黑屏时改变人物和相机的位置
         }
-        if (other.gameObject.CompareTag("Thunderstorm2"))
+        else if (other.gameObject.CompareTag("Thunderstorm2"))
         {
             //Debug.Log("huaweihuawei");
             PhotonNetwork.Destroy(other.gameObject);
             PhotonView.RPC("createPlayerCube", RpcTarget.MasterClient);
             PhotonView.RPC("ThunderStormSound", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID);
         }
-        if (other.gameObject.CompareTag("Stumbling2"))
+        else if (other.gameObject.CompareTag("Stumbling2"))
         {
             //Debug.Log("huaweihuawei");
             health -= 30;
@@ -131,7 +133,28 @@ public class CharacterStatus : MonoBehaviourPunCallbacks, IPunObservable
             else
             PhotonView.RPC("StumblingBlockSound", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID);
         }
+        
     }
+
+    //void OnTriggerStay(Collider other) {
+    //    //UI道具拾取提示
+    //    Debug.Log(other.tag);
+    //    if (other.gameObject.CompareTag("ThunderStorm"))
+    //    {
+    //        pickUpUI.pickUpItem.SetActive(true);
+    //        Sprite loadImage = Resources.Load("Picture/thunderstormStone", typeof(Sprite)) as Sprite;
+    //        pickUpUI.transform.GetChild(2).GetComponent<Image>().sprite = loadImage;
+    //        pickUpUI.transform.GetChild(3).GetComponent<Text>().text = "雷暴石";
+    //    }
+    //}
+
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("ThunderStorm"))
+    //    {
+    //        pickUpUI.pickUpItem.SetActive(false);
+    //    }
+    //}
 
     IEnumerator getBlack(float waitTime) //新增，页面渐变成黑色
     {

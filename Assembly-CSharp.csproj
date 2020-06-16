@@ -284,6 +284,7 @@
     <Compile Include="Assets\Scripts\UI\LoseSight.cs" />
     <Compile Include="Assets\Scripts\UI\MouseOverEffect.cs" />
     <Compile Include="Assets\Scripts\UI\NameSetButton.cs" />
+    <Compile Include="Assets\Scripts\UI\PickUpUI.cs" />
     <Compile Include="Assets\Scripts\UI\SightControl.cs" />
     <Compile Include="Assets\Scripts\UI\TimerControl.cs" />
     <Compile Include="Assets\Scripts\UI\ToolInteraction.cs" />
